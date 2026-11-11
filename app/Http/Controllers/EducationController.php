@@ -18,11 +18,17 @@ class EducationController extends Controller
 
     public function fiqh()
     {
-        return view('education.fiqh');
+        if (view()->exists('education.fiqh')) {
+            return view('education.fiqh');
+        }
+        return view('education.islamic-studies.index');
     }
 
     public function arabic()
     {
+        if (view()->exists('education.arabic.index')) {
+            return view('education.arabic.index');
+        }
         return view('education.arabic');
     }
 

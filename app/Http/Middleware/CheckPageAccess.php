@@ -31,12 +31,20 @@ class CheckPageAccess
             return $next($request);
         }
 
-        // Fetch active restricted page rules
-        $restrictedRules = PageAccessControl::where('is_active', true)
-            ->where('access_level', '!=', PageAccessControl::ACCESS_PUBLIC)
-            ->get();
+        // Fetch active restricted page rules with defensive check
+        try {
+            if (!\Illuminate\Support\Facades\Schema::hasTable('page_access_controls')) {
+                return $next($request);
+            }
 
-        if ($restrictedRules->isEmpty()) {
+            $restrictedRules = PageAccessControl::where('is_active', true)
+                ->where('access_level', '!=', PageAccessControl::ACCESS_PUBLIC)
+                ->get();
+        } catch (\Throwable $e) {
+            return $next($request);
+        }
+
+        if (!$restrictedRules || $restrictedRules->isEmpty()) {
             return $next($request);
         }
 

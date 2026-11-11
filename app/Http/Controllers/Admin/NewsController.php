@@ -40,7 +40,7 @@ class NewsController extends Controller
 
     public function show(News $news)
     {
-        return view('admin.news.show', compact('news'));
+        return redirect()->route('admin.news.edit', $news);
     }
 
     public function edit(News $news)

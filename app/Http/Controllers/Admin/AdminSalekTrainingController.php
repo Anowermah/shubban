@@ -147,7 +147,7 @@ class AdminSalekTrainingController extends Controller
     public function downloadAll()
     {
         $registrations = TrainingRegistration::where('course_type', CourseType::SALEK)->get();
-        $pdf = PDF::loadView('admin.training.salek.pdf-list', compact('registrations'));
+        $pdf = PDF::loadView('admin.training.salek.list-pdf', compact('registrations'));
         return $pdf->download('salek-registrations-list.pdf');
     }
 }

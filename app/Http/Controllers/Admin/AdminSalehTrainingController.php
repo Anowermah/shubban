@@ -150,7 +150,7 @@ class AdminSalehTrainingController extends Controller
     public function downloadAll()
     {
         $registrations = TrainingRegistration::where('course_type', CourseType::SALEH)->get();
-        $pdf = PDF::loadView('admin.training.saleh.pdf-list', compact('registrations'));
+        $pdf = PDF::loadView('admin.training.saleh.list-pdf', compact('registrations'));
         return $pdf->download('saleh-registrations-list.pdf');
     }
 }

@@ -60,11 +60,13 @@ class PublicationController extends Controller
      */
     public function readBook(Book $book)
     {
-        if (!$book->pdf_file || !Storage::disk('public')->exists($book->pdf_file)) {
-            return back()->with('error', 'এই বইয়ের পিডিএফ ফাইল পাওয়া যায়নি');
-        }
+        $relatedBooks = Book::where('status', 'published')
+            ->where('id', '!=', $book->id)
+            ->latest()
+            ->limit(4)
+            ->get();
 
-        return view('publications.books.read', compact('book'));
+        return view('publications.books.read', compact('book', 'relatedBooks'));
     }
 
     /**
@@ -124,10 +126,6 @@ class PublicationController extends Controller
      */
     public function readMagazine(Magazine $magazine)
     {
-        if (!$magazine->pdf_file || !Storage::disk('public')->exists($magazine->pdf_file)) {
-            return back()->with('error', 'এই ম্যাগাজিনের পিডিএফ ফাইল পাওয়া যায়নি');
-        }
-
         return view('publications.magazines.read', compact('magazine'));
     }
 

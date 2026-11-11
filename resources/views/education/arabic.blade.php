@@ -1,0 +1,1 @@
+@include('education.arabic.index')
