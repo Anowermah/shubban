@@ -18,6 +18,7 @@ class Setting extends Model
         'accent_color',
         'default_mode',
         'enable_theme_switcher',
+        'custom_css',
         'facebook_url',
         'twitter_url',
         'youtube_url',
@@ -100,6 +101,7 @@ class Setting extends Model
             'accent_color' => $setting->accent_color ?? $preset['accent'],
             'default_mode' => $setting->default_mode ?? 'light',
             'enable_theme_switcher' => $setting->enable_theme_switcher ?? true,
+            'custom_css' => $setting->custom_css ?? '',
         ];
     }
 }

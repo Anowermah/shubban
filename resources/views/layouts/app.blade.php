@@ -121,6 +121,12 @@
             --header-primary: #34d399 !important;
         }
     </style>
+    @if(!empty($themeSettings['custom_css']))
+    <!-- Shubban AI Injected Custom Design CSS -->
+    <style id="shubban-ai-custom-css">
+        {!! $themeSettings['custom_css'] !!}
+    </style>
+    @endif
     <script>
         window.SHUBBAN_DEFAULT_MODE = "{{ $themeSettings['default_mode'] ?? 'light' }}";
         (function() {

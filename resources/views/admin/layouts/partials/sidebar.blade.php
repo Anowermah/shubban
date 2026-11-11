@@ -45,6 +45,16 @@
                 </a>
             </li>
 
+            <!-- AI Site Co-Pilot -->
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.ai-copilot*') ? 'active' : '' }}" 
+                   href="{{ route('admin.ai-copilot.index') }}">
+                    <i class="fas fa-wand-magic-sparkles text-warning"></i>
+                    <span>এআই সাইট কো-পাইলট</span>
+                    <span class="badge bg-danger ms-auto font-xs fw-bold">AI PRO</span>
+                </a>
+            </li>
+
             <!-- Website Content -->
             <h6 class="sidebar-heading"><span>ওয়েবসাইট কনটেন্ট</span></h6>
 

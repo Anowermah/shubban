@@ -389,6 +389,14 @@ Route::middleware(['auth:admin'])->group(function () {
             Route::post('/test', [App\Http\Controllers\Admin\AdminAIChatController::class, 'testQuery'])->name('test');
         });
 
+        // AI Site Manager & Design Copilot
+        Route::prefix('ai-copilot')->name('ai-copilot.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Admin\AdminAICopilotController::class, 'index'])->name('index');
+            Route::post('/execute', [App\Http\Controllers\Admin\AdminAICopilotController::class, 'execute'])->name('execute');
+            Route::post('/rollback/{id?}', [App\Http\Controllers\Admin\AdminAICopilotController::class, 'rollback'])->name('rollback');
+            Route::post('/reset-css', [App\Http\Controllers\Admin\AdminAICopilotController::class, 'resetCss'])->name('reset-css');
+        });
+
         // Progressive Web App (PWA) Manager
         Route::prefix('pwa')->name('pwa.')->group(function () {
             Route::get('/', [App\Http\Controllers\Admin\PwaController::class, 'index'])->name('index');
