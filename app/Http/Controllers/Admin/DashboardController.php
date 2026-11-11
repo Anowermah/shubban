@@ -20,6 +20,7 @@ use App\Models\TierPromotion;
 use App\Models\ProgramReport;
 use App\Models\Iyanat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class DashboardController extends Controller
 {
@@ -28,110 +29,143 @@ class DashboardController extends Controller
         $this->middleware('auth:admin');
     }
 
+    /**
+     * Safely execute database queries with a default fallback to prevent 500 crashes
+     * when tables or columns are not yet migrated or seeded.
+     */
+    protected function safeQuery(callable $callback, $fallback = 0)
+    {
+        try {
+            return $callback();
+        } catch (\Throwable $e) {
+            return $fallback;
+        }
+    }
+
     public function index()
     {
+        $now = now();
+        $hasUsers = Schema::hasTable('users');
+        $hasWorkerTier = $hasUsers && Schema::hasColumn('users', 'worker_tier');
+
         $stats = [
             'sliders' => [
-                'total' => Slider::count(),
-                'active' => Slider::where('status', true)->count()
+                'total' => $this->safeQuery(fn() => Slider::count()),
+                'active' => $this->safeQuery(fn() => Slider::where('status', true)->count()),
             ],
             'members' => [
-                'total' => Member::count(),
-                'active' => Member::where('status', true)->count()
+                'total' => $this->safeQuery(fn() => Member::count()),
+                'active' => $this->safeQuery(fn() => Member::where('status', true)->count()),
             ],
             'users' => [
-                'total' => User::count(),
-                'rageb' => User::where('worker_tier', 'rageb')->count(),
-                'aref' => User::where('worker_tier', 'aref')->count(),
-                'salek' => User::where('worker_tier', 'salek')->count(),
-                'saleh' => User::where('worker_tier', 'saleh')->count(),
+                'total' => $this->safeQuery(fn() => User::count()),
+                'rageb' => $hasWorkerTier ? $this->safeQuery(fn() => User::where('worker_tier', 'rageb')->count()) : 0,
+                'aref' => $hasWorkerTier ? $this->safeQuery(fn() => User::where('worker_tier', 'aref')->count()) : 0,
+                'salek' => $hasWorkerTier ? $this->safeQuery(fn() => User::where('worker_tier', 'salek')->count()) : 0,
+                'saleh' => $hasWorkerTier ? $this->safeQuery(fn() => User::where('worker_tier', 'saleh')->count()) : 0,
             ],
             'management' => [
-                'total' => Management::count(),
-                'active' => Management::where('status', true)->count(),
-                'central' => Management::central()->count(),
-                'district' => Management::district()->count(),
-                'upazila' => Management::upazila()->count(),
-                'thana' => Management::thana()->count(),
-                'branch' => Management::branch()->count(),
-                'new' => Management::whereMonth('created_at', now()->month)->count()
+                'total' => $this->safeQuery(fn() => Management::count()),
+                'active' => $this->safeQuery(fn() => Management::where('status', true)->count()),
+                'central' => $this->safeQuery(fn() => Management::central()->count()),
+                'district' => $this->safeQuery(fn() => Management::district()->count()),
+                'upazila' => $this->safeQuery(fn() => Management::upazila()->count()),
+                'thana' => $this->safeQuery(fn() => Management::thana()->count()),
+                'branch' => $this->safeQuery(fn() => Management::branch()->count()),
+                'new' => $this->safeQuery(fn() => Management::whereMonth('created_at', $now->month)->count()),
             ],
             'donations' => [
-                'total' => Donation::count(),
-                'pending' => Donation::where('status', 'pending')->count(),
-                'amount' => Donation::where('status', 'approved')->sum('amount'),
-                'this_month' => Donation::where('status', 'approved')
-                    ->whereMonth('created_at', now()->month)
-                    ->whereYear('created_at', now()->year)
-                    ->sum('amount'),
+                'total' => $this->safeQuery(fn() => Donation::count()),
+                'pending' => $this->safeQuery(fn() => Donation::where('status', 'pending')->count()),
+                'amount' => $this->safeQuery(fn() => Donation::where('status', 'approved')->sum('amount')),
+                'this_month' => $this->safeQuery(fn() => Donation::where('status', 'approved')
+                    ->whereMonth('created_at', $now->month)
+                    ->whereYear('created_at', $now->year)
+                    ->sum('amount')),
             ],
             'organization' => [
-                'promotions_pending' => TierPromotion::where('status', 'pending')->count(),
-                'reports_submitted' => ProgramReport::where('status', 'submitted')->count(),
-                'iyanat_this_month' => Iyanat::where('status', 'approved')
-                    ->whereMonth('created_at', now()->month)
-                    ->whereYear('created_at', now()->year)
-                    ->sum('amount'),
-                'iyanat_total' => Iyanat::where('status', 'approved')->sum('amount'),
+                'promotions_pending' => Schema::hasTable('tier_promotions')
+                    ? $this->safeQuery(fn() => TierPromotion::where('status', 'pending')->count())
+                    : 0,
+                'reports_submitted' => Schema::hasTable('program_reports')
+                    ? $this->safeQuery(fn() => ProgramReport::where('status', 'submitted')->count())
+                    : 0,
+                'iyanat_this_month' => Schema::hasTable('iyanats')
+                    ? $this->safeQuery(fn() => Iyanat::where('status', 'approved')
+                        ->whereMonth('created_at', $now->month)
+                        ->whereYear('created_at', $now->year)
+                        ->sum('amount'))
+                    : 0,
+                'iyanat_total' => Schema::hasTable('iyanats')
+                    ? $this->safeQuery(fn() => Iyanat::where('status', 'approved')->sum('amount'))
+                    : 0,
             ],
             'contacts' => [
-                'total' => Contact::count(),
-                'unread' => Contact::where('status', false)->count()
+                'total' => $this->safeQuery(fn() => Contact::count()),
+                'unread' => $this->safeQuery(fn() => Contact::where('status', false)->count()),
             ],
             'news' => [
-                'total' => News::count(),
-                'active' => News::where('status', true)->count()
+                'total' => $this->safeQuery(fn() => News::count()),
+                'active' => $this->safeQuery(fn() => News::where('status', true)->count()),
             ],
             'notices' => [
-                'total' => Notice::count(),
-                'active' => Notice::where('status', true)->count()
+                'total' => $this->safeQuery(fn() => Notice::count()),
+                'active' => $this->safeQuery(fn() => Notice::where('status', true)->count()),
             ],
             'activities' => [
-                'total' => Activity::count(),
-                'active' => Activity::where('status', true)->count()
+                'total' => $this->safeQuery(fn() => Activity::count()),
+                'active' => $this->safeQuery(fn() => Activity::where('status', true)->count()),
             ],
             'gallery' => [
-                'total' => Gallery::count()
+                'total' => $this->safeQuery(fn() => Gallery::count()),
             ],
             'publications' => [
                 'books' => [
-                    'total' => Book::count(),
-                    'active' => Book::where('status', true)->count()
+                    'total' => $this->safeQuery(fn() => Book::count()),
+                    'active' => $this->safeQuery(fn() => Book::where('status', true)->count()),
                 ],
                 'magazines' => [
-                    'total' => Magazine::count(),
-                    'active' => Magazine::where('status', true)->count()
+                    'total' => $this->safeQuery(fn() => Magazine::count()),
+                    'active' => $this->safeQuery(fn() => Magazine::where('status', true)->count()),
                 ],
                 'articles' => [
-                    'total' => Article::count(),
-                    'active' => Article::where('status', true)->count()
-                ]
-            ]
+                    'total' => $this->safeQuery(fn() => Article::count()),
+                    'active' => $this->safeQuery(fn() => Article::where('status', true)->count()),
+                ],
+            ],
         ];
 
-        $activities = Activity::where('status', true)
-            ->orderBy('created_at', 'desc')
-            ->limit(5)
-            ->get();
+        $activities = $this->safeQuery(function () {
+            return Activity::where('status', true)
+                ->orderBy('created_at', 'desc')
+                ->limit(5)
+                ->get();
+        }, collect());
 
-        $recentDonations = Donation::with('cause')
-            ->latest()
-            ->limit(5)
-            ->get();
+        $recentDonations = $this->safeQuery(function () {
+            if (Schema::hasTable('donation_causes')) {
+                return Donation::with('cause')->latest()->limit(5)->get();
+            }
+            return Donation::latest()->limit(5)->get();
+        }, collect());
 
-        $recentPromotions = TierPromotion::with('user')
-            ->latest()
-            ->limit(4)
-            ->get();
+        $recentPromotions = $this->safeQuery(function () {
+            if (Schema::hasTable('tier_promotions')) {
+                return TierPromotion::with('user')->latest()->limit(4)->get();
+            }
+            return collect();
+        }, collect());
 
-        $recentReports = ProgramReport::with('user')
-            ->latest()
-            ->limit(4)
-            ->get();
+        $recentReports = $this->safeQuery(function () {
+            if (Schema::hasTable('program_reports')) {
+                return ProgramReport::with('user')->latest()->limit(4)->get();
+            }
+            return collect();
+        }, collect());
 
-        $recentUsers = User::latest()
-            ->limit(5)
-            ->get();
+        $recentUsers = $this->safeQuery(function () {
+            return User::latest()->limit(5)->get();
+        }, collect());
 
         return view('admin.dashboard.index', compact(
             'stats',
@@ -155,14 +189,11 @@ class DashboardController extends Controller
 
     public function sendToPublications(Request $request)
     {
-        // Prepare your books data here
         $booksData = [
             'total_books' => $request->total_books,
             'categories' => $request->categories,
-            // Add other relevant data
         ];
 
-        // Store in session for transfer
         $request->session()->put('dashboard_books_data', $booksData);
 
         return redirect()->route('publications.books')

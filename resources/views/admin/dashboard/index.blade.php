@@ -280,19 +280,20 @@
                                 @forelse($recentDonations as $donation)
                                     <tr>
                                         <td>
-                                            <div class="fw-bold text-dark">{{ $donation->is_anonymous ? 'গোপন দান (সাদাকাহ)' : ($donation->donor_name ?? 'অজ্ঞাত দাতা') }}</div>
+                                            <div class="fw-bold text-dark">{{ $donation->is_anonymous ? 'গোপন দান (সাদাকাহ)' : ($donation->name ?? $donation->donor_name ?? 'অজ্ঞাত দাতা') }}</div>
                                             <div class="small text-muted font-monospace">{{ $donation->receipt_no ?? '#' . $donation->id }}</div>
                                         </td>
                                         <td>
-                                            <span class="badge bg-light text-dark border">{{ $donation->cause->title ?? ($donation->purpose ?? 'সাধারণ ফান্ড') }}</span>
+                                            <span class="badge bg-light text-dark border">{{ $donation->cause->name ?? ($donation->category ?? $donation->purpose ?? 'সাধারণ ফান্ড') }}</span>
                                         </td>
                                         <td>
                                             <span class="fw-bold text-success fs-6">৳{{ number_format($donation->amount, 0) }}</span>
                                         </td>
                                         <td>
                                             <span class="badge bg-secondary-subtle text-secondary text-uppercase">{{ $donation->payment_method ?? 'bKash' }}</span>
-                                            @if($donation->trx_id)
-                                                <div class="small text-muted font-monospace" style="font-size: 0.72rem;">Trx: {{ Str::limit($donation->trx_id, 10) }}</div>
+                                            @php $trx = $donation->transaction_id ?? $donation->trx_id; @endphp
+                                            @if($trx)
+                                                <div class="small text-muted font-monospace" style="font-size: 0.72rem;">Trx: {{ Str::limit($trx, 10) }}</div>
                                             @endif
                                         </td>
                                         <td>
@@ -474,7 +475,7 @@
                     @forelse($recentReports as $report)
                         <div class="list-group-item p-3">
                             <div class="d-flex justify-content-between align-items-center mb-1">
-                                <span class="fw-bold text-dark">{{ Str::limit($report->program_title, 26) }}</span>
+                                <span class="fw-bold text-dark">{{ Str::limit($report->title ?? $report->program_title ?? 'কর্মসূচি রিপোর্ট', 26) }}</span>
                                 @if($report->status === 'submitted')
                                     <span class="badge bg-info text-dark">জমা হয়েছে</span>
                                 @elseif($report->status === 'approved')

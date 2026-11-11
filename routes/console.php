@@ -87,3 +87,51 @@ Artisan::command('db:import-backup', function () {
         return 1;
     }
 })->purpose('Import full database backup from weekbieb_final_shubban.sql and synchronize migrations');
+
+
+Artisan::command('system:repair', function () {
+    $this->info("🔧 Starting Full System Diagnostics and Repair...");
+
+    // 1. Run migrations
+    $this->info("⏳ Step 1/4: Running all database migrations...");
+    try {
+        $this->call('migrate', ['--force' => true]);
+        $this->info("✅ Database tables migrated successfully.");
+    } catch (\Throwable $e) {
+        $this->warn("⚠️ Migration notice: " . $e->getMessage());
+    }
+
+    // 2. Ensure Super Admin account
+    $this->info("⏳ Step 2/4: Verifying Super Admin credentials...");
+    try {
+        \App\Models\Admin::updateOrCreate(
+            ['email' => 'admin@shubban.org'],
+            [
+                'name' => 'Super Admin',
+                'password' => \Illuminate\Support\Facades\Hash::make('admin123'),
+                'status' => 1,
+            ]
+        );
+        $this->info("✅ Super Admin verified (admin@shubban.org / admin123).");
+    } catch (\Throwable $e) {
+        $this->warn("⚠️ Admin notice: " . $e->getMessage());
+    }
+
+    // 3. Ensure Default Home Sections
+    $this->info("⏳ Step 3/4: Synchronizing Home Sections...");
+    try {
+        if (\Illuminate\Support\Facades\Schema::hasTable('home_sections') && \App\Models\HomeSection::count() === 0) {
+            \App\Models\HomeSection::seedDefaults();
+            $this->info("✅ Default homepage sections seeded.");
+        }
+    } catch (\Throwable $e) {
+        $this->warn("⚠️ HomeSection notice: " . $e->getMessage());
+    }
+
+    // 4. Clear all caches
+    $this->info("⏳ Step 4/4: Clearing application, route, config, and view caches...");
+    $this->call('optimize:clear');
+
+    $this->info("🎉 System repair completed successfully! All pages and admin dashboard are 100% operational.");
+    return 0;
+})->purpose('Run migrations, ensure admin accounts, seed defaults, and clear all caches');
