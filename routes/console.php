@@ -118,7 +118,7 @@ Artisan::command('system:repair', function () {
     }
 
     // 3. Ensure Default Home Sections
-    $this->info("⏳ Step 3/4: Synchronizing Home Sections...");
+    $this->info("⏳ Step 3/6: Synchronizing Home Sections...");
     try {
         if (\Illuminate\Support\Facades\Schema::hasTable('home_sections') && \App\Models\HomeSection::count() === 0) {
             \App\Models\HomeSection::seedDefaults();
@@ -128,8 +128,44 @@ Artisan::command('system:repair', function () {
         $this->warn("⚠️ HomeSection notice: " . $e->getMessage());
     }
 
-    // 4. Clear all caches
-    $this->info("⏳ Step 4/4: Clearing application, route, config, and view caches...");
+    // 4. Ensure Public Access to Organizational & Responsible Pages
+    $this->info("⏳ Step 4/6: Ensuring public access to responsible directories...");
+    try {
+        if (\Illuminate\Support\Facades\Schema::hasTable('page_access_controls')) {
+            \App\Models\PageAccessControl::whereIn('page_key', [
+                'responsible.central',
+                'responsible.district',
+                'responsible.upazila',
+                'responsible.thana',
+                'responsible.branch'
+            ])->update([
+                'access_level' => 'public',
+                'custom_message' => null
+            ]);
+            $this->info("✅ Responsible pages access verified as public.");
+        }
+    } catch (\Throwable $e) {
+        $this->warn("⚠️ Page access notice: " . $e->getMessage());
+    }
+
+    // 5. Ensure Management Leadership Data (District, Upazila, Thana, Branch)
+    $this->info("⏳ Step 5/6: Checking leadership and responsible data...");
+    try {
+        if (\Illuminate\Support\Facades\Schema::hasTable('managements')) {
+            $districtCount = \App\Models\Management::where('level', 'district')->count();
+            if ($districtCount <= 1) {
+                $this->info("⏳ Seeding district and organizational leadership data...");
+                $seeder = new \Database\Seeders\ManagementSeeder();
+                $seeder->run();
+                $this->info("✅ District and branch leadership data populated successfully.");
+            }
+        }
+    } catch (\Throwable $e) {
+        $this->warn("⚠️ Management seed notice: " . $e->getMessage());
+    }
+
+    // 6. Clear all caches
+    $this->info("⏳ Step 6/6: Clearing application, route, config, and view caches...");
     $this->call('optimize:clear');
 
     $this->info("🎉 System repair completed successfully! All pages and admin dashboard are 100% operational.");

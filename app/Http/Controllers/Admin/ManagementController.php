@@ -71,13 +71,18 @@ class ManagementController extends Controller
             'name' => 'required|string|max:255',
             'designation' => 'required|string|max:255',
             'level' => 'required|string|in:central,district,upazila,thana,branch',
-            'area' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
+            'area' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:30',
             'email' => 'nullable|email|max:255',
-            'address' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'order' => 'required|integer|min:1'
+            'address' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
+            'order' => 'nullable|integer|min:0'
         ]);
+
+        if (empty($validated['order'])) {
+            $validated['order'] = (Management::where('level', $validated['level'])->max('order') ?? 0) + 1;
+        }
+        $validated['status'] = $request->boolean('status', true);
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -111,13 +116,20 @@ class ManagementController extends Controller
             'name' => 'required|string|max:255',
             'designation' => 'required|string|max:255',
             'level' => 'required|string|in:central,district,upazila,thana,branch',
-            'area' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
+            'area' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:30',
             'email' => 'nullable|email|max:255',
-            'address' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'order' => 'required|integer|min:1'
+            'address' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
+            'order' => 'nullable|integer|min:0'
         ]);
+
+        if (empty($validated['order'])) {
+            $validated['order'] = $management->order ?: 1;
+        }
+        if ($request->has('status')) {
+            $validated['status'] = $request->boolean('status');
+        }
 
         if ($request->hasFile('image')) {
             // Delete old image

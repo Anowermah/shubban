@@ -152,8 +152,8 @@ class PageAccessControlSeeder extends Seeder
                 'page_category' => 'দায়িত্বশীল পরিষদ',
                 'route_name' => 'responsible.district',
                 'route_pattern' => 'responsible/district',
-                'access_level' => 'authenticated',
-                'custom_message' => 'জেলা দায়িত্বশীলদের তালিকা ও যোগাযোগ দেখতে লগইন করুন।',
+                'access_level' => 'public',
+                'custom_message' => null,
             ],
             [
                 'page_key' => 'responsible.upazila',
@@ -161,8 +161,8 @@ class PageAccessControlSeeder extends Seeder
                 'page_category' => 'দায়িত্বশীল পরিষদ',
                 'route_name' => 'responsible.upazila',
                 'route_pattern' => 'responsible/upazila',
-                'access_level' => 'authenticated',
-                'custom_message' => 'উপজেলা দায়িত্বশীলদের তালিকা দেখতে লগইন করুন।',
+                'access_level' => 'public',
+                'custom_message' => null,
             ],
             [
                 'page_key' => 'responsible.branch',
@@ -170,8 +170,8 @@ class PageAccessControlSeeder extends Seeder
                 'page_category' => 'দায়িত্বশীল পরিষদ',
                 'route_name' => 'responsible.branch',
                 'route_pattern' => 'responsible/branch',
-                'access_level' => 'authenticated',
-                'custom_message' => 'শাখা দায়িত্বশীলদের তালিকা দেখতে লগইন করুন।',
+                'access_level' => 'public',
+                'custom_message' => null,
             ],
 
             // গ্যালারি ও ঐতিহাসিক আর্কাইভ

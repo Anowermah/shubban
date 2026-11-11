@@ -47,13 +47,20 @@ class ResponsibleController extends Controller
             return view('responsible.central', compact('managers', 'members', 'title'));
         }
         
-        $responsiblePersons = Management::where('level', $level)
-            ->where('is_active', true)
-            ->orderBy('order')
-            ->get();
+        try {
+            $query = Management::where('level', $level);
+            if (\Illuminate\Support\Facades\Schema::hasColumn('managements', 'status')) {
+                $query->where('status', 1);
+            } elseif (\Illuminate\Support\Facades\Schema::hasColumn('managements', 'is_active')) {
+                $query->where('is_active', 1);
+            }
+            $responsiblePersons = $query->orderBy('order')->get();
+        } catch (\Throwable $e) {
+            $responsiblePersons = collect();
+        }
         $managers = $responsiblePersons;
 
-        return view('responsible.' . $level, compact('responsiblePersons', 'managers', 'title'));
+        return view('responsible.' . $level, compact('responsiblePersons', 'managers', 'title', 'level'));
     }
 
     public function central()
