@@ -239,6 +239,7 @@
     </div>
 </div>
 @endforeach
+@endsection
 
 @push('styles')
 <style>
