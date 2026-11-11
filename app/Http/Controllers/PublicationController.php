@@ -102,9 +102,15 @@ class PublicationController extends Controller
 
         $magazines = $query->paginate(12)->withQueryString();
 
+        $connection = config('database.default');
+        $driver = config("database.connections.{$connection}.driver", 'mysql');
+        $yearExpression = $driver === 'sqlite'
+            ? 'strftime("%Y", publication_date) as year'
+            : 'YEAR(publication_date) as year';
+
         $years = Magazine::where('status', 'published')
                          ->whereNotNull('publication_date')
-                         ->selectRaw('strftime("%Y", publication_date) as year')
+                         ->selectRaw($yearExpression)
                          ->distinct()
                          ->pluck('year')
                          ->filter()
