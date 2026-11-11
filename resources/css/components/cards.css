@@ -1,0 +1,100 @@
+/* Card Styles */
+.card {
+    border: none;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-title {
+    color: #0C4B36;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.card-text {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Program Card */
+.program-card .card-body {
+    padding: 1.5rem;
+}
+
+.program-stats {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0C4B36;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Publication Card */
+.publication-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Event Card */
+.event-card .card-body {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.event-date {
+    background: #0C4B36;
+    color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    margin-right: 1rem;
+    min-width: 80px;
+}
+
+.event-date .date {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.event-date .month {
+    display: block;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .event-card .card-body {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .event-date {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}

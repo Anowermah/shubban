@@ -1,0 +1,59 @@
+name: Deploy to Subdomain on Push
+
+on:
+  push:
+    branches:
+      - main  # অথবা master (আপনার ডিফল্ট ব্রাঞ্চের নাম অনুযায়ী)
+
+jobs:
+  # =========================================================================
+  # অপশন ১: FTP / FTPS এর মাধ্যমে অটোমেটিক ডিপ্লয় (যেকোনো সাধারণ cPanel-এ চলে)
+  # =========================================================================
+  deploy-via-ftp:
+    runs-on: ubuntu-latest
+    name: Auto Deploy via FTP
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: 📂 Sync files to Subdomain via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}          # যেমন: ftp.yourdomain.com অথবা সার্ভারের আইপি
+          username: ${{ secrets.FTP_USERNAME }}      # আপনার cPanel বা FTP ইউজারনেম
+          password: ${{ secrets.FTP_PASSWORD }}      # আপনার FTP পাসওয়ার্ড
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}  # যেমন: public_html/subdomain/
+          dangerous-clean-slate: false               # সার্ভারের অন্যান্য ফাইল বা .env ডিলিট করবে না
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .env*
+            storage/logs/**
+            storage/framework/cache/**
+            storage/framework/sessions/**
+            storage/framework/views/**
+            public/storage/**
+
+  # =========================================================================
+  # অপশন ২: SSH এর মাধ্যমে অটোমেটিক ডিপ্লয় (VPS বা SSH এক্সেস থাকলে)
+  # ব্যবহার করতে চাইলে নিচের কোডগুলো আনকমেন্ট (Uncomment) করে নিতে পারেন:
+  # =========================================================================
+  # deploy-via-ssh:
+  #   runs-on: ubuntu-latest
+  #   name: Auto Deploy via SSH & Artisan Migrate
+  #   steps:
+  #     - name: 🚀 SSH Remote Commands
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #         host: ${{ secrets.SSH_HOST }}
+  #         username: ${{ secrets.SSH_USER }}
+  #         key: ${{ secrets.SSH_PRIVATE_KEY }}
+  #         port: ${{ secrets.SSH_PORT || 22 }}
+  #         script: |
+  #           cd ${{ secrets.DEPLOY_PATH }}
+  #           git pull origin main
+  #           php artisan migrate --force
+  #           php artisan optimize

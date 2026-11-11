@@ -1,0 +1,69 @@
+/* About Pages Styles */
+
+/* Common styles for about pages */
+.about-section {
+    padding: 3rem 0;
+}
+
+.about-content {
+    margin-bottom: 2rem;
+}
+
+.about-content h2 {
+    color: #014919;
+    margin-bottom: 1.5rem;
+}
+
+.about-content p {
+    color: #000;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+/* History page specific styles */
+.history-timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+/* Activities page specific styles */
+.activity-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Goals page specific styles */
+.goals-list {
+    list-style: none;
+    padding: 0;
+}
+
+.goals-list li {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #f8f9fa;
+    border-left: 4px solid #014919;
+    border-radius: 0 4px 4px 0;
+}
+
+/* Introduction page specific styles */
+.intro-highlight {
+    background: #ecf3fa;
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .about-section {
+        padding: 2rem 0;
+    }
+    
+    .activity-card {
+        margin-bottom: 1rem;
+    }
+}

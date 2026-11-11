@@ -1,0 +1,344 @@
+/* Institutions Pages Styles */
+
+.section-title {
+    color: #014919;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #014919;
+}
+
+/* Madrasa Styles */
+.madrasa-item {
+    transition: transform 0.3s ease;
+}
+
+.madrasa-item:hover {
+    transform: translateY(-5px);
+}
+
+.madrasa-info {
+    color: #000;
+    margin: 1rem 0;
+}
+
+.madrasa-info i {
+    color: #014919;
+    width: 20px;
+    margin-right: 10px;
+}
+
+.madrasa-details h4 {
+    color: #014919;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.madrasa-details ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.madrasa-details ul li {
+    color: #000;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* Mosque Styles */
+.mosque-item {
+    transition: transform 0.3s ease;
+}
+
+.mosque-item:hover {
+    transform: translateY(-5px);
+}
+
+.mosque-info {
+    color: #000;
+    margin: 1rem 0;
+}
+
+.mosque-info i {
+    color: #014919;
+    width: 20px;
+    margin-right: 10px;
+}
+
+.mosque-details h4 {
+    color: #014919;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.mosque-details ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.mosque-details ul li {
+    color: #000;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* Orphanage Styles */
+.orphanage-item {
+    transition: transform 0.3s ease;
+}
+
+.orphanage-item:hover {
+    transform: translateY(-5px);
+}
+
+.orphanage-info {
+    color: #000;
+    margin: 1rem 0;
+}
+
+.orphanage-info i {
+    color: #014919;
+    width: 20px;
+    margin-right: 10px;
+}
+
+.orphanage-details h4 {
+    color: #014919;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.orphanage-details ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.orphanage-details ul li {
+    color: #000;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.orphanage-stats {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.stat-item {
+    padding: 1rem;
+}
+
+.stat-item h5 {
+    color: #014919;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-item p {
+    color: #000;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.donation-section {
+    background: #fff;
+    border-radius: 8px;
+}
+
+.donation-section .card-title {
+    color: #014919;
+}
+
+.bank-info {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.bank-info h5 {
+    color: #014919;
+    margin-bottom: 1rem;
+}
+
+.bank-info p {
+    margin-bottom: 0.5rem;
+}
+
+/* Library Styles */
+.library-item {
+    transition: transform 0.3s ease;
+}
+
+.library-item:hover {
+    transform: translateY(-5px);
+}
+
+.library-info {
+    color: #000;
+    margin: 1rem 0;
+}
+
+.library-info i {
+    color: #014919;
+    width: 20px;
+    margin-right: 10px;
+}
+
+.book-search-form {
+    margin-bottom: 1rem;
+}
+
+.book-item {
+    transition: transform 0.3s ease;
+}
+
+.book-item:hover {
+    transform: translateY(-5px);
+}
+
+.book-title {
+    color: #014919;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.book-author {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.book-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.book-meta span i {
+    color: #014919;
+    margin-right: 5px;
+}
+
+.book-price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #014919;
+}
+
+.book-actions {
+    margin-top: 1rem;
+}
+
+.categories-list li {
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.categories-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.categories-list a {
+    color: #000;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.categories-list a:hover {
+    color: #014919;
+}
+
+.categories-list .count {
+    background: #014919;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
+
+.popular-book-thumb {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.popular-book-info h5 {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    color: #014919;
+}
+
+.popular-book-info p {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.popular-book-info .price {
+    color: #014919;
+    font-weight: bold;
+}
+
+.reading-stats .stat-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.reading-stats .stat-item:last-child {
+    border-bottom: none;
+}
+
+.reading-stats .stat-value {
+    color: #014919;
+    font-weight: bold;
+}
+
+/* Card Image Styles */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Sidebar Styles */
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.card-title {
+    color: #014919;
+    margin-bottom: 1rem;
+}
+
+.list-unstyled li {
+    margin-bottom: 0.5rem;
+}
+
+.list-unstyled a {
+    color: #000;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.list-unstyled a:hover {
+    color: #014919;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .section-title {
+        margin-bottom: 1.5rem;
+    }
+    
+    .madrasa-item,
+    .mosque-item,
+    .orphanage-item,
+    .library-item {
+        margin-bottom: 1rem;
+    }
+}

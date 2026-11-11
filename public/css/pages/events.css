@@ -1,0 +1,261 @@
+/* Events Pages Styles */
+
+/* Common styles for event pages */
+.events-section {
+    padding: 3rem 0;
+}
+
+.event-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+.event-title {
+    color: #014919;
+    margin-bottom: 1rem;
+}
+
+.event-meta {
+    color: #000;
+    margin-bottom: 1rem;
+}
+
+/* Conferences page specific styles */
+.conference-schedule {
+    background: #ecf3fa;
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+}
+
+/* Seminars page specific styles */
+.seminar-registration {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+/* Workshops page specific styles */
+.workshop-details {
+    border-left: 4px solid #014919;
+    padding-left: 1rem;
+    margin: 1rem 0;
+}
+
+/* Event Detail Page Styles */
+
+/* Event Header */
+.event-header {
+    margin-bottom: 2rem;
+}
+
+.event-title {
+    color: #014919;
+    margin-bottom: 1rem;
+}
+
+.event-meta {
+    display: flex;
+    gap: 1.5rem;
+    color: #666;
+}
+
+.event-meta span {
+    display: flex;
+    align-items: center;
+}
+
+.event-meta i {
+    color: #014919;
+    margin-right: 0.5rem;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    padding: 1rem 0;
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-time {
+    width: 100px;
+    color: #014919;
+    font-weight: bold;
+    padding-right: 1rem;
+    text-align: right;
+    border-right: 2px solid #014919;
+}
+
+.timeline-content {
+    flex: 1;
+    padding-left: 1rem;
+}
+
+.timeline-content h4 {
+    margin: 0;
+    color: #333;
+}
+
+/* Speaker Cards */
+.speaker-card {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.speaker-card:hover {
+    transform: translateY(-5px);
+}
+
+.speaker-avatar {
+    margin-right: 1rem;
+    color: #014919;
+}
+
+.speaker-info h4 {
+    margin: 0;
+    color: #014919;
+    font-size: 1.1rem;
+}
+
+.speaker-info p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Materials List */
+.materials-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.materials-list li {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    color: #333;
+}
+
+.materials-list i {
+    color: #014919;
+    margin-right: 0.5rem;
+}
+
+/* Event Info List */
+.event-info-list,
+.contact-info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.event-info-list li,
+.contact-info-list li {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    color: #333;
+}
+
+.event-info-list i,
+.contact-info-list i {
+    color: #014919;
+    width: 20px;
+    margin-right: 0.5rem;
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+}
+
+.card-title {
+    color: #014919;
+    margin-bottom: 1rem;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #014919;
+    border-color: #014919;
+}
+
+.btn-primary:hover {
+    background-color: #013913;
+    border-color: #013913;
+}
+
+.btn-outline-primary {
+    color: #014919;
+    border-color: #014919;
+}
+
+.btn-outline-primary:hover {
+    background-color: #014919;
+    border-color: #014919;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .events-section {
+        padding: 2rem 0;
+    }
+    
+    .event-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .event-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+    }
+
+    .timeline-time {
+        width: auto;
+        text-align: left;
+        border-right: none;
+        border-bottom: 2px solid #014919;
+        padding: 0 0 0.5rem 0;
+        margin-bottom: 0.5rem;
+    }
+
+    .timeline-content {
+        padding-left: 0;
+    }
+}

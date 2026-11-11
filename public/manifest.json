@@ -1,0 +1,150 @@
+{
+    "name": "জমঈয়ত শুব্বানে আহলে হাদীস বাংলাদেশ",
+    "short_name": "শুব্বান",
+    "description": "একটি ঐতিহ্যবাহী অরাজনৈতিক ছাত্র ও যুব আন্দোলন — যুব সমাজের আত্মশুদ্ধি ও মানবতার সেবায় নিবেদিত।",
+    "start_url": "/?source=pwa",
+    "id": "/?source=pwa",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#072e20",
+    "theme_color": "#0C4B36",
+    "lang": "bn",
+    "dir": "ltr",
+    "categories": [
+        "education",
+        "books",
+        "religion",
+        "social"
+    ],
+    "icons": [
+        {
+            "src": "/icons/icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icons/icon-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icons/icon-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icons/icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icons/icon-152x152.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icons/icon-maskable-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/icons/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icons/icon-maskable-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "অনলাইন দান",
+            "short_name": "অনুদান",
+            "description": "দ্বীনি দাওয়াত ও মানবতার সেবায় অনুদান দিন",
+            "url": "/donate",
+            "icons": [
+                {
+                    "src": "/icons/icon-96x96.png",
+                    "sizes": "96x96",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "name": "জরুরি নোটিশ",
+            "short_name": "নোটিশ",
+            "description": "সর্বশেষ সাংগঠনিক বিজ্ঞপ্তি ও আদেশ",
+            "url": "/notice",
+            "icons": [
+                {
+                    "src": "/icons/icon-96x96.png",
+                    "sizes": "96x96",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "name": "বই সম্ভার",
+            "short_name": "বই",
+            "description": "শুব্বান প্রকাশিত কিতাব ও সাহিত্য",
+            "url": "/publications/books",
+            "icons": [
+                {
+                    "src": "/icons/icon-96x96.png",
+                    "sizes": "96x96",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "name": "যোগাযোগ",
+            "short_name": "যোগাযোগ",
+            "description": "কেন্দ্রীয় কার্যালয় ও হেল্পডেস্ক",
+            "url": "/contact",
+            "icons": [
+                {
+                    "src": "/icons/icon-96x96.png",
+                    "sizes": "96x96",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "name": "রিসার্চ সেন্টার",
+            "short_name": "রিসার্চ",
+            "description": "কুরআন-সুন্নাহ গবেষণা ও ফতোয়া সেবা",
+            "url": "/facilities/research-center",
+            "icons": [
+                {
+                    "src": "/icons/icon-96x96.png",
+                    "sizes": "96x96",
+                    "type": "image/png"
+                }
+            ]
+        }
+    ],
+    "prefer_related_applications": false
+}

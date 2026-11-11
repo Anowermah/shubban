@@ -1,0 +1,463 @@
+/* Custom CSS for As-Sunnah Foundation Project */
+
+/* Font Face */
+@font-face {
+    font-family: 'Kalpurush';
+    src: url('../fonts/Kalpurush.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --primary-color: #0C4B36;
+    --secondary-color: #FBB040;
+    --text-color: #000;
+    --light-bg: #f8f9fa;
+    --white: #fff;
+}
+
+/* Global Styles */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+body {
+    font-family: 'Kalpurush', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+/* Top Bar */
+.top-bar {
+    background: var(--primary-color);
+    padding: 8px 0;
+    color: var(--white);
+}
+
+.top-bar .contact-info span {
+    margin-right: 20px;
+    font-size: 14px;
+}
+
+.top-bar .social-links a {
+    color: var(--white);
+    margin-left: 15px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.top-bar .social-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* (Dropdown & Navbar styles moved exclusively to header.css) */
+
+/* Hero Slider */
+.hero-section {
+    margin-bottom: 30px;
+}
+
+.carousel {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-item {
+    height: 600px;
+}
+
+.carousel-item img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.carousel-caption {
+    background: rgba(12, 75, 54, 0.8);
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    bottom: 50px;
+}
+
+.carousel-caption h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--white);
+    font-weight: 700;
+}
+
+.carousel-caption p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--white);
+}
+
+.carousel-caption .btn {
+    background: var(--secondary-color);
+    border: none;
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.carousel-caption .btn:hover {
+    background: var(--white);
+    color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* Section Styles */
+.section-title {
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color);
+    bottom: 0;
+    left: 0;
+}
+
+.section-title.text-center::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Activity Cards */
+.activity-card {
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.activity-card:hover {
+    transform: translateY(-10px);
+}
+
+.activity-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.activity-card .content {
+    padding: 20px;
+}
+
+.activity-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* Notice Board */
+.notice-board {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.notice-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.notice-item:last-child {
+    border-bottom: none;
+}
+
+.notice-item h5 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.notice-item .date {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.card-header-primary {
+    background: linear-gradient(135deg, #073123 0%, #0C4B36 100%) !important;
+    color: #ffffff !important;
+    border-bottom: 3px solid var(--secondary-color) !important;
+    padding: 12px 18px;
+    font-weight: 700;
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.card-header-primary h3, .card-header-primary h4, .card-header-primary h5 {
+    color: #ffffff !important;
+    margin: 0;
+}
+
+/* Category Sidebar */
+.categories-sidebar {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 30px;
+}
+
+.category-title {
+    color: #fff;
+    background: linear-gradient(135deg, #073123 0%, #0C4B36 100%);
+    padding: 14px 20px;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+.category-list {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.category-item {
+    color: #1f2937;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+}
+
+.category-item:hover {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    border-color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+/* News Card Styles */
+.news-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+.news-card img {
+    border-radius: 8px 8px 0 0;
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.news-content {
+    padding: 1.5rem;
+}
+
+.news-content h4 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+}
+
+.news-content .text-muted {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+.news-content p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+/* Font Size Control */
+.font-size-control {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.font-size-control .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-color: #0C4B36;
+    color: #0C4B36;
+}
+
+.font-size-control .btn:hover {
+    background-color: #0C4B36;
+    color: white;
+}
+
+.font-size-control .btn i {
+    font-size: 0.75rem;
+}
+
+@media (max-width: 991.98px) {
+    .font-size-control {
+        margin: 0.5rem 0;
+    }
+}
+
+/* Footer */
+.footer {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 60px 0 0;
+}
+
+.footer h3 {
+    color: var(--white);
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer h3::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 2px;
+    background: var(--secondary-color);
+    bottom: 0;
+    left: 0;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--secondary-color);
+    padding-left: 5px;
+}
+
+.footer .social-links a {
+    color: var(--white);
+    margin-right: 15px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.footer .social-links a:hover {
+    color: var(--secondary-color);
+}
+
+.footer-bottom {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
+    margin-top: 40px;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    padding: 8px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Responsive Styles */
+@media (max-width: 991.98px) {
+
+    .carousel-item {
+        height: 400px;
+    }
+
+    .carousel-caption {
+        padding: 20px;
+        bottom: 20px;
+    }
+
+    .carousel-caption h2 {
+        font-size: 2rem;
+    }
+
+    .organization-name {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .top-bar {
+        text-align: center;
+    }
+
+    .top-bar .social-links {
+        margin-top: 10px;
+    }
+
+    .carousel-item {
+        height: 300px;
+    }
+
+    .carousel-caption {
+        padding: 15px;
+        bottom: 10px;
+    }
+
+    .carousel-caption h2 {
+        font-size: 1.5rem;
+    }
+
+    .carousel-caption p {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,69 @@
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <!-- Quick Links -->
+            <div class="col-md-3 mb-4 mb-md-0">
+                <h5>{{ __('messages.quick_links') }}</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{{ route('about.index') }}"><i class="fas fa-chevron-right"></i>{{ __('messages.about_us') }}</a></li>
+                    <li><a href="{{ route('gallery.photos') }}"><i class="fas fa-chevron-right"></i>{{ __('messages.photo_gallery') }}</a></li>
+                    <li><a href="{{ route('gallery.videos') }}"><i class="fas fa-chevron-right"></i>{{ __('messages.video_gallery') }}</a></li>
+                    <li><a href="{{ route('contact.index') }}"><i class="fas fa-chevron-right"></i>{{ __('messages.contact_us') }}</a></li>
+                </ul>
+            </div>
+
+            <!-- Useful Links -->
+            <div class="col-md-3 mb-4 mb-md-0">
+                <h5>{{ __('messages.useful_links') }}</h5>
+                <ul class="list-unstyled useful-links">
+                    <li><a href="{{ route('education.quran') }}"><i class="fas fa-book-open"></i>কুরআন শিক্ষা</a></li>
+                    <li><a href="{{ route('education.hadith') }}"><i class="fas fa-book-reader"></i>হাদীস শিক্ষা</a></li>
+                    <li><a href="{{ route('central.committee') }}"><i class="fas fa-users"></i>কমিটি</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="col-md-3 mb-4 mb-md-0">
+                <h5>{{ __('messages.contact_us') }}</h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        কেন্দ্রীয় কার্যালয়: ৭৯/ক/৩, উত্তর যাত্রাবাড়ী,<br>
+                        <span class="ms-4">ঢাকা-১২০৪</span>
+                    </li>
+                    <li><i class="fas fa-phone"></i>+৮৮০১৭৬৫-৮১২২৬১</li>
+                    <li><i class="fas fa-envelope"></i>info.shubbanbd@gmail.com</li>
+                </ul>
+            </div>
+
+            <!-- Social Media & Newsletter -->
+            <div class="col-md-3">
+                <h5>{{ __('messages.social_media') }}</h5>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/shubban" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/@ShubbanDawah" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="mt-4">
+                    <h5>{{ __('messages.newsletter') }}</h5>
+                    <form class="newsletter-form">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="{{ __('messages.email') }}">
+                            <button class="btn btn-primary" type="submit">{{ __('messages.subscribe') }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="copyright">
+            <div class="container">
+                <p>কপিরাইট &copy; {{ date('Y') }} জমঈয়ত শুব্বানে আহলে হাদীস বাংলাদেশ। সর্বস্বত্ব সংরক্ষিত।</p>
+            </div>
+        </div>
+    </div>
+</footer>

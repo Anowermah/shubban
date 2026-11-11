@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="bn" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0C4B36">
+    <title>আপনি বর্তমানে অফলাইনে আছেন - জমঈয়ত শুব্বান</title>
+    <link rel="icon" type="image/png" href="/icons/icon-96x96.png">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+    <style>
+        @font-face {
+            font-family: 'Bornomala';
+            src: url('/fonts/Bornomala.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Bornomala', 'Kalpurush', system-ui, -apple-system, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #072e20 0%, #0C4B36 60%, #041810 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #ffffff;
+        }
+        .offline-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid #FBB040;
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .logo-wrap {
+            width: 84px;
+            height: 84px;
+            margin: 0 auto 20px;
+            background: #ffffff;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+            border: 2px solid #FBB040;
+        }
+        .logo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        h1 {
+            font-size: 1.55rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #FBB040;
+        }
+        p {
+            font-size: 0.96rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.88);
+            margin-bottom: 24px;
+        }
+        .btn-retry {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #FBB040;
+            color: #072e20;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(251, 176, 64, 0.35);
+            transition: all 0.2s ease;
+        }
+        .btn-retry:hover {
+            transform: scale(1.04);
+            background: #ffbe53;
+        }
+        .tip-box {
+            margin-top: 25px;
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.22);
+            font-size: 0.84rem;
+            color: rgba(255, 255, 255, 0.75);
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 14px;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ef4444;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-card">
+        <div class="logo-wrap">
+            <img src="/icons/icon-96x96.png" alt="Shubban Logo">
+        </div>
+
+        <div class="status-badge">
+            <span class="dot"></span>
+            <span>সংযোগ বিচ্ছিন্ন</span>
+        </div>
+
+        <h1>আপনি বর্তমানে অফলাইনে আছেন</h1>
+        <p>আপনার ডিভাইসে ইন্টারনেট সংযোগ পাওয়া যাচ্ছে না। অনুগ্রহ করে মোবাইল ডেটা বা ওয়াই-ফাই সংযোগ চেক করুন।</p>
+
+        <button type="button" class="btn-retry" onclick="checkConnection()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+            </svg>
+            <span>পুনরায় চেষ্টা করুন</span>
+        </button>
+
+        <div class="tip-box">
+            💡 <strong>টিপস:</strong> ইন্টারনেট ফিরে এলে পেজটি স্বয়ংক্রিয়ভাবে পুনরায় লোড হবে।
+        </div>
+    </div>
+
+    <script>
+        function checkConnection() {
+            if (navigator.onLine) {
+                window.location.reload();
+            } else {
+                alert('এখনো কোনো ইন্টারনেট সংযোগ পাওয়া যায়নি। সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।');
+            }
+        }
+        window.addEventListener('online', function() {
+            window.location.reload();
+        });
+    </script>
+</body>
+</html>

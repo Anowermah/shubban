@@ -1,0 +1,47 @@
+.app-badge-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .app-badge-container {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.app-store-badge {
+    height: 40px;
+    width: auto;
+    transition: transform 0.2s ease-in-out;
+}
+
+.app-store-badge:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 767px) {
+    .app-store-badge {
+        height: 35px;
+    }
+}
+
+.app-badge-wrapper {
+    display: inline-block;
+    position: relative;
+}
+
+.app-badge-wrapper::after {
+    content: 'Coming Soon';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #ff5722;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: bold;
+    transform: rotate(15deg);
+}

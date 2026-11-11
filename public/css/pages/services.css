@@ -1,0 +1,82 @@
+/* Services Pages Styles */
+
+.services-section {
+    padding: 3rem 0;
+}
+
+.service-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    background: #ecf3fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.service-icon i {
+    font-size: 2rem;
+    color: #014919;
+}
+
+.service-title {
+    color: #014919;
+    margin-bottom: 1rem;
+}
+
+.service-description {
+    color: #000;
+    margin-bottom: 1.5rem;
+}
+
+/* Charity service specific styles */
+.donation-section {
+    background: #ecf3fa;
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+}
+
+/* Medical service specific styles */
+.medical-schedule {
+    border: 1px solid #dee2e6;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+/* Education service specific styles */
+.education-programs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .services-section {
+        padding: 2rem 0;
+    }
+    
+    .service-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .education-programs {
+        grid-template-columns: 1fr;
+    }
+}

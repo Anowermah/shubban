@@ -1,0 +1,1118 @@
+/* ==========================================================================
+   Shubban Portal - Modern Home Page Styles
+   ========================================================================== */
+
+:root {
+    --shubban-green-deep: #073123;
+    --shubban-green: #0C4B36;
+    --shubban-green-light: #126b4e;
+    --shubban-gold: #FBB040;
+    --shubban-gold-dark: #d99126;
+    --shubban-bg-subtle: #f8fafc;
+    --shubban-border: #e2e8f0;
+}
+
+/* --------------------------------------------------------------------------
+   Hero Slider & Ticker
+   -------------------------------------------------------------------------- */
+.hero-section {
+    position: relative;
+    margin-bottom: 0;
+}
+
+.hero-slider-wrap {
+    box-shadow: 0 10px 30px rgba(7, 49, 35, 0.12);
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-slider-wrap .carousel-item {
+    height: 480px;
+    background-color: var(--shubban-green-deep);
+}
+
+.hero-slider-wrap .carousel-item img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    filter: brightness(0.85);
+}
+
+.hero-slider-wrap .carousel-caption {
+    background: linear-gradient(135deg, rgba(7, 49, 35, 0.92) 0%, rgba(12, 75, 54, 0.85) 100%);
+    backdrop-filter: blur(4px);
+    border-radius: 16px;
+    padding: 24px 30px;
+    max-width: 650px;
+    margin: 0 auto;
+    bottom: 45px;
+    border: 1px solid rgba(251, 176, 64, 0.3);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+.hero-slider-wrap .carousel-caption h2 {
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+    line-height: 1.35;
+}
+
+.hero-slider-wrap .carousel-caption p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.hero-slider-wrap .carousel-caption .btn-slider-cta {
+    background: var(--shubban-gold);
+    color: var(--shubban-green-deep);
+    font-weight: 700;
+    padding: 8px 22px;
+    border-radius: 30px;
+    border: none;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+}
+
+.hero-slider-wrap .carousel-caption .btn-slider-cta:hover {
+    background: #ffffff;
+    color: var(--shubban-green);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Urgent Notice Ticker */
+.notice-ticker-bar {
+    background: linear-gradient(90deg, #073123 0%, #0C4B36 100%);
+    color: #ffffff;
+    padding: 10px 0;
+    border-bottom: 2px solid var(--shubban-gold);
+    font-size: 0.92rem;
+}
+
+.ticker-badge {
+    background: var(--shubban-gold);
+    color: var(--shubban-green-deep);
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ticker-content a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.ticker-content a:hover {
+    color: var(--shubban-gold);
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Organization Stats at a Glance
+   -------------------------------------------------------------------------- */
+.stats-section {
+    margin-top: -30px;
+    position: relative;
+    z-index: 10;
+}
+
+.stat-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--shubban-border);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 100%;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(12, 75, 54, 0.12);
+    border-color: var(--shubban-gold);
+}
+
+.stat-icon-wrap {
+    width: 54px;
+    height: 54px;
+    min-width: 54px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(12, 75, 54, 0.08) 0%, rgba(251, 176, 64, 0.15) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--shubban-green);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-icon-wrap {
+    background: var(--shubban-green);
+    color: var(--shubban-gold);
+}
+
+.stat-number {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--shubban-green);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   Specialized Facilities (৪টি মূল অঙ্গ-প্রতিষ্ঠান)
+   -------------------------------------------------------------------------- */
+.facility-card {
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid var(--shubban-border);
+    padding: 22px;
+    height: 100%;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    position: relative;
+    overflow: hidden;
+}
+
+.facility-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--shubban-green) 0%, var(--shubban-gold) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.facility-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px rgba(12, 75, 54, 0.1);
+    border-color: rgba(12, 75, 54, 0.2);
+}
+
+.facility-card:hover::before {
+    opacity: 1;
+}
+
+.facility-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.facility-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+}
+
+.facility-icon.research {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.facility-icon.shekor {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.facility-icon.shifa {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.facility-icon.maktabah {
+    background: #e0e7ff;
+    color: #4f46e5;
+}
+
+.facility-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--shubban-green);
+    margin: 0;
+}
+
+.hover-green {
+    transition: color 0.2s ease;
+}
+
+.hover-green:hover {
+    color: var(--shubban-green) !important;
+}
+
+.facility-desc {
+    color: #64748b;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    flex-grow: 1;
+}
+
+.btn-facility-link {
+    color: var(--shubban-green);
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    margin-top: auto;
+}
+
+.btn-facility-link i {
+    transition: transform 0.2s ease;
+}
+
+.btn-facility-link:hover {
+    color: var(--shubban-gold-dark);
+}
+
+.btn-facility-link:hover i {
+    transform: translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   4-Tier Training Curriculum (৪-স্তরীয় যুব প্রশিক্ষণ ব্যবস্থা)
+   -------------------------------------------------------------------------- */
+.training-tier-card {
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid var(--shubban-border);
+    padding: 20px;
+    height: 100%;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    text-align: center;
+}
+
+.training-tier-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 25px rgba(12, 75, 54, 0.1);
+    border-color: var(--shubban-green);
+}
+
+.tier-step-badge {
+    display: inline-block;
+    background: var(--shubban-green);
+    color: var(--shubban-gold);
+    font-weight: 700;
+    font-size: 0.76rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.tier-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--shubban-green);
+    margin-bottom: 6px;
+}
+
+.tier-focus {
+    font-size: 0.84rem;
+    color: #64748b;
+    line-height: 1.45;
+    margin-bottom: 14px;
+}
+
+.btn-tier-action {
+    background: #f1f5f9;
+    color: var(--shubban-green);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+}
+
+.training-tier-card:hover .btn-tier-action {
+    background: var(--shubban-green);
+    color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Publications & Books Grid
+   -------------------------------------------------------------------------- */
+.book-card-item {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid var(--shubban-border);
+    padding: 12px;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.03);
+}
+
+.book-card-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+    border-color: var(--shubban-gold);
+}
+
+.book-cover-wrap {
+    height: 270px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.book-cover-wrap img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.book-card-item:hover .book-cover-wrap img {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 8px 20px rgba(12, 75, 54, 0.2);
+}
+
+.book-title-text {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--shubban-green);
+    margin-bottom: 4px;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-author-text {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.book-actions-wrap {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    padding-top: 6px;
+    border-top: 1px solid #f1f5f9;
+}
+
+/* --------------------------------------------------------------------------
+   Donation CTA Banner
+   -------------------------------------------------------------------------- */
+.donation-banner-wrap {
+    background: linear-gradient(135deg, #073123 0%, #0C4B36 50%, #16654c 100%);
+    border-radius: 18px;
+    padding: 35px 30px;
+    color: #ffffff;
+    box-shadow: 0 15px 35px rgba(7, 49, 35, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.donation-banner-wrap::after {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(251, 176, 64, 0.08);
+    pointer-events: none;
+}
+
+.btn-donate-gold {
+    background: var(--shubban-gold);
+    color: var(--shubban-green-deep);
+    font-weight: 700;
+    padding: 10px 26px;
+    border-radius: 30px;
+    border: none;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-donate-gold:hover {
+    background: #ffffff;
+    color: var(--shubban-green);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-contact-outline {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    font-weight: 600;
+    padding: 8px 22px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-contact-outline:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Dedicated Photo Gallery (দৃষ্টিজুড়ানো ফটো গ্যালারি)
+   -------------------------------------------------------------------------- */
+.photo-gallery-section {
+    background: #ffffff;
+    padding: 55px 0;
+}
+
+.photo-grid-card {
+    display: block;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #f1f5f9;
+    text-decoration: none;
+    border: 1px solid var(--shubban-border);
+}
+
+.photo-grid-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(12, 75, 54, 0.15);
+    border-color: var(--shubban-gold);
+}
+
+.photo-grid-thumb {
+    position: relative;
+    padding-top: 68%; /* Aspect Ratio */
+    overflow: hidden;
+}
+
+.photo-grid-thumb img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.photo-grid-card:hover .photo-grid-thumb img {
+    transform: scale(1.08);
+}
+
+.photo-grid-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(7, 49, 35, 0.1) 0%, rgba(7, 49, 35, 0.75) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.photo-grid-card:hover .photo-grid-overlay {
+    opacity: 1;
+}
+
+.photo-zoom-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--shubban-gold);
+    color: var(--shubban-green-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.photo-grid-card:hover .photo-zoom-icon {
+    transform: scale(1);
+}
+
+.photo-caption-bar {
+    padding: 10px 14px;
+    background: #ffffff;
+    border-top: 1px solid #f1f5f9;
+}
+
+.photo-caption-text {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--shubban-green);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --------------------------------------------------------------------------
+   Historical Photo Archives (ঐতিহাসিক অ্যালবাম ও ফটো আর্কাইভ)
+   -------------------------------------------------------------------------- */
+.archive-gallery-section {
+    background: #f8fafc;
+    padding: 50px 0;
+    border-top: 1px solid var(--shubban-border);
+    border-bottom: 1px solid var(--shubban-border);
+}
+
+.archive-album-card {
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid var(--shubban-border);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    text-decoration: none;
+}
+
+.archive-album-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--shubban-green);
+}
+
+.archive-thumb-wrap {
+    height: 160px;
+    position: relative;
+    background: #e2e8f0;
+    overflow: hidden;
+}
+
+.archive-thumb-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.archive-album-card:hover .archive-thumb-wrap img {
+    transform: scale(1.06);
+}
+
+.archive-year-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(7, 49, 35, 0.9);
+    color: var(--shubban-gold);
+    font-weight: 700;
+    font-size: 0.78rem;
+    padding: 3px 9px;
+    border-radius: 8px;
+}
+
+.archive-body-wrap {
+    padding: 14px 16px;
+    background: #ffffff;
+}
+
+.archive-album-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--shubban-green);
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.archive-photo-count {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Dedicated Video Cinema Gallery (ভিডিও লেকচার ও আলোচনা)
+   -------------------------------------------------------------------------- */
+.video-cinema-section {
+    background: linear-gradient(180deg, #072c1f 0%, #051e15 100%);
+    padding: 60px 0;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.video-cinema-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.video-cinema-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.09);
+    border-color: var(--shubban-gold);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.video-thumb-wrap {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    background: #000;
+    overflow: hidden;
+}
+
+.video-thumb-wrap img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.9);
+    transition: transform 0.4s ease, filter 0.3s ease;
+}
+
+.video-cinema-card:hover .video-thumb-wrap img {
+    transform: scale(1.06);
+    filter: brightness(1);
+}
+
+.video-play-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 58px;
+    height: 58px;
+    background: #dc2626;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.35rem;
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+    transition: all 0.3s ease;
+}
+
+.video-cinema-card:hover .video-play-pulse {
+    background: #ef4444;
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 0 0 12px rgba(220, 38, 38, 0);
+}
+
+.video-cinema-body {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.video-cinema-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Research Articles & Essays (গবেষণামূলক প্রবন্ধ ও নিবন্ধ)
+   -------------------------------------------------------------------------- */
+.articles-section {
+    background: #ffffff;
+    padding: 60px 0;
+    border-bottom: 1px solid var(--shubban-border);
+}
+
+.article-modern-card {
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid var(--shubban-border);
+    overflow: hidden;
+    transition: all 0.35s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.article-modern-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 30px rgba(12, 75, 54, 0.1);
+    border-color: var(--shubban-green);
+}
+
+.article-cover-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    position: relative;
+    background: #f1f5f9;
+}
+
+.article-cover-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.4s ease;
+}
+
+.article-modern-card:hover .article-cover-wrap img {
+    transform: scale(1.06);
+}
+
+.article-category-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(7, 49, 35, 0.85);
+    backdrop-filter: blur(4px);
+    color: var(--shubban-gold);
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(251, 176, 64, 0.3);
+}
+
+.article-content-wrap {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.article-meta-info {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.article-card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--shubban-green);
+    line-height: 1.4;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.article-card-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.article-card-title a:hover {
+    color: var(--shubban-gold-dark);
+}
+
+.article-card-excerpt {
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.btn-article-read {
+    color: var(--shubban-green);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    margin-top: auto;
+}
+
+.btn-article-read:hover {
+    color: var(--shubban-gold-dark);
+    gap: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   Core Mission Pillars (৪টি সংক্ষিপ্ত লক্ষ্য)
+   -------------------------------------------------------------------------- */
+.pillar-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 18px 16px;
+    border: 1px solid var(--shubban-border);
+    transition: all 0.25s ease;
+    height: 100%;
+}
+
+.pillar-card:hover {
+    border-color: var(--shubban-green);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.pillar-icon {
+    font-size: 1.5rem;
+    color: var(--shubban-green);
+    margin-bottom: 10px;
+}
+
+.pillar-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--shubban-green);
+    margin-bottom: 6px;
+}
+
+.pillar-text {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.45;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Media Queries
+   -------------------------------------------------------------------------- */
+@media (max-width: 767.98px) {
+    .hero-slider-wrap .carousel-item {
+        height: 250px;
+    }
+
+    .hero-slider-wrap .carousel-caption {
+        padding: 12px 14px;
+        bottom: 15px;
+        max-width: 92%;
+        border-radius: 10px;
+    }
+
+    .hero-slider-wrap .carousel-caption h2 {
+        font-size: 1.15rem;
+        margin-bottom: 4px;
+    }
+
+    .hero-slider-wrap .carousel-caption p {
+        font-size: 0.78rem;
+        margin-bottom: 8px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .hero-slider-wrap .carousel-caption .btn-slider-cta {
+        padding: 4px 12px;
+        font-size: 0.78rem;
+    }
+
+    .stats-section {
+        margin-top: 15px;
+    }
+
+    .stat-card {
+        padding: 14px 12px;
+    }
+
+    .stat-icon-wrap {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        font-size: 1.2rem;
+    }
+
+    .stat-number {
+        font-size: 1.2rem;
+    }
+
+    .stat-label {
+        font-size: 0.78rem;
+    }
+
+    .donation-banner-wrap {
+        padding: 24px 18px;
+        text-align: center;
+    }
+
+    .donation-banner-wrap .d-flex {
+        justify-content: center !important;
+    }
+
+    .book-cover-wrap {
+        height: 220px;
+        padding: 6px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .book-cover-wrap {
+        height: 180px;
+        padding: 5px;
+    }
+
+    .facility-card {
+        padding: 14px 10px;
+    }
+    .facility-icon {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        font-size: 1.05rem;
+    }
+    .facility-title {
+        font-size: 0.92rem;
+    }
+    .facility-desc {
+        font-size: 0.76rem;
+        margin-bottom: 8px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .btn-facility-link {
+        font-size: 0.78rem;
+    }
+
+    .training-tier-card {
+        padding: 12px 8px;
+    }
+    .tier-name {
+        font-size: 1.05rem;
+    }
+    .tier-focus {
+        font-size: 0.74rem;
+        margin-bottom: 8px;
+    }
+    .btn-tier-action {
+        font-size: 0.72rem;
+        padding: 3px 10px;
+    }
+
+    .video-cinema-body {
+        padding: 10px 8px;
+    }
+    .video-cinema-title {
+        font-size: 0.8rem;
+    }
+    .video-play-pulse {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .article-modern-card .article-content-wrap {
+        padding: 14px 12px;
+    }
+    .article-card-title {
+        font-size: 0.95rem;
+    }
+    .article-card-excerpt {
+        font-size: 0.8rem;
+    }
+
+    .photo-caption-bar {
+        padding: 8px 10px;
+    }
+    .photo-caption-text {
+        font-size: 0.78rem;
+    }
+
+    .archive-thumb-wrap {
+        height: 120px;
+    }
+    .archive-body-wrap {
+        padding: 10px 12px;
+    }
+    .archive-album-title {
+        font-size: 0.84rem;
+    }
+}

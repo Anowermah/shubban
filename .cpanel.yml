@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    # cPanel Git Version Control স্বয়ংক্রিয় ডিপ্লয়মেন্ট স্ক্রিপ্ট
+    # নোট: আপনার cPanel ইউজারনেম ও সাবডোমেইনের ফোল্ডার নাম অনুযায়ী DEPLOYPATH পরিবর্তন করুন
+    - export DEPLOYPATH=/home/YOUR_CPANEL_USERNAME/public_html/subdomain/
+    - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp .htaccess $DEPLOYPATH/

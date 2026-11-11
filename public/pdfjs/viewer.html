@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Viewer</title>
+    
+    <!-- Include PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #525659;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        }
+        
+        #toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        #viewerContainer {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: auto;
+            background: #525659;
+        }
+        
+        #viewer {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            gap: 20px;
+        }
+        
+        canvas {
+            max-width: 100%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        
+        button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+        
+        #pageInput {
+            width: 60px;
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        #error {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="toolbar">
+        <button id="prev" title="পূর্ববর্তী পৃষ্ঠা">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+            </svg>
+            পূর্ববর্তী
+        </button>
+        
+        <input type="number" id="pageInput" value="1" min="1" title="পৃষ্ঠা নম্বর" aria-label="পৃষ্ঠা নম্বর">
+        <span>/ <span id="pageCount">0</span></span>
+        
+        <button id="next" title="পরবর্তী পৃষ্ঠা">
+            পরবর্তী
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+        </button>
+        
+        <button id="zoomOut" title="ছোট করুন">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M14 7H2v2h12V7z"/>
+            </svg>
+        </button>
+        
+        <button id="zoomIn" title="বড় করুন">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg>
+        </button>
+    </div>
+
+    <div id="viewerContainer">
+        <div id="viewer"></div>
+    </div>
+
+    <div id="loading">Loading PDF...</div>
+    <div id="error"></div>
+
+    <script>
+        // Set worker source
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        // Get elements
+        const viewer = document.getElementById('viewer');
+        const pageInput = document.getElementById('pageInput');
+        const pageCount = document.getElementById('pageCount');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        const zoomInButton = document.getElementById('zoomIn');
+        const zoomOutButton = document.getElementById('zoomOut');
+        const loading = document.getElementById('loading');
+        const error = document.getElementById('error');
+
+        // Variables
+        let pdfDoc = null;
+        let currentPage = 1;
+        let scale = 1.5;
+
+        // Get PDF URL from query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const pdfUrl = decodeURIComponent(urlParams.get('file'));
+
+        // Functions
+        function showError(message) {
+            error.textContent = message;
+            error.style.display = 'block';
+            loading.style.display = 'none';
+        }
+
+        async function renderPage(num) {
+            try {
+                const page = await pdfDoc.getPage(num);
+                const viewport = page.getViewport({ scale });
+                
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+
+                await page.render(renderContext).promise;
+                return canvas;
+            } catch (err) {
+                console.error('Error rendering page:', err);
+                showError('Error rendering page. Please try again.');
+                return null;
+            }
+        }
+
+        async function loadPage(num) {
+            try {
+                viewer.innerHTML = '';
+                loading.style.display = 'block';
+                error.style.display = 'none';
+
+                const canvas = await renderPage(num);
+                if (canvas) {
+                    viewer.appendChild(canvas);
+                    currentPage = num;
+                    pageInput.value = num;
+                }
+                
+                loading.style.display = 'none';
+            } catch (err) {
+                console.error('Error loading page:', err);
+                showError('Error loading page. Please try again.');
+            }
+        }
+
+        // Load PDF
+        pdfjsLib.getDocument(pdfUrl).promise
+            .then(pdf => {
+                pdfDoc = pdf;
+                pageCount.textContent = pdf.numPages;
+                pageInput.max = pdf.numPages;
+                return loadPage(1);
+            })
+            .catch(err => {
+                console.error('Error loading PDF:', err);
+                showError('Error loading PDF. Please try again.');
+            });
+
+        // Event listeners
+        prevButton.addEventListener('click', () => {
+            if (currentPage > 1) {
+                loadPage(currentPage - 1);
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentPage < pdfDoc.numPages) {
+                loadPage(currentPage + 1);
+            }
+        });
+
+        pageInput.addEventListener('change', (e) => {
+            const num = parseInt(e.target.value);
+            if (num >= 1 && num <= pdfDoc.numPages) {
+                loadPage(num);
+            }
+        });
+
+        zoomInButton.addEventListener('click', () => {
+            scale += 0.25;
+            loadPage(currentPage);
+        });
+
+        zoomOutButton.addEventListener('click', () => {
+            if (scale > 0.5) {
+                scale -= 0.25;
+                loadPage(currentPage);
+            }
+        });
+    </script>
+</body>
+</html>

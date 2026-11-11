@@ -1,0 +1,557 @@
+/* ==========================================================================
+   Shubban Portal - Modern App-Like Mobile Experience Styles
+   ========================================================================== */
+
+:root {
+    --mob-primary-dark: #07281d;
+    --mob-primary: #0C4B36;
+    --mob-primary-light: #126348;
+    --mob-gold: #FBB040;
+    --mob-gold-dark: #d99126;
+    --mob-bottom-bar-height: 62px;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile App Top Header Bar (Screen < 992px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+    body {
+        padding-bottom: calc(var(--mob-bottom-bar-height) + 12px) !important;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Hide Desktop-only Header Parts */
+    .header-top,
+    .main-header,
+    nav.main-nav {
+        display: none !important;
+    }
+
+    /* Modern Compact Sticky Mobile Header */
+    .mobile-header-bar {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: linear-gradient(90deg, var(--mob-primary-dark) 0%, var(--mob-primary) 100%);
+        border-bottom: 2px solid var(--mob-gold);
+        box-shadow: 0 4px 15px rgba(7, 40, 29, 0.35);
+        z-index: 1030;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 14px;
+    }
+
+    .mobile-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+    }
+
+    .mobile-brand-img {
+        height: 40px;
+        width: auto;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+    }
+
+    .mobile-brand-text {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mobile-brand-title {
+        color: #ffffff;
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .mobile-brand-sub {
+        color: var(--mob-gold);
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        margin: 0;
+        line-height: 1.1;
+    }
+
+    .mobile-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-mobile-search {
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+    }
+
+    .btn-mobile-search:active {
+        background: var(--mob-gold);
+        color: var(--mob-primary-dark);
+    }
+
+    .btn-mobile-donate {
+        background: var(--mob-gold);
+        color: var(--mob-primary-dark) !important;
+        font-weight: 700;
+        font-size: 0.78rem;
+        padding: 6px 12px;
+        border-radius: 20px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-mobile-menu-toggle {
+        background: transparent;
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 8px;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+    }
+
+    .btn-mobile-menu-toggle:focus {
+        box-shadow: 0 0 0 2px var(--mob-gold);
+    }
+}
+
+/* On Desktop: Hide Mobile Header & Bottom Bar */
+@media (min-width: 992px) {
+    .mobile-header-bar,
+    .mobile-bottom-bar,
+    .mobile-search-modal {
+        display: none !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Offcanvas Mobile App Drawer (মসৃণ স্লাইড-আউট মোবাইল মেনু)
+   -------------------------------------------------------------------------- */
+.mobile-app-drawer.offcanvas {
+    width: 320px;
+    max-width: 86vw;
+    background: var(--mob-primary-dark) !important;
+    color: #ffffff;
+    border-right: 2px solid var(--mob-gold);
+    box-shadow: 10px 0 35px rgba(0, 0, 0, 0.5);
+}
+
+.mobile-drawer-header {
+    background: linear-gradient(135deg, #051e16 0%, var(--mob-primary) 100%);
+    padding: 16px 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.drawer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.drawer-brand img {
+    height: 44px;
+    width: auto;
+}
+
+.drawer-brand-title {
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.25;
+}
+
+.drawer-brand-sub {
+    color: var(--mob-gold);
+    font-size: 0.72rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.mobile-app-drawer .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+    opacity: 0.85;
+}
+
+.mobile-drawer-body {
+    padding: 14px 12px 30px;
+    overflow-y: auto;
+}
+
+/* Quick Search in Drawer */
+.drawer-search-box {
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.drawer-search-box input {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border-radius: 25px;
+    padding: 8px 40px 8px 16px;
+    font-size: 0.88rem;
+    width: 100%;
+}
+
+.drawer-search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.drawer-search-box input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--mob-gold);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(251, 176, 64, 0.3);
+}
+
+.drawer-search-box button {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--mob-gold);
+    font-size: 0.95rem;
+}
+
+/* Drawer Menu Items */
+.drawer-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.drawer-menu-item {
+    margin-bottom: 4px;
+}
+
+.drawer-menu-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.drawer-menu-link-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.drawer-menu-link-left i {
+    color: var(--mob-gold);
+    width: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.drawer-menu-link:hover,
+.drawer-menu-link.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--mob-gold);
+    border-color: rgba(251, 176, 64, 0.2);
+}
+
+/* Drawer Accordion Submenu */
+.drawer-submenu-collapse {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 6px 0;
+    margin: 4px 6px 8px 12px;
+    border-left: 2px solid var(--mob-gold);
+}
+
+.drawer-sub-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 0.88rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.drawer-sub-link i {
+    font-size: 0.8rem;
+    color: var(--mob-gold);
+    width: 16px;
+    text-align: center;
+}
+
+.drawer-sub-link:hover,
+.drawer-sub-link.active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    padding-left: 18px;
+}
+
+.drawer-chevron {
+    font-size: 0.8rem;
+    transition: transform 0.25s ease;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.drawer-menu-link:not(.collapsed) .drawer-chevron {
+    transform: rotate(180deg);
+    color: var(--mob-gold);
+}
+
+/* Drawer Quick Action CTA */
+.drawer-actions-card {
+    background: linear-gradient(135deg, rgba(12, 75, 54, 0.6) 0%, rgba(7, 40, 29, 0.8) 100%);
+    border: 1px solid rgba(251, 176, 64, 0.25);
+    border-radius: 14px;
+    padding: 14px;
+    margin-top: 18px;
+    text-align: center;
+}
+
+.btn-drawer-donate {
+    background: var(--mob-gold);
+    color: var(--mob-primary-dark) !important;
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 10px 18px;
+    border-radius: 25px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: all 0.2s ease;
+}
+
+.btn-drawer-donate:active {
+    transform: scale(0.98);
+}
+
+.drawer-contacts-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.drawer-contact-btn {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 8px 6px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.drawer-contact-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--mob-gold);
+}
+
+/* Language Switcher in Drawer */
+.drawer-lang-wrap {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.drawer-lang-btn {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.drawer-lang-btn.active,
+.drawer-lang-btn:hover {
+    background: var(--mob-gold);
+    color: var(--mob-primary-dark);
+    font-weight: 700;
+}
+
+/* Social links in drawer */
+.drawer-social-links {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.drawer-social-links a {
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.1);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.drawer-social-links a:hover {
+    background: var(--mob-gold);
+    color: var(--mob-primary-dark);
+    transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   Modern Floating Mobile Bottom Navigation Bar (অ্যাপ-লাইক বটম বার)
+   -------------------------------------------------------------------------- */
+.mobile-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--mob-bottom-bar-height);
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    z-index: 1040;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 4px;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 4px 6px;
+    min-width: 58px;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+}
+
+.bottom-nav-item i {
+    font-size: 1.15rem;
+    margin-bottom: 2px;
+    transition: transform 0.2s ease;
+}
+
+.bottom-nav-item.active,
+.bottom-nav-item:active {
+    color: var(--mob-primary);
+}
+
+.bottom-nav-item.active i {
+    color: var(--mob-primary);
+    transform: scale(1.12);
+}
+
+/* Center Prominent Donate Button in Bottom Bar */
+.bottom-nav-item.center-donate {
+    color: var(--mob-primary-dark);
+    margin-top: -16px;
+}
+
+.bottom-nav-item.center-donate .donate-circle-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--mob-gold) 0%, var(--mob-gold-dark) 100%);
+    color: var(--mob-primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    box-shadow: 0 6px 16px rgba(217, 145, 38, 0.4);
+    margin-bottom: 2px;
+    transition: transform 0.2s ease;
+    border: 3px solid #ffffff;
+}
+
+.bottom-nav-item.center-donate:active .donate-circle-btn {
+    transform: scale(0.92);
+}
+
+/* --------------------------------------------------------------------------
+   Back to Top Floating Button
+   -------------------------------------------------------------------------- */
+.btn-back-to-top {
+    position: fixed;
+    bottom: calc(var(--mob-bottom-bar-height) + 16px);
+    right: 14px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--mob-primary);
+    color: #ffffff;
+    border: 2px solid var(--mob-gold);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    z-index: 1035;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.btn-back-to-top:hover,
+.btn-back-to-top:active {
+    background: var(--mob-primary-dark);
+    color: var(--mob-gold);
+    transform: translateY(-3px);
+}

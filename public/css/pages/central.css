@@ -1,0 +1,383 @@
+/* Central Committee, Department, and Officials Styles */
+
+.section-title {
+    color: #014919;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #014919;
+}
+
+.section-subtitle {
+    color: #014919;
+    font-size: 1.5rem;
+}
+
+/* Member Cards */
+.member-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+}
+
+.member-card.key-member {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+}
+
+.member-avatar {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #014919;
+}
+
+.member-avatar i {
+    font-size: 4rem;
+}
+
+.member-info {
+    text-align: center;
+}
+
+.member-info h4 {
+    color: #014919;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.member-info .designation {
+    color: #666;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.member-info .position {
+    color: #333;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.member-info .mobile {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.member-info .mobile i {
+    color: #014919;
+    margin-right: 0.5rem;
+}
+
+/* Department Cards */
+.departments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.department-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.department-card:hover {
+    transform: translateY(-5px);
+}
+
+.department-header {
+    background: #014919;
+    color: white;
+    padding: 1.5rem;
+}
+
+.department-name {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.department-description {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    opacity: 0.9;
+}
+
+.department-body {
+    padding: 1.5rem;
+}
+
+.head-info {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.head-avatar {
+    font-size: 3rem;
+    color: #014919;
+    margin-bottom: 1rem;
+}
+
+.head-name {
+    color: #014919;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.head-designation {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.department-details h5 {
+    color: #014919;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.responsibilities {
+    margin-bottom: 1.5rem;
+}
+
+.responsibilities ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.responsibilities li {
+    padding: 0.5rem 0;
+    color: #333;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.responsibilities li:before {
+    content: "•";
+    color: #014919;
+    position: absolute;
+    left: 0;
+}
+
+.contact-info {
+    margin-bottom: 1.5rem;
+}
+
+.contact-info ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.contact-info li {
+    padding: 0.5rem 0;
+    color: #666;
+}
+
+.contact-info i {
+    color: #014919;
+    width: 1.5rem;
+}
+
+.staff-info {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.staff-info p {
+    color: #666;
+    margin-bottom: 0;
+}
+
+.staff-info i {
+    color: #014919;
+}
+
+/* Officials Cards */
+.officials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.official-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.official-card:hover {
+    transform: translateY(-5px);
+}
+
+.official-header {
+    background: #014919;
+    color: white;
+    padding: 2rem 1.5rem;
+    text-align: center;
+}
+
+.official-avatar {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid rgba(255,255,255,0.2);
+}
+
+.official-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.official-name {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.official-designation {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 0;
+}
+
+.official-body {
+    padding: 1.5rem;
+}
+
+.info-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.info-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.info-section h4 {
+    color: #014919;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.info-section p {
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.info-section .experience {
+    color: #666;
+    font-style: italic;
+}
+
+.info-section ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.info-section li {
+    padding: 0.5rem 0;
+    color: #333;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.info-section li:before {
+    content: "•";
+    color: #014919;
+    position: absolute;
+    left: 0;
+}
+
+.contact-info li {
+    color: #666;
+}
+
+.contact-info i {
+    color: #014919;
+    width: 1.5rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .member-card {
+        padding: 1rem;
+    }
+
+    .member-info h4 {
+        font-size: 1rem;
+    }
+
+    .member-info .position,
+    .member-info .mobile {
+        font-size: 0.8rem;
+    }
+
+    .departments-grid,
+    .officials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .department-card,
+    .official-card {
+        margin-bottom: 1.5rem;
+    }
+
+    .department-header,
+    .official-header {
+        padding: 1rem;
+    }
+
+    .department-body,
+    .official-body {
+        padding: 1rem;
+    }
+
+    .official-avatar {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 576px) {
+    .member-avatar i {
+        font-size: 3rem;
+    }
+
+    .official-name {
+        font-size: 1.1rem;
+    }
+
+    .official-designation {
+        font-size: 0.9rem;
+    }
+}
+
+@media print {
+    .department-card,
+    .official-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .department-details,
+    .info-section {
+        page-break-inside: avoid;
+    }
+}

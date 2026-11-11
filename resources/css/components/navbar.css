@@ -1,0 +1,71 @@
+/* Navbar Styles */
+.navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 0.5rem 0;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.organization-name {
+    font-size: 1.4rem;
+    color: #0C4B36;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.navbar-nav .nav-link {
+    color: #333;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: #0C4B36;
+}
+
+/* Font Size Control */
+.font-size-control {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.font-size-control .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-color: #0C4B36;
+    color: #0C4B36;
+}
+
+.font-size-control .btn:hover {
+    background-color: #0C4B36;
+    color: white;
+}
+
+.font-size-control .btn i {
+    font-size: 0.75rem;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    .organization-name {
+        font-size: 1.1rem;
+    }
+    
+    .navbar-brand {
+        max-width: 80%;
+    }
+    
+    .navbar-brand img {
+        height: 40px;
+    }
+
+    .font-size-control {
+        margin: 0.5rem 0;
+    }
+}

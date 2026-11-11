@@ -1,0 +1,547 @@
+/* ==========================================================================
+   Shubban Portal - Modern Header & Navigation Styles
+   ========================================================================== */
+
+:root {
+    --header-primary: #0C4B36;
+    --header-primary-dark: #073123;
+    --header-primary-light: #16654c;
+    --header-accent: #FBB040;
+    --header-accent-hover: #e59b2b;
+    --header-text-light: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Top Bar Styles
+   -------------------------------------------------------------------------- */
+.header-top {
+    background-color: var(--header-primary-dark);
+    padding: 7px 0;
+    font-size: 0.86rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.header-contact a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.86rem;
+}
+
+.header-contact a:hover {
+    color: var(--header-accent);
+}
+
+.header-contact i {
+    margin-right: 6px;
+    color: var(--header-accent);
+}
+
+.social-links {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.social-links a {
+    color: rgba(255, 255, 255, 0.85);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    background: var(--header-accent);
+    color: #073123;
+    transform: translateY(-2px);
+}
+
+.language-selector {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.language-selector a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 2px 7px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.language-selector a:hover,
+.language-selector a.active {
+    color: #073123;
+    background: var(--header-accent);
+    font-weight: 700;
+}
+
+.language-selector .separator {
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.72rem;
+}
+
+/* --------------------------------------------------------------------------
+   Main Header (Branding & Search)
+   -------------------------------------------------------------------------- */
+.main-header {
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.logo-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+}
+
+.logo-img {
+    height: 62px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logo-container:hover .logo-img {
+    transform: scale(1.03);
+}
+
+.org-title-bn {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--header-primary);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.org-title-en {
+    font-size: 0.82rem;
+    color: #64748b;
+    margin-top: 3px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.search-box input {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    font-size: 0.9rem;
+    transition: all 0.25s ease;
+}
+
+.search-box input:focus {
+    background: #ffffff;
+    border-color: var(--header-primary);
+    box-shadow: 0 0 0 3px rgba(12, 75, 54, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   Navigation Bar (Solid Islamic Deep Emerald Green)
+   -------------------------------------------------------------------------- */
+nav.navbar.main-nav,
+.main-nav {
+    background-color: var(--header-primary) !important;
+    background: linear-gradient(90deg, #073123 0%, var(--header-primary) 50%, #0e563e 100%) !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(7, 49, 35, 0.25) !important;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
+.main-nav .container {
+    position: relative;
+}
+
+.main-nav .navbar-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+}
+
+.main-nav .nav-item {
+    position: relative;
+    list-style: none;
+}
+
+/* Nav Links - ALWAYS Crisply Visible White Text */
+.main-nav .nav-link {
+    color: #ffffff !important;
+    font-size: 0.93rem;
+    font-weight: 500;
+    padding: 0.85rem 1rem !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.2s ease-in-out;
+    border-radius: 0;
+    border-bottom: 3px solid transparent;
+    text-decoration: none;
+    white-space: nowrap;
+    position: relative;
+    background: transparent;
+}
+
+/* Golden Icons */
+.main-nav .nav-link i {
+    color: var(--header-accent) !important;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease;
+}
+
+/* Dropdown Caret Styling */
+.main-nav .nav-link.dropdown-toggle::after {
+    display: inline-block;
+    margin-left: 6px;
+    vertical-align: 0.15em;
+    content: "";
+    border-top: 0.32em solid rgba(255, 255, 255, 0.75);
+    border-right: 0.28em solid transparent;
+    border-bottom: 0;
+    border-left: 0.28em solid transparent;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* Hover and Active States */
+.main-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    color: var(--header-accent) !important;
+    border-bottom-color: var(--header-accent);
+}
+
+.main-nav .nav-link:hover i {
+    transform: scale(1.1);
+}
+
+.main-nav .nav-link:hover.dropdown-toggle::after {
+    border-top-color: var(--header-accent);
+}
+
+.main-nav .nav-link.active,
+.main-nav .nav-item.active > .nav-link {
+    background-color: rgba(0, 0, 0, 0.28) !important;
+    color: var(--header-accent) !important;
+    border-bottom: 3px solid var(--header-accent) !important;
+    font-weight: 600;
+}
+
+.main-nav .nav-link.active.dropdown-toggle::after {
+    border-top-color: var(--header-accent);
+}
+
+/* --------------------------------------------------------------------------
+   Dropdown Menus (Desktop Hover & Polish)
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) {
+    /* Smooth CSS Hover on Desktop */
+    .main-nav .dropdown:hover > .dropdown-menu {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .main-nav .dropdown:hover > .nav-link.dropdown-toggle::after {
+        transform: rotate(180deg);
+    }
+
+    .main-nav .dropdown-menu {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(8px);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+        background-color: #ffffff !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        border-radius: 10px !important;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15) !important;
+        padding: 0.5rem 0 !important;
+        min-width: 230px !important;
+        margin-top: 0 !important;
+        top: 100%;
+        left: 0;
+        z-index: 1050;
+    }
+
+    .main-nav .dropdown-item {
+        padding: 0.6rem 1.25rem !important;
+        color: #1f2937 !important;
+        font-size: 0.9rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.2s ease;
+        background: transparent;
+    }
+
+    .main-nav .dropdown-item i {
+        color: var(--header-primary) !important;
+        width: 18px;
+        text-align: center;
+        font-size: 0.88rem;
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .main-nav .dropdown-item:hover {
+        background-color: #f0fdf4 !important;
+        color: var(--header-primary) !important;
+        padding-left: 1.5rem !important;
+    }
+
+    .main-nav .dropdown-item:hover i {
+        color: var(--header-accent) !important;
+        transform: scale(1.15);
+    }
+}
+
+/* Screen width optimizations for compact laptops (992px - 1280px) */
+@media (min-width: 992px) and (max-width: 1280px) {
+    .main-nav .nav-link {
+        padding: 0.78rem 0.58rem !important;
+        font-size: 0.85rem;
+        gap: 5px;
+    }
+    .main-nav .nav-link i {
+        font-size: 0.82rem;
+    }
+    .main-nav .nav-link.dropdown-toggle::after {
+        margin-left: 4px;
+    }
+}
+
+@media (min-width: 1281px) and (max-width: 1400px) {
+    .main-nav .nav-link {
+        padding: 0.82rem 0.78rem !important;
+        font-size: 0.9rem;
+        gap: 6px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile & Responsive Layout (max-width: 991.98px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+    .header-top {
+        padding: 6px 0;
+        font-size: 0.8rem;
+    }
+
+    .header-top .header-contact {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px 15px;
+        margin-bottom: 4px;
+    }
+
+    .logo-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 8px 0;
+    }
+
+    .logo-img {
+        height: 50px;
+    }
+
+    .org-title-bn {
+        font-size: 1.25rem;
+    }
+
+    .org-title-en {
+        font-size: 0.72rem;
+    }
+
+    .header-actions {
+        margin-top: 5px;
+        margin-bottom: 8px;
+    }
+
+    .search-box {
+        max-width: 100% !important;
+    }
+
+    /* Mobile Navbar Bar */
+    nav.navbar.main-nav,
+    .main-nav {
+        padding: 4px 0 !important;
+    }
+
+    /* Mobile menu toggler toggle icon */
+    .navbar-toggler:not(.collapsed) .fa-bars:before {
+        content: "\f00d"; /* FontAwesome fa-times (x) */
+    }
+
+    /* Mobile Navbar Collapse Drawer */
+    .main-nav .navbar-collapse {
+        background: #083324 !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 0.75rem 0.5rem 1rem !important;
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .main-nav .navbar-nav {
+        display: block;
+        width: 100%;
+    }
+
+    .main-nav .nav-item {
+        width: 100%;
+        margin-bottom: 3px;
+    }
+
+    /* Mobile Nav Link Items */
+    .main-nav .nav-link {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100%;
+        padding: 0.75rem 1rem !important;
+        color: #ffffff !important;
+        font-size: 0.95rem;
+        border-radius: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .main-nav .nav-link i {
+        color: var(--header-accent) !important;
+    }
+
+    .main-nav .nav-link.dropdown-toggle::after {
+        margin-left: auto;
+        border-top-color: var(--header-accent);
+        transition: transform 0.25s ease;
+    }
+
+    .main-nav .nav-link.dropdown-toggle[aria-expanded="true"]::after,
+    .main-nav .nav-link.dropdown-toggle.show::after {
+        transform: rotate(180deg) !important;
+        border-top-color: var(--header-accent) !important;
+    }
+
+    .main-nav .nav-link.active,
+    .main-nav .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.12) !important;
+        color: var(--header-accent) !important;
+        border-bottom-color: rgba(255, 255, 255, 0.06);
+    }
+
+    /* Mobile Dropdown Submenus */
+    .main-nav .dropdown-menu {
+        display: none;
+        position: static !important;
+        float: none !important;
+        background-color: rgba(0, 0, 0, 0.35) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+        margin: 4px 6px 8px 12px !important;
+        padding: 4px 0 !important;
+        width: calc(100% - 18px);
+    }
+
+    .main-nav .dropdown-menu.show {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        animation: fadeInDown 0.25s ease;
+    }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-6px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .main-nav .dropdown-item {
+        color: rgba(255, 255, 255, 0.92) !important;
+        padding: 0.65rem 1.15rem !important;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        background: transparent;
+    }
+
+    .main-nav .dropdown-item:last-child {
+        border-bottom: none;
+    }
+
+    .main-nav .dropdown-item i {
+        color: var(--header-accent) !important;
+        width: 18px;
+        text-align: center;
+    }
+
+    .main-nav .dropdown-item:hover,
+    .main-nav .dropdown-item:active {
+        background-color: rgba(255, 255, 255, 0.15) !important;
+        color: #ffffff !important;
+        padding-left: 1.35rem !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Extra Small Devices (max-width: 575.98px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 575.98px) {
+    .header-top {
+        font-size: 0.74rem;
+    }
+    .header-top .header-contact {
+        gap: 4px 10px;
+    }
+    .header-contact a {
+        font-size: 0.74rem;
+    }
+    .logo-img {
+        height: 44px;
+    }
+    .org-title-bn {
+        font-size: 1.18rem;
+    }
+    .org-title-en {
+        font-size: 0.66rem;
+    }
+    .main-nav .nav-link {
+        font-size: 0.9rem;
+        padding: 0.65rem 0.85rem !important;
+    }
+}
