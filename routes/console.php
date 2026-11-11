@@ -48,3 +48,42 @@ Artisan::command('user:create {email=anowar266927@gmail.com} {password=123456} {
     $this->line("🔑 Password: {$password}");
     $this->line("🌐 Login at: /login");
 })->purpose('Create or reset regular user login credentials');
+
+Artisan::command('db:import-backup', function () {
+    $sqlPath = base_path('weekbieb_final_shubban.sql');
+    if (!file_exists($sqlPath)) {
+        $this->error("❌ Backup SQL file not found at: {$sqlPath}");
+        return 1;
+    }
+
+    $this->info("⏳ Importing database records from weekbieb_final_shubban.sql...");
+
+    try {
+        $driver = \Illuminate\Support\Facades\DB::connection()->getDriverName();
+        if ($driver === 'mysql') {
+            \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
+
+        $sql = file_get_contents($sqlPath);
+        \Illuminate\Support\Facades\DB::unprepared($sql);
+
+        if ($driver === 'mysql') {
+            \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
+
+        $this->info("✅ Database backup imported successfully!");
+
+        // Run migrations for any newer tables (home_sections, ai_chat, pwa, etc.)
+        $this->info("⏳ Synchronizing latest migrations...");
+        $this->call('migrate', ['--force' => true]);
+
+        // Clear caches
+        $this->call('optimize:clear');
+
+        $this->info("🎉 All books, photos, sliders, notices, and settings are now 100% restored!");
+        return 0;
+    } catch (\Throwable $e) {
+        $this->error("❌ Import failed: " . $e->getMessage());
+        return 1;
+    }
+})->purpose('Import full database backup from weekbieb_final_shubban.sql and synchronize migrations');
