@@ -14,13 +14,19 @@ class ResponsibleController extends Controller
         $title = '';
         switch ($level) {
             case 'central':
-                $title = 'কেন্দ্রীয় দায়িত্বপ্রাপ্ত ব্যক্তিবর্গ';
+                $title = 'কেন্দ্রীয় দায়িত্বশীলবৃন্দ';
                 break;
             case 'district':
                 $title = 'জেলা দায়িত্বপ্রাপ্ত ব্যক্তিবর্গ';
                 break;
             case 'upazila':
                 $title = 'উপজেলা দায়িত্বপ্রাপ্ত ব্যক্তিবর্গ';
+                break;
+            case 'thana':
+                $title = 'থানা দায়িত্বপ্রাপ্ত ব্যক্তিবর্গ';
+                break;
+            case 'branch':
+                $title = 'শাখা দায়িত্বপ্রাপ্ত ব্যক্তিবর্গ';
                 break;
             case 'union':
                 $title = 'ইউনিয়ন দায়িত্বপ্রাপ্ত ব্যক্তিবর্গ';
@@ -36,16 +42,18 @@ class ResponsibleController extends Controller
             $managers = Committee::where('is_active', true)
                 ->orderBy('order')
                 ->get();
+            $members = $managers;
 
-            return view('responsible.central', compact('managers', 'title'));
+            return view('responsible.central', compact('managers', 'members', 'title'));
         }
         
         $responsiblePersons = Management::where('level', $level)
             ->where('is_active', true)
             ->orderBy('order')
             ->get();
+        $managers = $responsiblePersons;
 
-        return view('responsible.' . $level, compact('responsiblePersons', 'title'));
+        return view('responsible.' . $level, compact('responsiblePersons', 'managers', 'title'));
     }
 
     public function central()
@@ -53,10 +61,12 @@ class ResponsibleController extends Controller
         $managers = Committee::where('is_active', true)
             ->orderBy('order')
             ->get();
+        $members = $managers;
 
         return view('responsible.central', [
             'managers' => $managers,
-            'title' => 'কেন্দ্রীয় দায়িত্বপ্রাপ্ত ব্যক্তিবর্গ'
+            'members' => $managers,
+            'title' => 'কেন্দ্রীয় দায়িত্বশীলবৃন্দ'
         ]);
     }
 
