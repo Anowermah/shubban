@@ -260,12 +260,8 @@
      MOBILE MODERN HEADER BAR (Screen < 992px)
      ========================================================================== -->
 <div class="mobile-header-bar d-lg-none">
-    <a href="{{ url('/') }}" class="mobile-brand">
+    <a href="{{ url('/') }}" class="mobile-brand" title="জমঈয়ত শুব্বানে আহলে হাদীস বাংলাদেশ">
         <img src="{{ asset('images/logo.png') }}" alt="Shubban Logo" class="mobile-brand-img">
-        <div class="mobile-brand-text">
-            <span class="mobile-brand-title">জমঈয়ত শুব্বান</span>
-            <span class="mobile-brand-sub">আহলে হাদীস বাংলাদেশ</span>
-        </div>
     </a>
 
     <div class="mobile-header-actions">
