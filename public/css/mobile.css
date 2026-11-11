@@ -64,25 +64,10 @@
         transform: scale(0.94);
     }
 
-    .mobile-brand-text {
-        display: none !important;
-    }
-
-    .mobile-brand-title {
-        color: #ffffff;
-        font-size: 1.05rem;
-        font-weight: 700;
-        margin: 0;
-        line-height: 1.2;
-    }
-
+    .mobile-brand-text,
+    .mobile-brand-title,
     .mobile-brand-sub {
-        color: var(--mob-gold);
-        font-size: 0.68rem;
-        font-weight: 600;
-        letter-spacing: 0.3px;
-        margin: 0;
-        line-height: 1.1;
+        display: none !important;
     }
 
     .mobile-header-actions {

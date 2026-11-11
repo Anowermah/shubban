@@ -11,12 +11,12 @@
                 <i class="fas fa-bars"></i>
             </button>
 
-            <!-- Brand Link -->
-            <a class="navbar-brand me-0 d-flex align-items-center gap-2" href="{{ route('admin.dashboard.index') }}">
+            <!-- Brand Link (Mobile displays ONLY logo; Desktop displays logo + text) -->
+            <a class="navbar-brand me-0 d-flex align-items-center gap-2" href="{{ route('admin.dashboard.index') }}" title="শুব্বান এডমিন ড্যাশবোর্ড">
                 <img src="{{ asset('images/logo.png') }}" alt="Shubban Logo" class="brand-logo-img">
-                <div class="d-flex flex-column">
+                <div class="d-none d-md-flex flex-column brand-text-wrap">
                     <span class="brand-title">শুব্বান এডমিন</span>
-                    <small class="brand-subtitle d-none d-sm-block">প্যানেল ও ম্যানেজমেন্ট</small>
+                    <small class="brand-subtitle">প্যানেল ও ম্যানেজমেন্ট</small>
                 </div>
             </a>
         </div>
@@ -32,10 +32,10 @@
                 </a>
             @endif
 
-            <!-- View Site Button (Desktop & Tablet) -->
-            <div class="d-none d-sm-flex align-items-center">
+            <!-- View Site Button (Universal: Icon on mobile, Icon+text on desktop) -->
+            <div class="d-flex align-items-center">
                 <a href="{{ url('/') }}" target="_blank" class="btn btn-view-site" title="মূল ওয়েবসাইট নতুন ট্যাবে দেখুন">
-                    <i class="fas fa-external-link-alt me-1"></i> <span class="d-none d-md-inline">ওয়েবসাইট দেখুন</span>
+                    <i class="fas fa-external-link-alt me-md-1"></i> <span class="d-none d-md-inline">ওয়েবসাইট দেখুন</span>
                 </a>
             </div>
 
