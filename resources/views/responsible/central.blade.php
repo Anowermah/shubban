@@ -41,7 +41,9 @@
                 <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 manager-col" 
                      data-name="{{ mb_strtolower($manager->name) }}" 
                      data-designation="{{ mb_strtolower($manager->designation) }}"
-                     data-address="{{ mb_strtolower($manager->address ?? '') }}">
+                     data-address="{{ mb_strtolower($manager->address ?? '') }}"
+                     data-phone="{{ $manager->phone ?? '' }}"
+                     data-email="{{ mb_strtolower($manager->email ?? '') }}">
                     <div class="profile-card h-100 {{ $manager->order <= 3 ? 'key-member' : '' }}">
                         <!-- Image Container with Safe Top-Framed Ratio -->
                         <div class="profile-image-wrap" data-bs-toggle="modal" data-bs-target="#managerModal-{{ $manager->id }}">
@@ -414,42 +416,81 @@ document.addEventListener('DOMContentLoaded', function () {
     const cards = document.querySelectorAll('.manager-col');
     const noResults = document.getElementById('noResults');
 
-    if (searchInput) {
-        searchInput.addEventListener('input', function () {
-            const query = this.value.trim().toLowerCase();
-            let visibleCount = 0;
+    function normalizeText(text) {
+        if (!text) return '';
+        const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+        const enDigits = ['0','1','2','3','4','5','6','7','8','9'];
+        
+        let normalized = text.toLowerCase()
+            .replace(/[\u200B-\u200D\uFEFF]/g, '')
+            .replace(/[ঃ:]/g, ' ')
+            .replace(/[.,\-_/()|]/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
 
-            if (query.length > 0) {
-                clearBtn.style.display = 'block';
+        let enVersion = normalized.replace(/[০-৯]/g, d => bnDigits.indexOf(d));
+        let bnVersion = normalized.replace(/[0-9]/g, d => bnDigits[enDigits.indexOf(d)]);
+        
+        return normalized + ' ' + enVersion + ' ' + bnVersion;
+    }
+
+    const cardData = Array.from(cards).map(card => {
+        const name = card.getAttribute('data-name') || '';
+        const designation = card.getAttribute('data-designation') || '';
+        const address = card.getAttribute('data-address') || '';
+        const phone = card.getAttribute('data-phone') || '';
+        const email = card.getAttribute('data-email') || '';
+        const cardText = card.textContent || '';
+        
+        const fullSearchable = normalizeText(name + ' ' + designation + ' ' + address + ' ' + phone + ' ' + email + ' ' + cardText);
+
+        return {
+            element: card,
+            searchable: fullSearchable
+        };
+    });
+
+    function filterCards() {
+        const rawQuery = searchInput ? searchInput.value.trim() : '';
+        const normalizedQuery = normalizeText(rawQuery);
+        const tokens = normalizedQuery.split(/\s+/).filter(t => t.length > 0);
+
+        if (clearBtn) {
+            clearBtn.style.display = rawQuery.length > 0 ? 'inline-block' : 'none';
+        }
+
+        let visibleCount = 0;
+
+        cardData.forEach(item => {
+            const matchesQuery = tokens.length === 0 || tokens.every(token => item.searchable.includes(token));
+
+            if (matchesQuery) {
+                item.element.style.display = '';
+                visibleCount++;
             } else {
-                clearBtn.style.display = 'none';
+                item.element.style.display = 'none';
             }
+        });
 
-            cards.forEach(card => {
-                const name = card.getAttribute('data-name') || '';
-                const designation = card.getAttribute('data-designation') || '';
-                const address = card.getAttribute('data-address') || '';
-
-                if (name.includes(query) || designation.includes(query) || address.includes(query)) {
-                    card.style.display = '';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            if (visibleCount === 0 && cards.length > 0) {
+        if (noResults) {
+            if (visibleCount === 0 && cardData.length > 0) {
                 noResults.classList.remove('d-none');
             } else {
                 noResults.classList.add('d-none');
             }
-        });
+        }
+    }
 
+    if (searchInput) {
+        searchInput.addEventListener('input', filterCards);
+        searchInput.addEventListener('keyup', filterCards);
+        searchInput.addEventListener('search', filterCards);
+    }
+
+    if (clearBtn) {
         clearBtn.addEventListener('click', function () {
             searchInput.value = '';
-            clearBtn.style.display = 'none';
-            cards.forEach(card => card.style.display = '');
-            noResults.classList.add('d-none');
+            filterCards();
             searchInput.focus();
         });
     }

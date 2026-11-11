@@ -59,7 +59,9 @@
                      data-name="{{ mb_strtolower($manager->name) }}" 
                      data-designation="{{ mb_strtolower($manager->designation) }}"
                      data-area="{{ mb_strtolower($manager->area ?? '') }}"
-                     data-address="{{ mb_strtolower($manager->address ?? '') }}">
+                     data-address="{{ mb_strtolower($manager->address ?? '') }}"
+                     data-phone="{{ $manager->phone ?? '' }}"
+                     data-email="{{ mb_strtolower($manager->email ?? '') }}">
                     <div class="profile-card h-100">
                         <!-- Image Container -->
                         <div class="profile-image-wrap" data-bs-toggle="modal" data-bs-target="#managerModal-{{ $manager->id }}">
@@ -391,40 +393,94 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let activeFilter = 'all';
 
+    function normalizeText(text) {
+        if (!text) return '';
+        const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+        const enDigits = ['0','1','2','3','4','5','6','7','8','9'];
+        
+        let normalized = text.toLowerCase()
+            .replace(/[\u200B-\u200D\uFEFF]/g, '')
+            .replace(/[ঃ:]/g, ' ')
+            .replace(/[.,\-_/()|]/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+
+        let enVersion = normalized.replace(/[০-৯]/g, d => bnDigits.indexOf(d));
+        let bnVersion = normalized.replace(/[0-9]/g, d => bnDigits[enDigits.indexOf(d)]);
+        
+        return normalized + ' ' + enVersion + ' ' + bnVersion;
+    }
+
+    const cardData = Array.from(cards).map(card => {
+        const name = card.getAttribute('data-name') || '';
+        const designation = card.getAttribute('data-designation') || '';
+        const area = (card.getAttribute('data-area') || '').trim().toLowerCase();
+        const address = card.getAttribute('data-address') || '';
+        const phone = card.getAttribute('data-phone') || '';
+        const email = card.getAttribute('data-email') || '';
+        const cardText = card.textContent || '';
+        
+        const fullSearchable = normalizeText(name + ' ' + designation + ' ' + area + ' ' + address + ' ' + phone + ' ' + email + ' ' + cardText);
+
+        return {
+            element: card,
+            area: area,
+            searchable: fullSearchable
+        };
+    });
+
     function filterCards() {
-        const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
-        let visibleCount = 0;
+        const rawQuery = searchInput ? searchInput.value.trim() : '';
+        const normalizedQuery = normalizeText(rawQuery);
+        const tokens = normalizedQuery.split(/\s+/).filter(t => t.length > 0);
 
         if (clearBtn) {
-            clearBtn.style.display = query.length > 0 ? 'block' : 'none';
+            clearBtn.style.display = rawQuery.length > 0 ? 'inline-block' : 'none';
         }
 
-        cards.forEach(card => {
-            const name = card.getAttribute('data-name') || '';
-            const designation = card.getAttribute('data-designation') || '';
-            const area = card.getAttribute('data-area') || '';
-            const address = card.getAttribute('data-address') || '';
+        if (tokens.length > 0 && activeFilter !== 'all') {
+            const matchesInFilter = cardData.some(c => c.area === activeFilter && tokens.every(t => c.searchable.includes(t)));
+            if (!matchesInFilter) {
+                activeFilter = 'all';
+                pills.forEach(p => {
+                    if (p.getAttribute('data-area') === 'all') {
+                        p.classList.add('active', 'btn-success');
+                        p.classList.remove('btn-outline-secondary');
+                    } else {
+                        p.classList.remove('active', 'btn-success');
+                        p.classList.add('btn-outline-secondary');
+                    }
+                });
+            }
+        }
 
-            const matchesArea = (activeFilter === 'all') || (area === activeFilter);
-            const matchesQuery = !query || name.includes(query) || designation.includes(query) || area.includes(query) || address.includes(query);
+        let visibleCount = 0;
+
+        cardData.forEach(item => {
+            const matchesArea = (activeFilter === 'all') || (item.area === activeFilter);
+            const matchesQuery = tokens.length === 0 || tokens.every(token => item.searchable.includes(token));
 
             if (matchesArea && matchesQuery) {
-                card.style.display = '';
+                item.element.style.display = '';
                 visibleCount++;
             } else {
-                card.style.display = 'none';
+                item.element.style.display = 'none';
             }
         });
 
-        if (visibleCount === 0 && cards.length > 0) {
-            noResults.classList.remove('d-none');
-        } else {
-            noResults.classList.add('d-none');
+        if (noResults) {
+            if (visibleCount === 0 && cardData.length > 0) {
+                noResults.classList.remove('d-none');
+            } else {
+                noResults.classList.add('d-none');
+            }
         }
     }
 
     if (searchInput) {
         searchInput.addEventListener('input', filterCards);
+        searchInput.addEventListener('keyup', filterCards);
+        searchInput.addEventListener('search', filterCards);
     }
 
     if (clearBtn) {
@@ -437,12 +493,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     pills.forEach(pill => {
         pill.addEventListener('click', function () {
-            pills.forEach(p => p.classList.remove('active', 'btn-success'));
-            pills.forEach(p => p.classList.add('btn-outline-secondary'));
+            pills.forEach(p => {
+                p.classList.remove('active', 'btn-success');
+                p.classList.add('btn-outline-secondary');
+            });
             this.classList.remove('btn-outline-secondary');
             this.classList.add('active', 'btn-success');
 
-            activeFilter = this.getAttribute('data-area');
+            activeFilter = (this.getAttribute('data-area') || 'all').trim().toLowerCase();
             filterCards();
         });
     });

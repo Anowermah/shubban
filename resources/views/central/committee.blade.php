@@ -400,40 +400,79 @@
         const memberCols = document.querySelectorAll('.member-col');
         const noResults = document.getElementById('noResults');
 
-        if (searchInput) {
-            searchInput.addEventListener('input', function () {
-                const query = this.value.trim().toLowerCase();
+        function normalizeText(text) {
+            if (!text) return '';
+            const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+            const enDigits = ['0','1','2','3','4','5','6','7','8','9'];
+            
+            let normalized = text.toLowerCase()
+                .replace(/[\u200B-\u200D\uFEFF]/g, '')
+                .replace(/[ঃ:]/g, ' ')
+                .replace(/[.,\-_/()|]/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
 
-                if (query.length > 0) {
-                    clearBtn.style.display = 'inline-block';
+            let enVersion = normalized.replace(/[০-৯]/g, d => bnDigits.indexOf(d));
+            let bnVersion = normalized.replace(/[0-9]/g, d => bnDigits[enDigits.indexOf(d)]);
+            
+            return normalized + ' ' + enVersion + ' ' + bnVersion;
+        }
+
+        const cardData = Array.from(memberCols).map(col => {
+            const name = col.getAttribute('data-name') || '';
+            const designation = col.getAttribute('data-designation') || '';
+            const address = col.getAttribute('data-address') || '';
+            const cardText = col.textContent || '';
+            
+            const fullSearchable = normalizeText(name + ' ' + designation + ' ' + address + ' ' + cardText);
+
+            return {
+                element: col,
+                searchable: fullSearchable
+            };
+        });
+
+        function filterMembers() {
+            const rawQuery = searchInput ? searchInput.value.trim() : '';
+            const normalizedQuery = normalizeText(rawQuery);
+            const tokens = normalizedQuery.split(/\s+/).filter(t => t.length > 0);
+
+            if (clearBtn) {
+                clearBtn.style.display = rawQuery.length > 0 ? 'inline-block' : 'none';
+            }
+
+            let visibleCount = 0;
+
+            cardData.forEach(item => {
+                const matchesQuery = tokens.length === 0 || tokens.every(token => item.searchable.includes(token));
+
+                if (matchesQuery) {
+                    item.element.style.display = '';
+                    visibleCount++;
                 } else {
-                    clearBtn.style.display = 'none';
+                    item.element.style.display = 'none';
                 }
+            });
 
-                let visibleCount = 0;
-                memberCols.forEach(function (col) {
-                    const name = col.getAttribute('data-name') || '';
-                    const designation = col.getAttribute('data-designation') || '';
-                    const address = col.getAttribute('data-address') || '';
-
-                    if (name.includes(query) || designation.includes(query) || address.includes(query)) {
-                        col.style.display = '';
-                        visibleCount++;
-                    } else {
-                        col.style.display = 'none';
-                    }
-                });
-
-                if (visibleCount === 0) {
+            if (noResults) {
+                if (visibleCount === 0 && cardData.length > 0) {
                     noResults.classList.remove('d-none');
                 } else {
                     noResults.classList.add('d-none');
                 }
-            });
+            }
+        }
 
+        if (searchInput) {
+            searchInput.addEventListener('input', filterMembers);
+            searchInput.addEventListener('keyup', filterMembers);
+            searchInput.addEventListener('search', filterMembers);
+        }
+
+        if (clearBtn) {
             clearBtn.addEventListener('click', function () {
                 searchInput.value = '';
-                searchInput.dispatchEvent(new Event('input'));
+                filterMembers();
                 searchInput.focus();
             });
         }

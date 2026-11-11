@@ -213,6 +213,7 @@ Route::prefix('ai-chat')->name('ai-chat.')->group(function () {
 
 // Search Routes
 Route::get('/search', [SearchController::class, 'index'])->name('search');
+Route::get('/search/live', [SearchController::class, 'live'])->name('search.live');
 
 // Language Routes
 Route::get('/language/{lang}', [LanguageController::class, 'switchLang'])->name('language.switch');

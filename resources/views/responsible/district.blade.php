@@ -59,7 +59,9 @@
                      data-name="{{ mb_strtolower($manager->name) }}" 
                      data-designation="{{ mb_strtolower($manager->designation) }}"
                      data-district="{{ mb_strtolower($manager->area ?? '') }}"
-                     data-address="{{ mb_strtolower($manager->address ?? '') }}">
+                     data-address="{{ mb_strtolower($manager->address ?? '') }}"
+                     data-phone="{{ $manager->phone ?? '' }}"
+                     data-email="{{ mb_strtolower($manager->email ?? '') }}">
                     <div class="profile-card h-100">
                         <!-- Image Container with Safe Top-Framed Ratio -->
                         <div class="profile-image-wrap" data-bs-toggle="modal" data-bs-target="#managerModal-{{ $manager->id }}">
@@ -461,40 +463,94 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let activeDistrictFilter = 'all';
 
+    function normalizeText(text) {
+        if (!text) return '';
+        const bnDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+        const enDigits = ['0','1','2','3','4','5','6','7','8','9'];
+        
+        let normalized = text.toLowerCase()
+            .replace(/[\u200B-\u200D\uFEFF]/g, '')
+            .replace(/[ঃ:]/g, ' ')
+            .replace(/[.,\-_/()|]/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+
+        let enVersion = normalized.replace(/[০-৯]/g, d => bnDigits.indexOf(d));
+        let bnVersion = normalized.replace(/[0-9]/g, d => bnDigits[enDigits.indexOf(d)]);
+        
+        return normalized + ' ' + enVersion + ' ' + bnVersion;
+    }
+
+    const cardData = Array.from(cards).map(card => {
+        const name = card.getAttribute('data-name') || '';
+        const designation = card.getAttribute('data-designation') || '';
+        const district = (card.getAttribute('data-district') || '').trim().toLowerCase();
+        const address = card.getAttribute('data-address') || '';
+        const phone = card.getAttribute('data-phone') || '';
+        const email = card.getAttribute('data-email') || '';
+        const cardText = card.textContent || '';
+        
+        const fullSearchable = normalizeText(name + ' ' + designation + ' ' + district + ' ' + address + ' ' + phone + ' ' + email + ' ' + cardText);
+
+        return {
+            element: card,
+            district: district,
+            searchable: fullSearchable
+        };
+    });
+
     function filterCards() {
-        const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
-        let visibleCount = 0;
+        const rawQuery = searchInput ? searchInput.value.trim() : '';
+        const normalizedQuery = normalizeText(rawQuery);
+        const tokens = normalizedQuery.split(/\s+/).filter(t => t.length > 0);
 
         if (clearBtn) {
-            clearBtn.style.display = query.length > 0 ? 'block' : 'none';
+            clearBtn.style.display = rawQuery.length > 0 ? 'inline-block' : 'none';
         }
 
-        cards.forEach(card => {
-            const name = card.getAttribute('data-name') || '';
-            const designation = card.getAttribute('data-designation') || '';
-            const district = card.getAttribute('data-district') || '';
-            const address = card.getAttribute('data-address') || '';
+        if (tokens.length > 0 && activeDistrictFilter !== 'all') {
+            const matchesInFilter = cardData.some(c => c.district === activeDistrictFilter && tokens.every(t => c.searchable.includes(t)));
+            if (!matchesInFilter) {
+                activeDistrictFilter = 'all';
+                pills.forEach(p => {
+                    if (p.getAttribute('data-district') === 'all') {
+                        p.classList.add('active', 'btn-success');
+                        p.classList.remove('btn-outline-secondary');
+                    } else {
+                        p.classList.remove('active', 'btn-success');
+                        p.classList.add('btn-outline-secondary');
+                    }
+                });
+            }
+        }
 
-            const matchesDistrict = (activeDistrictFilter === 'all') || (district === activeDistrictFilter);
-            const matchesQuery = !query || name.includes(query) || designation.includes(query) || district.includes(query) || address.includes(query);
+        let visibleCount = 0;
+
+        cardData.forEach(item => {
+            const matchesDistrict = (activeDistrictFilter === 'all') || (item.district === activeDistrictFilter);
+            const matchesQuery = tokens.length === 0 || tokens.every(token => item.searchable.includes(token));
 
             if (matchesDistrict && matchesQuery) {
-                card.style.display = '';
+                item.element.style.display = '';
                 visibleCount++;
             } else {
-                card.style.display = 'none';
+                item.element.style.display = 'none';
             }
         });
 
-        if (visibleCount === 0 && cards.length > 0) {
-            noResults.classList.remove('d-none');
-        } else {
-            noResults.classList.add('d-none');
+        if (noResults) {
+            if (visibleCount === 0 && cardData.length > 0) {
+                noResults.classList.remove('d-none');
+            } else {
+                noResults.classList.add('d-none');
+            }
         }
     }
 
     if (searchInput) {
         searchInput.addEventListener('input', filterCards);
+        searchInput.addEventListener('keyup', filterCards);
+        searchInput.addEventListener('search', filterCards);
     }
 
     if (clearBtn) {
@@ -507,12 +563,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     pills.forEach(pill => {
         pill.addEventListener('click', function () {
-            pills.forEach(p => p.classList.remove('active', 'btn-success'));
-            pills.forEach(p => p.classList.add('btn-outline-secondary'));
+            pills.forEach(p => {
+                p.classList.remove('active', 'btn-success');
+                p.classList.add('btn-outline-secondary');
+            });
             this.classList.remove('btn-outline-secondary');
             this.classList.add('active', 'btn-success');
 
-            activeDistrictFilter = this.getAttribute('data-district');
+            activeDistrictFilter = (this.getAttribute('data-district') || 'all').trim().toLowerCase();
             filterCards();
         });
     });

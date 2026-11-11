@@ -213,6 +213,7 @@
         });
     </script>
     <script src="{{ asset('js/theme-mode.js') }}"></script>
+    <script src="{{ asset('js/live-search.js') }}?v={{ file_exists(public_path('js/live-search.js')) ? filemtime(public_path('js/live-search.js')) : '1.0' }}"></script>
     
     <!-- Shubban AI Assistant Floating Widget -->
     @include('frontend.partials.ai_chat_widget')
