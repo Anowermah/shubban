@@ -24,9 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        HomeSection::seedDefaultsIfEmpty();
-        $homeSections = HomeSection::orderBy('order')->get();
-        $sectionsMap = $homeSections->keyBy('section_key');
+        try {
+            HomeSection::seedDefaultsIfEmpty();
+            $homeSections = HomeSection::orderBy('order')->get();
+            $sectionsMap = $homeSections->keyBy('section_key');
+        } catch (\Throwable $e) {
+            $homeSections = collect([]);
+            $sectionsMap = collect([]);
+        }
 
         // Dynamic limits based on section config
         $sliderLimit = $sectionsMap['hero_slider']->item_limit ?? 5;
@@ -38,61 +43,51 @@ class HomeController extends Controller
         $bookLimit = $sectionsMap['books']->item_limit ?? 4;
         $articleLimit = $sectionsMap['articles']->item_limit ?? 6;
 
-        $sliders = Slider::where('status', true)
-                        ->latest()
-                        ->take($sliderLimit)
-                        ->get();
+        try {
+            $sliders = Slider::where('status', true)->latest()->take($sliderLimit)->get();
+        } catch (\Throwable $e) { $sliders = collect([]); }
 
-        $news = News::where('status', true)
-                   ->latest()
-                   ->take(6)
-                   ->get();
+        try {
+            $news = News::where('status', true)->latest()->take(6)->get();
+        } catch (\Throwable $e) { $news = collect([]); }
 
-        $notices = Notice::where('status', true)
-                        ->latest()
-                        ->take($noticeLimit)
-                        ->get();
+        try {
+            $notices = Notice::where('status', true)->latest()->take($noticeLimit)->get();
+        } catch (\Throwable $e) { $notices = collect([]); }
 
-        $photos = Photo::where('status', true)
-                      ->latest()
-                      ->take($photoLimit)
-                      ->get();
+        try {
+            $photos = Photo::where('status', true)->latest()->take($photoLimit)->get();
+        } catch (\Throwable $e) { $photos = collect([]); }
 
-        $videos = Video::where('status', true)
-                      ->latest()
-                      ->take($videoLimit)
-                      ->get();
+        try {
+            $videos = Video::where('status', true)->latest()->take($videoLimit)->get();
+        } catch (\Throwable $e) { $videos = collect([]); }
 
-        $archives = Archive::where('status', true)
-                         ->latest()
-                         ->take($archiveLimit)
-                         ->get();
+        try {
+            $archives = Archive::where('status', true)->latest()->take($archiveLimit)->get();
+        } catch (\Throwable $e) { $archives = collect([]); }
 
-        $activities = Activity::where('status', true)
-                            ->orderBy('created_at', 'desc')
-                            ->take($activityLimit)
-                            ->get();
+        try {
+            $activities = Activity::where('status', true)->orderBy('created_at', 'desc')->take($activityLimit)->get();
+        } catch (\Throwable $e) { $activities = collect([]); }
 
-        $featuredBooks = Book::where('status', 'published')
-                            ->orWhere('status', 1)
-                            ->latest()
-                            ->take($bookLimit)
-                            ->get();
-        if ($featuredBooks->isEmpty()) {
-            $featuredBooks = Book::latest()->take($bookLimit)->get();
-        }
+        try {
+            $featuredBooks = Book::where('status', 'published')->orWhere('status', 1)->latest()->take($bookLimit)->get();
+            if ($featuredBooks->isEmpty()) {
+                $featuredBooks = Book::latest()->take($bookLimit)->get();
+            }
+        } catch (\Throwable $e) { $featuredBooks = collect([]); }
 
-        $latestMagazine = Magazine::latest()->first();
+        try {
+            $latestMagazine = Magazine::latest()->first();
+        } catch (\Throwable $e) { $latestMagazine = null; }
 
-        $articles = Article::where('status', 'published')
-                            ->orWhere('status', 1)
-                            ->orWhere('status', true)
-                            ->latest()
-                            ->take($articleLimit)
-                            ->get();
-        if ($articles->isEmpty()) {
-            $articles = Article::latest()->take($articleLimit)->get();
-        }
+        try {
+            $articles = Article::where('status', 'published')->orWhere('status', 1)->orWhere('status', true)->latest()->take($articleLimit)->get();
+            if ($articles->isEmpty()) {
+                $articles = Article::latest()->take($articleLimit)->get();
+            }
+        } catch (\Throwable $e) { $articles = collect([]); }
 
         return view('welcome', compact(
             'homeSections',

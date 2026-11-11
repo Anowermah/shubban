@@ -11,6 +11,7 @@
 !.env.example
 *.bak
 *.sql
+*.zip
 bkash-setup.txt
 .phpunit.result.cache
 Homestead.json

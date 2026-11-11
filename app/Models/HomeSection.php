@@ -255,10 +255,17 @@ class HomeSection extends Model
      */
     public static function seedDefaultsIfEmpty(): void
     {
-        if (self::count() === 0) {
-            foreach (self::defaultSections() as $data) {
-                self::create($data);
+        try {
+            if (!\Illuminate\Support\Facades\Schema::hasTable('home_sections')) {
+                return;
             }
+            if (self::count() === 0) {
+                foreach (self::defaultSections() as $data) {
+                    self::create($data);
+                }
+            }
+        } catch (\Throwable $e) {
+            // Silently ignore if database or table not ready
         }
     }
 

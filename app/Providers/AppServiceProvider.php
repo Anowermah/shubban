@@ -27,9 +27,13 @@ class AppServiceProvider extends ServiceProvider
         \Illuminate\Pagination\Paginator::defaultView('vendor.pagination.shubban');
         \Illuminate\Pagination\Paginator::defaultSimpleView('vendor.pagination.shubban');
 
-        // Set default locale from session if exists
-        if (session()->has('locale')) {
-            app()->setLocale(session('locale'));
+        // Set default locale from session if exists (safely guarded)
+        try {
+            if (session()->isStarted() && session()->has('locale')) {
+                app()->setLocale(session('locale'));
+            }
+        } catch (\Throwable $e) {
+            // Session not initialized during early boot phase
         }
         
         // Set RTL/LTR direction based on locale
