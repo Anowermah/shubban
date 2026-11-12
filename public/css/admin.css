@@ -593,27 +593,287 @@ body {
         line-height: 1.3 !important;
     }
 
-    /* Page Header Box minimal height */
-    .page-header-box {
-        padding: 0.75rem 0.95rem !important;
-        margin-bottom: 0.85rem !important;
-        border-radius: 12px !important;
+    /* Page Header Box minimal height & Modern Mobile Title */
+    .page-header-box,
+    .border-bottom.d-flex,
+    .d-flex.justify-content-between.border-bottom,
+    div[class*="border-bottom"][class*="justify-content-between"] {
+        padding: 8px 10px !important;
+        margin-bottom: 12px !important;
+        border-radius: 14px !important;
+        background: #ffffff !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        border-left: 4px solid var(--admin-primary) !important;
     }
 
     .page-header-box h1,
-    .page-header-box h2 {
+    .page-header-box h2,
+    .page-header-box h3,
+    .border-bottom h1,
+    .border-bottom .h2,
+    .border-bottom .h3,
+    h1.h2,
+    h1.h3 {
         font-size: 1.15rem !important;
+        font-weight: 700 !important;
+        color: var(--admin-primary-dark) !important;
+        margin: 0 !important;
+        line-height: 1.3 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
     }
 
-    /* Compact tables on mobile */
+    .border-bottom p.text-muted,
+    .border-bottom p.small,
+    .page-header-box p {
+        font-size: 0.74rem !important;
+        margin-top: 3px !important;
+        margin-bottom: 0 !important;
+        line-height: 1.3 !important;
+        color: #64748b !important;
+    }
+
+    /* Action Toolbars on Header (Pill track with horizontal scroll) */
+    .btn-toolbar,
+    .card-tools,
+    .border-bottom .d-flex.gap-2,
+    .page-header-box .d-flex {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        margin: 0 !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        max-width: 100% !important;
+        padding-bottom: 2px !important;
+    }
+
+    .btn-toolbar .btn,
+    .card-tools .btn,
+    .page-header-box .btn,
+    .border-bottom .btn {
+        padding: 5px 12px !important;
+        font-size: 0.78rem !important;
+        border-radius: 20px !important;
+        font-weight: 600 !important;
+        white-space: nowrap !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        min-height: 32px !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+    }
+
+    /* Universal Admin Table Polishing on Mobile */
+    .table-responsive {
+        border-radius: 12px !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: thin;
+        box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+        margin-bottom: 0 !important;
+    }
+
+    .card .card-body:has(.table-responsive) {
+        padding: 0 !important;
+    }
+
+    .card-body > .table-responsive {
+        margin: -0.75rem !important;
+        margin-bottom: 0 !important;
+        border-radius: 0 0 12px 12px !important;
+    }
+
+    .table {
+        margin-bottom: 0 !important;
+        vertical-align: middle !important;
+    }
+
     .table thead th {
-        padding: 0.5rem 0.65rem !important;
-        font-size: 0.75rem !important;
+        padding: 8px 10px !important;
+        font-size: 0.74rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.4px !important;
+        background: #f8fafc !important;
+        color: #475569 !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        white-space: nowrap !important;
     }
 
     .table tbody td {
-        padding: 0.55rem 0.65rem !important;
+        padding: 8px 10px !important;
         font-size: 0.82rem !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        color: #1e293b !important;
+        vertical-align: middle !important;
+    }
+
+    /* Table thumbnails & photos */
+    td img,
+    td .img-thumbnail {
+        width: 42px !important;
+        height: 42px !important;
+        max-width: 42px !important;
+        max-height: 42px !important;
+        border-radius: 8px !important;
+        object-fit: cover !important;
+        padding: 1px !important;
+        border: 1px solid #e2e8f0 !important;
+    }
+
+    /* Table Action Buttons Grouping */
+    td .btn-group,
+    td:last-child {
+        white-space: nowrap !important;
+    }
+
+    td .btn-sm,
+    td .btn {
+        width: 32px !important;
+        height: 32px !important;
+        min-width: 32px !important;
+        padding: 0 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 8px !important;
+        font-size: 0.8rem !important;
+        margin: 1px !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    td form.d-inline {
+        display: inline-flex !important;
+        margin: 0 !important;
+        vertical-align: middle !important;
+    }
+
+    /* Form Inputs & Mobile Touch Optimization */
+    .form-label {
+        font-size: 0.82rem !important;
+        font-weight: 600 !important;
+        color: #334155 !important;
+        margin-bottom: 4px !important;
+    }
+
+    .form-control,
+    .form-select {
+        border-radius: 10px !important;
+        border: 1px solid #cbd5e1 !important;
+        padding: 8px 12px !important;
+        font-size: 15px !important;
+        min-height: 42px !important;
+        background-color: #ffffff !important;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--admin-primary) !important;
+        box-shadow: 0 0 0 3px rgba(12, 75, 54, 0.12) !important;
+    }
+
+    textarea.form-control {
+        min-height: 85px !important;
+    }
+
+    input[type="file"].form-control {
+        padding: 6px 10px !important;
+        font-size: 0.82rem !important;
+        background: #f8fafc !important;
+    }
+
+    .form-check {
+        min-height: 24px !important;
+        padding-left: 1.7em !important;
+        margin-bottom: 0.5rem !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .form-check-input {
+        width: 1.25em !important;
+        height: 1.25em !important;
+        margin-top: 0 !important;
+        margin-left: -1.7em !important;
+        border-radius: 5px !important;
+    }
+
+    .form-check-label {
+        font-size: 0.86rem !important;
+        font-weight: 500 !important;
+        color: #1e293b !important;
+        padding-left: 6px !important;
+    }
+
+    /* TinyMCE Mobile Responsiveness */
+    .tox-tinymce {
+        max-width: 100% !important;
+        border-radius: 10px !important;
+        border-color: #cbd5e1 !important;
+    }
+
+    /* Form Action Buttons Bar (Submit / Cancel) */
+    form > button[type="submit"],
+    form > .btn-primary,
+    form > .btn-secondary,
+    form > .btn-success {
+        border-radius: 10px !important;
+        min-height: 42px !important;
+        font-weight: 600 !important;
+        font-size: 0.9rem !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 8px 18px !important;
+    }
+
+    form > .btn + .btn {
+        margin-left: 8px;
+    }
+
+    /* Detail / Show Views Key-Value List Styling */
+    .card-body > .row.mb-3 {
+        display: flex !important;
+        flex-direction: column !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        padding-bottom: 8px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .card-body > .row.mb-3:last-child {
+        border-bottom: none !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .card-body > .row.mb-3 > .col-md-3,
+    .card-body > .row.mb-3 > .col-sm-3,
+    .card-body > .row.mb-3 > dt {
+        font-size: 0.72rem !important;
+        font-weight: 600 !important;
+        color: #64748b !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.4px !important;
+        margin-bottom: 2px !important;
+        width: 100% !important;
+    }
+
+    .card-body > .row.mb-3 > .col-md-9,
+    .card-body > .row.mb-3 > .col-sm-9,
+    .card-body > .row.mb-3 > dd {
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        color: #1e293b !important;
+        width: 100% !important;
     }
 
     /* Reduce vertical gaps in forms */
@@ -623,6 +883,54 @@ body {
 
     .mb-4 {
         margin-bottom: 1rem !important;
+    }
+
+    /* Pagination Overhaul on Mobile */
+    .pagination {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 4px !important;
+        margin: 0.85rem 0 !important;
+        padding: 0 !important;
+    }
+
+    .pagination .page-item .page-link {
+        border-radius: 8px !important;
+        padding: 6px 12px !important;
+        font-size: 0.8rem !important;
+        font-weight: 600 !important;
+        border: 1px solid #e2e8f0 !important;
+        color: #334155 !important;
+        background: #ffffff !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.04) !important;
+    }
+
+    .pagination .page-item.active .page-link {
+        background: var(--admin-primary) !important;
+        border-color: var(--admin-primary) !important;
+        color: #ffffff !important;
+        box-shadow: 0 2px 6px rgba(12, 75, 54, 0.25) !important;
+    }
+
+    /* Category Chip Button Groups on Mobile */
+    .btn-group:not(td .btn-group) {
+        display: flex !important;
+        overflow-x: auto !important;
+        flex-wrap: nowrap !important;
+        gap: 6px !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding-bottom: 6px !important;
+        border-radius: 0 !important;
+    }
+
+    .btn-group:not(td .btn-group) > .btn {
+        border-radius: 20px !important;
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+        padding: 6px 14px !important;
+        font-size: 0.8rem !important;
+        font-weight: 600 !important;
     }
 
     /* Mobile Back to Top floating button */
