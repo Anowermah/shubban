@@ -353,22 +353,25 @@
                             <label class="form-label fw-semibold small text-dark">এআই ইঞ্জিন মোড (Engine Mode) *</label>
                             <select name="ai_provider" id="aiProviderSelect" class="form-select">
                                 <option value="internal" {{ $setting->ai_provider === 'internal' ? 'selected' : '' }}>
-                                    ⚡ বিল্ট-ইন স্মার্ট ইঞ্জিন (ফ্রি, দ্রুত, অফলাইন)
+                                    ⚡ বিল্ট-ইন সুপার নলেজ ইঞ্জিন (ফ্রি, দ্রুত, অফলাইন)
                                 </option>
                                 <option value="gemini" {{ $setting->ai_provider === 'gemini' ? 'selected' : '' }}>
-                                    ✨ গুগল জেমিনাই এআই (Google Gemini API)
+                                    ✨ গুগল জেমিনাই ফ্রি এআই (Google Gemini API - ফ্রি টিয়ার)
+                                </option>
+                                <option value="groq" {{ $setting->ai_provider === 'groq' ? 'selected' : '' }}>
+                                    🚀 গ্রক ক্লাউড আল্ট্রা-ফাস্ট (Groq Llama 3.3 70B - সম্পূর্ণ ফ্রি)
                                 </option>
                                 <option value="openai" {{ $setting->ai_provider === 'openai' ? 'selected' : '' }}>
-                                    🤖 ওপেনএআই চ্যাটজিপিটি (OpenAI GPT)
+                                    🤖 ওপেনএআই চ্যাটজিপিটি (OpenAI GPT-4o-mini)
                                 </option>
                             </select>
                             <div class="font-xs text-muted mt-1">
-                                বিল্ট-ইন ইঞ্জিন কোনো এক্সটার্নাল এপিআই কী ছাড়াই সম্পূর্ণ নির্ভুল উত্তর প্রদান করে।
+                                বিল্ট-ইন ইঞ্জিন ছাড়াও Google Gemini ও Groq-এর ফ্রি এপিআই সম্পূর্ণ বিনামূল্যে সাপোর্ট করে।
                             </div>
                         </div>
 
                         <div class="col-md-4">
-                            <label class="form-label fw-semibold small text-dark">API Key (ঐচ্ছিক, যদি Gemini/OpenAI নির্বাচন করেন)</label>
+                            <label class="form-label fw-semibold small text-dark">API Key (Gemini, Groq বা OpenAI-এর জন্য)</label>
                             <div class="input-group">
                                 <input type="password" name="api_key" id="apiKeyInput" class="form-control" placeholder="{{ $setting->api_key ? '••••••••••••••••' : 'এপিআই কী পেস্ট করুন...' }}">
                                 <button class="btn btn-outline-secondary" type="button" id="toggleApiKeyVisibility">
@@ -385,7 +388,24 @@
 
                         <div class="col-md-4">
                             <label class="form-label fw-semibold small text-dark">মডেল নাম (Model Name)</label>
-                            <input type="text" name="model_name" class="form-control" value="{{ old('model_name', $setting->model_name) }}" placeholder="gemini-1.5-flash বা gpt-4o-mini">
+                            <input type="text" name="model_name" id="modelNameInput" class="form-control" value="{{ old('model_name', $setting->model_name) }}" placeholder="gemini-1.5-flash / llama-3.3-70b-versatile">
+                            <div class="font-xs text-muted mt-1">জেমিনাইয়ের জন্য: gemini-1.5-flash | গ্রকের জন্য: llama-3.3-70b-versatile</div>
+                        </div>
+
+                        <!-- Free API Key Guidance Box -->
+                        <div class="col-12 mt-2">
+                            <div class="p-3 rounded-3 border bg-light d-flex align-items-start gap-3">
+                                <i class="fas fa-key text-warning fs-4 mt-1"></i>
+                                <div class="small">
+                                    <strong class="d-block text-dark mb-1">🎁 কীভাবে সম্পূর্ণ বিনামূল্যে ফ্রি এপিআই কি (Free API Key) পাবেন?</strong>
+                                    <div class="text-secondary mb-1">
+                                        • <strong>গুগল জেমিনাই (Google Gemini Free):</strong> কোনো ক্রেডিট কার্ড প্রয়োজন নেই। <a href="https://aistudio.google.com/app/apikey" target="_blank" class="fw-bold text-success text-decoration-underline">aistudio.google.com/app/apikey</a> এ জিমেইল দিয়ে লগইন করে "Create API Key" বাটনে ক্লিক করে সাথে সাথে ফ্রি কী পেয়ে যাবেন।
+                                    </div>
+                                    <div class="text-secondary">
+                                        • <strong>গ্রক ক্লাউড (Groq Cloud Free):</strong> বিশ্বের দ্রুততম ওপেন-সোর্স ইনফারেন্স ইঞ্জিন। <a href="https://console.groq.com/keys" target="_blank" class="fw-bold text-primary text-decoration-underline">console.groq.com/keys</a> থেকে সম্পূর্ণ ফ্রিতে Llama-3.3-70B কি নিতে পারেন।
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

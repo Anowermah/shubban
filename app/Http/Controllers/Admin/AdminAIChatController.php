@@ -58,7 +58,7 @@ class AdminAIChatController extends Controller
             'welcome_message' => 'required|string|max:1000',
             'fallback_message' => 'required|string|max:1000',
             'system_prompt' => 'nullable|string|max:2000',
-            'ai_provider' => 'required|in:internal,gemini,openai',
+            'ai_provider' => 'required|in:internal,gemini,groq,openai',
             'api_key' => 'nullable|string|max:255',
             'model_name' => 'nullable|string|max:100',
             'temperature' => 'nullable|numeric|min:0|max:1',
@@ -82,7 +82,13 @@ class AdminAIChatController extends Controller
             $setting->api_key = null;
         }
 
-        $setting->model_name = $validated['model_name'] ?: ($validated['ai_provider'] === 'openai' ? 'gpt-4o-mini' : 'gemini-1.5-flash');
+        $defaultModel = 'gemini-1.5-flash';
+        if ($validated['ai_provider'] === 'groq') {
+            $defaultModel = 'llama-3.3-70b-versatile';
+        } elseif ($validated['ai_provider'] === 'openai') {
+            $defaultModel = 'gpt-4o-mini';
+        }
+        $setting->model_name = $validated['model_name'] ?: $defaultModel;
         $setting->temperature = $validated['temperature'] ?? 0.7;
         $setting->widget_position = $validated['widget_position'];
 
