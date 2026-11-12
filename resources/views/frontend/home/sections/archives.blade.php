@@ -25,7 +25,7 @@
                 </a>
             </div>
 
-            <div class="row g-3 g-lg-4">
+            <div class="row g-3 g-lg-4 mobile-swipe-track archives-swipe-track">
                 @foreach($archiveList as $archive)
                     <div class="col-6 col-md-3">
                         <a href="{{ route('gallery.archives.show', $archive) }}" class="archive-album-card">

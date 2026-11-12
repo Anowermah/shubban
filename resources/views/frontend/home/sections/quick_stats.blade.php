@@ -12,7 +12,7 @@
     $s4Num = $extra['stat4_num'] ?? '৪ স্তর';
     $s4Lbl = $extra['stat4_label'] ?? 'ধারাবাহিক যুব প্রশিক্ষণ';
 @endphp
-<section class="stats-section pb-4">
+<section class="stats-section py-2 py-md-4">
     <div class="container">
         <div class="row g-3">
             <div class="col-6 col-lg-3">

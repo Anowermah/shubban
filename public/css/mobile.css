@@ -546,3 +546,388 @@
     color: var(--mob-gold);
     transform: translateY(-3px);
 }
+
+/* ==========================================================================
+   MINIMAL MOBILE HOMEPAGE & UX OPTIMIZATION SYSTEM (< 768px)
+   ========================================================================== */
+@media (max-width: 767.98px) {
+    /* 1. Global Section Spacing - Cuts 1,000px+ of Dead Vertical Space */
+    section.py-4,
+    section.py-5,
+    section.py-lg-5 {
+        padding-top: 14px !important;
+        padding-bottom: 16px !important;
+    }
+
+    section .mb-4,
+    section .mb-5 {
+        margin-bottom: 12px !important;
+    }
+
+    /* Minimal Compact Section Headers */
+    section h2.fs-3,
+    section h2.fs-2,
+    section .section-title {
+        font-size: 1.18rem !important;
+        margin-bottom: 2px !important;
+        font-weight: 700 !important;
+    }
+
+    section p.text-muted,
+    section p.text-white-50 {
+        font-size: 0.78rem !important;
+        margin-bottom: 4px !important;
+        line-height: 1.35 !important;
+    }
+
+    section .badge {
+        font-size: 0.68rem !important;
+        padding: 2px 8px !important;
+    }
+
+    /* 2. Hero Slider Sleek Minimalist Makeover */
+    .hero-slider-wrap {
+        border-radius: 14px !important;
+        margin: 8px 10px 0 !important;
+        box-shadow: 0 4px 18px rgba(7, 49, 35, 0.18) !important;
+        overflow: hidden !important;
+    }
+
+    .hero-slider-wrap .carousel-item {
+        height: 195px !important;
+        max-height: 195px !important;
+    }
+
+    .hero-slider-wrap .carousel-item img {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover !important;
+    }
+
+    /* Elegant bottom-gradient overlay replacing the cramped black box */
+    .hero-slider-wrap .carousel-caption {
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        border-radius: 0 0 14px 14px !important;
+        border: none !important;
+        box-shadow: none !important;
+        backdrop-filter: blur(2px) !important;
+        background: linear-gradient(0deg, rgba(7, 49, 35, 0.95) 0%, rgba(7, 49, 35, 0.65) 55%, transparent 100%) !important;
+        padding: 10px 14px 8px !important;
+        text-align: start !important;
+    }
+
+    .hero-slider-wrap .carousel-caption h2 {
+        font-size: 1.05rem !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        margin-bottom: 4px !important;
+        line-height: 1.25 !important;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .hero-slider-wrap .carousel-caption .btn-slider-cta {
+        padding: 3px 12px !important;
+        font-size: 0.74rem !important;
+        font-weight: 700 !important;
+        border-radius: 20px !important;
+        background: var(--mob-gold) !important;
+        color: #073123 !important;
+        display: inline-flex !important;
+    }
+
+    .hero-slider-wrap .carousel-indicators {
+        bottom: 4px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .hero-slider-wrap .carousel-indicators button {
+        width: 16px !important;
+        height: 3px !important;
+        border-radius: 3px !important;
+        margin: 0 2px !important;
+        opacity: 0.5;
+        border: none !important;
+    }
+
+    .hero-slider-wrap .carousel-indicators button.active {
+        width: 24px !important;
+        opacity: 1;
+        background-color: var(--mob-gold) !important;
+    }
+
+    /* 3. App-Style Quick Action Shortcuts Bar */
+    .mobile-quick-actions-bar {
+        background: #ffffff;
+        padding: 10px 0 6px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid #edf2f7;
+    }
+
+    html[data-theme="dark"] .mobile-quick-actions-bar,
+    html[data-bs-theme="dark"] .mobile-quick-actions-bar {
+        background: #0f271e !important;
+        border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    .quick-actions-track {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        overflow-x: auto;
+        padding: 4px 6px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .quick-actions-track::-webkit-scrollbar {
+        display: none;
+    }
+
+    .quick-action-pill {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        flex: 0 0 60px;
+        transition: transform 0.2s ease;
+    }
+
+    .quick-action-pill:active {
+        transform: scale(0.92);
+    }
+
+    .quick-action-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+        margin-bottom: 4px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .quick-action-title {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: #334155;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    html[data-theme="dark"] .quick-action-title,
+    html[data-bs-theme="dark"] .quick-action-title {
+        color: #e2e8f0 !important;
+    }
+
+    /* 4. Universal Horizontal Swipeable Tracks - Replaces Endless Scrolling */
+    .mobile-swipe-track {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 12px !important;
+        padding: 4px 12px 14px !important;
+        margin-left: -12px !important;
+        margin-right: -12px !important;
+        scrollbar-width: none !important;
+    }
+
+    .mobile-swipe-track::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    .mobile-swipe-track > [class*="col"] {
+        flex: 0 0 200px !important;
+        max-width: 200px !important;
+        scroll-snap-align: start !important;
+    }
+
+    /* Books Track - Compact Book Shelves */
+    .mobile-swipe-track.books-swipe-track > [class*="col"] {
+        flex: 0 0 140px !important;
+        max-width: 140px !important;
+    }
+
+    .mobile-swipe-track.books-swipe-track .book-card-item {
+        padding: 8px !important;
+        border-radius: 12px !important;
+    }
+
+    .mobile-swipe-track.books-swipe-track .book-cover-wrap {
+        height: 160px !important;
+        padding: 4px !important;
+    }
+
+    .mobile-swipe-track.books-swipe-track .book-title-text {
+        font-size: 0.8rem !important;
+        min-height: 32px !important;
+        line-height: 1.25 !important;
+    }
+
+    .mobile-swipe-track.books-swipe-track .book-author-text {
+        font-size: 0.68rem !important;
+        margin-bottom: 4px !important;
+    }
+
+    /* Activities Track */
+    .mobile-swipe-track.activities-swipe-track > [class*="col"] {
+        flex: 0 0 215px !important;
+        max-width: 215px !important;
+    }
+
+    .mobile-swipe-track.activities-swipe-track .card img,
+    .mobile-swipe-track.activities-swipe-track .card > div:first-child {
+        height: 110px !important;
+    }
+
+    .mobile-swipe-track.activities-swipe-track .card .p-3 {
+        padding: 10px !important;
+    }
+
+    .mobile-swipe-track.activities-swipe-track .card p.small {
+        display: none !important; /* Hide long description text on mobile cards */
+    }
+
+    .mobile-swipe-track.activities-swipe-track .card h4 {
+        font-size: 0.84rem !important;
+        min-height: auto !important;
+        margin-bottom: 6px !important;
+        line-height: 1.3 !important;
+    }
+
+    /* 5 Pillars (Core Mission) Compact Card */
+    .mobile-swipe-track .pillar-card {
+        padding: 12px 10px !important;
+        border-radius: 12px !important;
+    }
+
+    .mobile-swipe-track .pillar-icon {
+        font-size: 1.4rem !important;
+        margin-bottom: 4px !important;
+    }
+
+    .mobile-swipe-track .pillar-title {
+        font-size: 0.92rem !important;
+        margin-bottom: 4px !important;
+    }
+
+    .mobile-swipe-track .pillar-text {
+        font-size: 0.74rem !important;
+        line-height: 1.35 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .main-objective-box {
+        padding: 12px 14px !important;
+        border-radius: 12px !important;
+        margin-bottom: 12px !important;
+    }
+
+    .main-objective-box h3 {
+        font-size: 0.98rem !important;
+        line-height: 1.5 !important;
+    }
+
+    /* 5. Quick Stats 2x2 Micro Cards */
+    .stats-section .stat-card {
+        padding: 8px 10px !important;
+        border-radius: 12px !important;
+        gap: 8px !important;
+    }
+
+    .stats-section .stat-icon-wrap {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        font-size: 1rem !important;
+        border-radius: 10px !important;
+    }
+
+    .stats-section .stat-number {
+        font-size: 1.15rem !important;
+        line-height: 1.1 !important;
+    }
+
+    .stats-section .stat-label {
+        font-size: 0.68rem !important;
+        line-height: 1.2 !important;
+    }
+
+    /* 6. Compact Mobile Footer */
+    .footer {
+        padding: 24px 0 16px !important;
+    }
+
+    .footer h5 {
+        font-size: 0.95rem !important;
+        margin-bottom: 10px !important;
+        padding-bottom: 4px !important;
+    }
+
+    .footer h5::after {
+        width: 25px !important;
+        height: 2px !important;
+    }
+
+    .footer ul li {
+        margin-bottom: 6px !important;
+        font-size: 0.8rem !important;
+    }
+
+    .footer .social-links {
+        margin-bottom: 12px !important;
+        gap: 8px !important;
+    }
+
+    .footer .social-links a {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.82rem !important;
+    }
+
+    .footer .copyright {
+        margin-top: 18px !important;
+        padding-top: 12px !important;
+        font-size: 0.74rem !important;
+    }
+
+    /* 7. Donation Banner Compact */
+    .donation-banner-wrap {
+        padding: 16px 14px !important;
+        border-radius: 14px !important;
+        text-align: center !important;
+    }
+
+    .donation-banner-wrap h2 {
+        font-size: 1.12rem !important;
+        margin-bottom: 6px !important;
+    }
+
+    .donation-banner-wrap p {
+        font-size: 0.78rem !important;
+        margin-bottom: 10px !important;
+    }
+
+    .btn-donate-gold {
+        padding: 8px 18px !important;
+        font-size: 0.82rem !important;
+    }
+
+    .btn-contact-outline {
+        padding: 8px 14px !important;
+        font-size: 0.82rem !important;
+    }
+}

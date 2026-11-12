@@ -39,8 +39,8 @@
                     <div class="card-body p-0">
                         <div class="list-group list-group-flush">
                             @forelse($noticeList as $notice)
-                                <div class="list-group-item p-3 border-bottom d-flex align-items-center justify-content-between flex-wrap gap-2">
-                                    <div class="flex-grow-1 overflow-hidden" style="min-width: 250px;">
+                                <div class="list-group-item p-2 p-md-3 border-bottom d-flex align-items-center justify-content-between flex-wrap gap-2">
+                                    <div class="flex-grow-1 overflow-hidden" style="min-width: 160px;">
                                         <div class="d-flex align-items-center gap-2 mb-1">
                                             <span class="badge bg-success-subtle text-success small">
                                                 <i class="far fa-calendar-alt me-1"></i> {{ $notice->created_at->format('d M, Y') }}

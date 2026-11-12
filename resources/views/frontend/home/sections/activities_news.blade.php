@@ -27,7 +27,7 @@
             </a>
         </div>
 
-        <div class="row g-3 g-lg-4">
+        <div class="row g-3 g-lg-4 mobile-swipe-track activities-swipe-track">
             @forelse($activityList as $activity)
                 <div class="col-6 col-md-6 col-lg-3">
                     <div class="card h-100 border-0 rounded-3 shadow-sm overflow-hidden bg-white">

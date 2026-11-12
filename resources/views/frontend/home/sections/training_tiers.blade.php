@@ -15,7 +15,7 @@
             @endif
         </div>
 
-        <div class="row g-3 g-lg-4">
+        <div class="row g-3 g-lg-4 mobile-swipe-track training-swipe-track">
             <!-- Tier 1: Aref -->
             <div class="col-6 col-lg-3">
                 <div class="training-tier-card">

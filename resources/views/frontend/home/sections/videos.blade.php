@@ -25,7 +25,7 @@
         </div>
 
         <!-- Videos Grid -->
-        <div class="row g-3 g-lg-4">
+        <div class="row g-3 g-lg-4 mobile-swipe-track videos-swipe-track">
             @forelse($videoList as $video)
                 @php
                     $videoId = '';

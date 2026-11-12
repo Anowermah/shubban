@@ -1,5 +1,5 @@
 <!-- ========================================================================
-     1. HERO SLIDER & NOTICE TICKER
+     1. HERO SLIDER & NOTICE TICKER (উন্নত ও মিনমাল মোবাইল রেসপন্সিভ)
      ======================================================================== -->
 <section class="hero-section">
     <div class="hero-slider-wrap">
@@ -23,11 +23,11 @@
                         <div class="carousel-caption">
                             <h2>{{ $slider->title }}</h2>
                             @if($slider->subtitle)
-                                <p>{{ $slider->subtitle }}</p>
+                                <p class="d-none d-md-block">{{ $slider->subtitle }}</p>
                             @elseif($slider->description)
-                                <p>{{ Str::limit($slider->description, 110) }}</p>
+                                <p class="d-none d-md-block">{{ Str::limit($slider->description, 110) }}</p>
                             @endif
-                            <div>
+                            <div class="slider-btn-group">
                                 @if($slider->button_text && $slider->button_link)
                                     <a href="{{ $slider->button_link }}" class="btn-slider-cta">
                                         <span>{{ $slider->button_text }}</span>
@@ -39,7 +39,7 @@
                                         <i class="fas fa-arrow-right"></i>
                                     </a>
                                 @endif
-                                <a href="{{ route('donate.index') }}" class="btn btn-sm btn-outline-warning text-white rounded-pill px-3 py-2 ms-2 fw-semibold">
+                                <a href="{{ route('donate.index') }}" class="btn btn-sm btn-outline-warning text-white rounded-pill px-3 py-2 ms-2 fw-semibold d-none d-sm-inline-block">
                                     <i class="fas fa-hand-holding-heart me-1"></i> অনুদান দিন
                                 </a>
                             </div>
@@ -50,21 +50,23 @@
                         <img src="{{ asset('images/slider1.jpg') }}" class="d-block w-100" alt="Shubban Banner">
                         <div class="carousel-caption">
                             <h2>জমঈয়ত শুব্বানে আহলে হাদীস বাংলাদেশ</h2>
-                            <p>একটি ঐতিহ্যবাহী অরাজনৈতিক ছাত্র ও যুব আন্দোলন — যুব সমাজের আত্মশুদ্ধি ও মানবতার সেবায় নিবেদিত।</p>
-                            <a href="{{ route('about.introduction') }}" class="btn-slider-cta">
-                                <span>আমাদের সম্পর্কে</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
+                            <p class="d-none d-md-block">একটি ঐতিহ্যবাহী অরাজনৈতিক ছাত্র ও যুব আন্দোলন — যুব সমাজের আত্মশুদ্ধি ও মানবতার সেবায় নিবেদিত।</p>
+                            <div class="slider-btn-group">
+                                <a href="{{ route('about.introduction') }}" class="btn-slider-cta">
+                                    <span>আমাদের সম্পর্কে</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 @endforelse
             </div>
 
             @if($sliders->count() > 1)
-                <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev" aria-label="পূর্ববর্তী">
+                <button class="carousel-control-prev d-none d-md-flex" type="button" data-bs-target="#heroSlider" data-bs-slide="prev" aria-label="পূর্ববর্তী">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#heroSlider" data-bs-slide="next" aria-label="পরবর্তী">
+                <button class="carousel-control-next d-none d-md-flex" type="button" data-bs-target="#heroSlider" data-bs-slide="next" aria-label="পরবর্তী">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 </button>
             @endif
@@ -75,23 +77,20 @@
     @if(isset($notices) && $notices->isNotEmpty())
         @php $topNotice = $notices->first(); @endphp
         <div class="notice-ticker-bar">
-            <div class="container">
-                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <div class="container px-2 px-sm-3">
+                <div class="d-flex align-items-center justify-content-between gap-2 py-1">
                     <div class="d-flex align-items-center gap-2 overflow-hidden flex-grow-1">
                         <span class="ticker-badge">
-                            <i class="fas fa-bullhorn"></i> {{ $section->badge_text ?? 'সর্বশেষ নোটিশ' }}
+                            <i class="fas fa-bullhorn"></i> <span class="d-none d-sm-inline">{{ $section->badge_text ?? 'সর্বশেষ' }}</span>
                         </span>
                         <div class="ticker-content text-truncate">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#noticeModal{{ $topNotice->id }}">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#noticeModal{{ $topNotice->id }}" class="text-white text-decoration-none small fw-semibold">
                                 {{ $topNotice->title }}
                             </a>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-2">
-                        <span class="text-white-50 small d-none d-md-inline">
-                            <i class="far fa-calendar-alt me-1"></i> {{ $topNotice->created_at->format('d/m/Y') }}
-                        </span>
-                        <a href="{{ route('notice.index') }}" class="badge bg-warning text-dark text-decoration-none px-2 py-1">
+                    <div class="d-flex align-items-center gap-2 flex-shrink-0">
+                        <a href="{{ route('notice.index') }}" class="badge bg-warning text-dark text-decoration-none px-2 py-1" style="font-size: 0.72rem;">
                             সকল নোটিশ <i class="fas fa-chevron-right ms-1"></i>
                         </a>
                     </div>
@@ -99,4 +98,60 @@
             </div>
         </div>
     @endif
+
+    <!-- App-Style Minimal Quick Actions Bar (Mobile Only: Screen < 992px) -->
+    <div class="mobile-quick-actions-bar d-lg-none">
+        <div class="container px-2">
+            <div class="quick-actions-track">
+                <a href="{{ route('notice.index') }}" class="quick-action-pill">
+                    <div class="quick-action-icon bg-warning-subtle text-warning-emphasis">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <span class="quick-action-title">নোটিশ</span>
+                </a>
+                <a href="{{ route('publications.books') }}" class="quick-action-pill">
+                    <div class="quick-action-icon bg-success-subtle text-success">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <span class="quick-action-title">বই সম্ভার</span>
+                </a>
+                <a href="{{ route('responsible.district') }}" class="quick-action-pill">
+                    <div class="quick-action-icon bg-info-subtle text-info-emphasis">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <span class="quick-action-title">দায়িত্বশীল</span>
+                </a>
+                <a href="{{ route('training.courses') }}" class="quick-action-pill">
+                    <div class="quick-action-icon bg-primary-subtle text-primary">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <span class="quick-action-title">প্রশিক্ষণ</span>
+                </a>
+                <a href="{{ route('donate.index') }}" class="quick-action-pill">
+                    <div class="quick-action-icon bg-danger-subtle text-danger">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <span class="quick-action-title">দান করুন</span>
+                </a>
+                <a href="{{ route('gallery.photos') }}" class="quick-action-pill">
+                    <div class="quick-action-icon bg-secondary-subtle text-secondary">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <span class="quick-action-title">ছবি</span>
+                </a>
+                <a href="{{ route('gallery.videos') }}" class="quick-action-pill">
+                    <div class="quick-action-icon bg-danger-subtle text-danger">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <span class="quick-action-title">ভিডিও</span>
+                </a>
+                <a href="{{ route('contact.index') }}" class="quick-action-pill">
+                    <div class="quick-action-icon bg-success-subtle text-success">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <span class="quick-action-title">যোগাযোগ</span>
+                </a>
+            </div>
+        </div>
+    </div>
 </section>

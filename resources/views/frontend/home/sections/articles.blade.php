@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div class="row g-3 g-lg-4">
+        <div class="row g-3 g-lg-4 mobile-swipe-track articles-swipe-track">
             @forelse($articleList as $article)
                 <div class="col-md-6 col-lg-4">
                     <div class="article-modern-card">

@@ -964,61 +964,87 @@
    Responsive Media Queries
    -------------------------------------------------------------------------- */
 @media (max-width: 767.98px) {
+    .hero-slider-wrap {
+        border-radius: 14px;
+        margin: 8px 10px 0;
+        box-shadow: 0 4px 18px rgba(7, 49, 35, 0.18);
+        overflow: hidden;
+    }
+
     .hero-slider-wrap .carousel-item {
-        height: 250px;
+        height: 195px;
     }
 
     .hero-slider-wrap .carousel-caption {
-        padding: 12px 14px;
-        bottom: 15px;
-        max-width: 92%;
-        border-radius: 10px;
+        padding: 10px 14px 8px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0 0 14px 14px;
+        border: none;
+        box-shadow: none;
+        backdrop-filter: blur(2px);
+        background: linear-gradient(0deg, rgba(7, 49, 35, 0.95) 0%, rgba(7, 49, 35, 0.65) 55%, transparent 100%);
+        text-align: start;
     }
 
     .hero-slider-wrap .carousel-caption h2 {
-        font-size: 1.15rem;
+        font-size: 1.05rem;
         margin-bottom: 4px;
-    }
-
-    .hero-slider-wrap .carousel-caption p {
-        font-size: 0.78rem;
-        margin-bottom: 8px;
+        line-height: 1.25;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
 
+    .hero-slider-wrap .carousel-caption p {
+        display: none !important;
+    }
+
     .hero-slider-wrap .carousel-caption .btn-slider-cta {
-        padding: 4px 12px;
-        font-size: 0.78rem;
+        padding: 3px 12px;
+        font-size: 0.74rem;
+        font-weight: 700;
+        border-radius: 20px;
     }
 
     .stats-section {
-        margin-top: 15px;
+        margin-top: 8px;
+        padding-top: 8px;
+        padding-bottom: 8px;
     }
 
     .stat-card {
-        padding: 14px 12px;
+        padding: 8px 10px;
+        border-radius: 12px;
     }
 
     .stat-icon-wrap {
-        width: 44px;
-        height: 44px;
-        min-width: 44px;
-        font-size: 1.2rem;
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        font-size: 1rem;
+        border-radius: 10px;
     }
 
     .stat-number {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
+        line-height: 1.1;
     }
 
     .stat-label {
-        font-size: 0.78rem;
+        font-size: 0.68rem;
+        line-height: 1.2;
     }
 
     .donation-banner-wrap {
-        padding: 24px 18px;
+        padding: 16px 14px;
+        border-radius: 14px;
         text-align: center;
     }
 
@@ -1027,8 +1053,8 @@
     }
 
     .book-cover-wrap {
-        height: 220px;
-        padding: 6px;
+        height: 160px;
+        padding: 4px;
     }
 }
 

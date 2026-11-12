@@ -29,8 +29,8 @@
             </h3>
         </div>
 
-        <!-- পাঁচ দফা কর্মসূচি (৫টি স্তম্ভ) -->
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
+        <!-- পাঁচ দফা কর্মসূচি (৫টি স্তম্ভ - মোবাইলে মসৃণ সোয়াইপযোগ্য ট্র্যাক) -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3 mobile-swipe-track">
             <!-- ১. আকীদাহ সংশোধন -->
             <div class="col">
                 <div class="pillar-card text-center h-100">

@@ -25,7 +25,7 @@
         </div>
 
         <!-- Photos Grid -->
-        <div class="row g-3 g-lg-4">
+        <div class="row g-3 g-lg-4 mobile-swipe-track photos-swipe-track">
             @forelse($photoList as $photo)
                 <div class="col-6 col-md-3">
                     <a href="{{ $photo->image_url }}" data-lightbox="shubban-photo-gallery" data-title="{{ $photo->title }}" class="photo-grid-card">

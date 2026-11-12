@@ -18,7 +18,7 @@
             </a>
         </div>
 
-        <div class="row g-3 g-lg-4">
+        <div class="row g-3 g-lg-4 mobile-swipe-track facilities-swipe-track">
             <!-- Research Center -->
             <div class="col-6 col-lg-3">
                 <div class="facility-card">
