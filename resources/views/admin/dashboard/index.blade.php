@@ -4,8 +4,67 @@
 
 @section('content')
 <div class="container-fluid px-0">
-    <!-- 1. Modern Welcome Hero Card -->
-    <div class="dashboard-welcome-hero">
+    <!-- Mobile Ultra-Minimal Header & Quick Actions (< 768px) -->
+    <div class="mobile-admin-header d-md-none mb-3">
+        <div class="d-flex align-items-center justify-content-between p-3 rounded-4 bg-gradient-admin text-white shadow-sm mb-2">
+            <div>
+                <div class="d-flex align-items-center gap-1 small text-warning mb-1">
+                    <i class="far fa-calendar-alt"></i>
+                    <span>{{ \Carbon\Carbon::now()->isoFormat('D MMMM, YYYY') }}</span>
+                </div>
+                <h6 class="fw-bold mb-0 text-white">
+                    {{ Auth::guard('admin')->user()->name ?? 'সম্মানিত অ্যাডমিনিস্ট্রেটর' }}
+                </h6>
+            </div>
+            @php
+                $totalPending = ($stats['donations']['pending'] ?? 0) + ($stats['organization']['promotions_pending'] ?? 0) + ($stats['organization']['reports_submitted'] ?? 0);
+            @endphp
+            @if($totalPending > 0)
+                <a href="{{ route('admin.donations.index') }}?status=pending" class="badge bg-danger rounded-pill px-3 py-2 text-decoration-none text-white d-flex align-items-center gap-1 shadow-sm">
+                    <i class="fas fa-bell"></i>
+                    <span>{{ $totalPending }} পেন্ডিং</span>
+                </a>
+            @else
+                <span class="badge bg-success-subtle text-success rounded-pill px-3 py-1 small">
+                    <i class="fas fa-check-circle me-1"></i>আপডেট
+                </span>
+            @endif
+        </div>
+
+        <!-- Mobile Horizontal Swipe Quick Actions Bar -->
+        <div class="mobile-quick-actions-bar">
+            <a href="{{ route('admin.donations.create') }}" class="mobile-quick-pill">
+                <i class="fas fa-plus text-warning"></i><span>নতুন দান</span>
+            </a>
+            <a href="{{ route('admin.notices.create') }}" class="mobile-quick-pill">
+                <i class="fas fa-bullhorn text-info"></i><span>নোটিশ</span>
+            </a>
+            <a href="{{ route('admin.news.create') }}" class="mobile-quick-pill">
+                <i class="fas fa-newspaper text-success"></i><span>সংবাদ</span>
+            </a>
+            <a href="{{ route('admin.publications.books.create') }}" class="mobile-quick-pill">
+                <i class="fas fa-book text-warning"></i><span>বই</span>
+            </a>
+            <a href="{{ route('admin.ai-copilot.index') }}" class="mobile-quick-pill">
+                <i class="fas fa-wand-magic-sparkles text-danger"></i><span>এআই কো-পাইলট</span>
+            </a>
+            <a href="{{ route('admin.organization.promotions') }}" class="mobile-quick-pill">
+                <i class="fas fa-layer-group text-primary"></i><span>পদোন্নতি</span>
+            </a>
+            <a href="{{ route('admin.organization.reports') }}" class="mobile-quick-pill">
+                <i class="fas fa-file-signature text-success"></i><span>প্রতিবেদন</span>
+            </a>
+            <a href="{{ route('admin.homepage.index') }}" class="mobile-quick-pill">
+                <i class="fas fa-sliders-h text-info"></i><span>হোমপেজ</span>
+            </a>
+            <a href="{{ route('admin.media.index') }}" class="mobile-quick-pill">
+                <i class="fas fa-photo-video text-warning"></i><span>মিডিয়া</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- 1. Modern Welcome Hero Card (Desktop & Tablet) -->
+    <div class="dashboard-welcome-hero d-none d-md-block">
         <div class="row align-items-center">
             <div class="col-lg-8">
                 <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
@@ -83,13 +142,13 @@
     </div>
 
     <!-- 2. Primary KPI Metric Cards (Row 1: Finance & Organization) -->
-    <div class="row g-3 mb-4">
+    <div class="row g-2 g-md-3 mb-3 mb-md-4">
         <!-- 1. Total Donations -->
-        <div class="col-xl-3 col-sm-6">
+        <div class="col-6 col-md-6 col-xl-3">
             <div class="stat-card-modern">
                 <div class="stat-top-row">
                     <div>
-                        <div class="stat-title">মোট অনুদান সংগ্রহ</div>
+                        <div class="stat-title text-truncate">মোট অনুদান</div>
                         <div class="stat-number text-success">৳{{ number_format($stats['donations']['amount'] ?? 0, 0) }}</div>
                     </div>
                     <div class="stat-icon-wrap success">
@@ -101,18 +160,18 @@
                     @if(($stats['donations']['pending'] ?? 0) > 0)
                         <span class="badge bg-warning text-dark">{{ $stats['donations']['pending'] }} পেন্ডিং</span>
                     @else
-                        <span class="badge bg-success-subtle text-success">সব যাচাইকৃত</span>
+                        <span class="badge bg-success-subtle text-success">যাচাইকৃত</span>
                     @endif
                 </div>
             </div>
         </div>
 
         <!-- 2. Organization Workers & Users -->
-        <div class="col-xl-3 col-sm-6">
+        <div class="col-6 col-md-6 col-xl-3">
             <div class="stat-card-modern">
                 <div class="stat-top-row">
                     <div>
-                        <div class="stat-title">সংগঠন ও কর্মী</div>
+                        <div class="stat-title text-truncate">সংগঠন ও কর্মী</div>
                         <div class="stat-number text-primary">{{ ($stats['users']['total'] ?? 0) + ($stats['members']['total'] ?? 0) }} <span class="fs-6 fw-normal text-muted">জন</span></div>
                     </div>
                     <div class="stat-icon-wrap primary">
@@ -120,17 +179,17 @@
                     </div>
                 </div>
                 <div class="stat-meta text-muted text-truncate" title="সালেহ, সালেক, আরেফ, রাগেব">
-                    রাগেব: <strong>{{ $stats['users']['rageb'] ?? 0 }}</strong> | আরেফ: <strong>{{ $stats['users']['aref'] ?? 0 }}</strong> | সালেক: <strong>{{ $stats['users']['salek'] ?? 0 }}</strong> | সালেহ: <strong>{{ $stats['users']['saleh'] ?? 0 }}</strong>
+                    রাগেব: <strong>{{ $stats['users']['rageb'] ?? 0 }}</strong> | আরেফ: <strong>{{ $stats['users']['aref'] ?? 0 }}</strong> | সালেক: <strong>{{ $stats['users']['salek'] ?? 0 }}</strong>
                 </div>
             </div>
         </div>
 
         <!-- 3. Monthly Iyanat -->
-        <div class="col-xl-3 col-sm-6">
+        <div class="col-6 col-md-6 col-xl-3">
             <div class="stat-card-modern">
                 <div class="stat-top-row">
                     <div>
-                        <div class="stat-title">মাসিক এয়ানত তহবিল</div>
+                        <div class="stat-title text-truncate">এয়ানত তহবিল</div>
                         <div class="stat-number text-info">৳{{ number_format($stats['organization']['iyanat_total'] ?? 0, 0) }}</div>
                     </div>
                     <div class="stat-icon-wrap info">
@@ -138,18 +197,18 @@
                     </div>
                 </div>
                 <div class="stat-meta d-flex justify-content-between align-items-center text-muted">
-                    <span>চলতি মাসে আদায়:</span>
+                    <span>চলতি মাসে:</span>
                     <strong class="text-dark">৳{{ number_format($stats['organization']['iyanat_this_month'] ?? 0, 0) }}</strong>
                 </div>
             </div>
         </div>
 
         <!-- 4. Approvals & Reviews -->
-        <div class="col-xl-3 col-sm-6">
+        <div class="col-6 col-md-6 col-xl-3">
             <div class="stat-card-modern">
                 <div class="stat-top-row">
                     <div>
-                        <div class="stat-title">অপেক্ষমাণ আবেদন</div>
+                        <div class="stat-title text-truncate">অপেক্ষমাণ আবেদন</div>
                         <div class="stat-number text-warning">{{ ($stats['organization']['promotions_pending'] ?? 0) + ($stats['organization']['reports_submitted'] ?? 0) }} <span class="fs-6 fw-normal text-muted">টি</span></div>
                     </div>
                     <div class="stat-icon-wrap warning">
@@ -157,39 +216,39 @@
                     </div>
                 </div>
                 <div class="stat-meta d-flex justify-content-between align-items-center text-muted">
-                    <span>পদোন্নতি: <strong>{{ $stats['organization']['promotions_pending'] ?? 0 }}</strong></span>
-                    <span>প্রতিবেদন: <strong>{{ $stats['organization']['reports_submitted'] ?? 0 }}</strong></span>
+                    <span>আবেদন: <strong>{{ $stats['organization']['promotions_pending'] ?? 0 }}</strong></span>
+                    <span>রিপোর্ট: <strong>{{ $stats['organization']['reports_submitted'] ?? 0 }}</strong></span>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- 3. Secondary Row: Publications & Website Content -->
-    <div class="row g-3 mb-4">
+    <div class="row g-2 g-md-3 mb-3 mb-md-4">
         <!-- Publications -->
-        <div class="col-xl-3 col-sm-6">
+        <div class="col-6 col-md-6 col-xl-3">
             <div class="stat-card-modern">
                 <div class="stat-top-row">
                     <div>
-                        <div class="stat-title">মাকতাবাহ ও প্রকাশনা</div>
-                        <div class="stat-number text-purple">{{ ($stats['publications']['books']['total'] ?? 0) + ($stats['publications']['magazines']['total'] ?? 0) + ($stats['publications']['articles']['total'] ?? 0) }} <span class="fs-6 fw-normal text-muted">আইটেম</span></div>
+                        <div class="stat-title text-truncate">মাকতাবাহ ও বই</div>
+                        <div class="stat-number text-purple">{{ ($stats['publications']['books']['total'] ?? 0) + ($stats['publications']['magazines']['total'] ?? 0) + ($stats['publications']['articles']['total'] ?? 0) }} <span class="fs-6 fw-normal text-muted">টি</span></div>
                     </div>
                     <div class="stat-icon-wrap purple">
                         <i class="fas fa-book-open"></i>
                     </div>
                 </div>
-                <div class="stat-meta text-muted">
-                    বই: <strong>{{ $stats['publications']['books']['total'] ?? 0 }}</strong> | ম্যাগাজিন: <strong>{{ $stats['publications']['magazines']['total'] ?? 0 }}</strong> | প্রবন্ধ: <strong>{{ $stats['publications']['articles']['total'] ?? 0 }}</strong>
+                <div class="stat-meta text-muted text-truncate">
+                    বই: <strong>{{ $stats['publications']['books']['total'] ?? 0 }}</strong> | ম্যাগাজিন: <strong>{{ $stats['publications']['magazines']['total'] ?? 0 }}</strong>
                 </div>
             </div>
         </div>
 
         <!-- Notices -->
-        <div class="col-xl-3 col-sm-6">
+        <div class="col-6 col-md-6 col-xl-3">
             <div class="stat-card-modern">
                 <div class="stat-top-row">
                     <div>
-                        <div class="stat-title">জরুরি নোটিশ</div>
+                        <div class="stat-title text-truncate">জরুরি নোটিশ</div>
                         <div class="stat-number text-danger">{{ $stats['notices']['total'] ?? 0 }}</div>
                     </div>
                     <div class="stat-icon-wrap danger">
@@ -197,18 +256,18 @@
                     </div>
                 </div>
                 <div class="stat-meta d-flex justify-content-between text-muted">
-                    <span>প্রকাশিত নোটিশ: <strong>{{ $stats['notices']['active'] ?? 0 }}</strong> টি</span>
-                    <a href="{{ route('admin.notices.index') }}" class="text-decoration-none small text-danger fw-bold">সব নোটিশ &rarr;</a>
+                    <span>সক্রিয়: <strong>{{ $stats['notices']['active'] ?? 0 }}</strong> টি</span>
+                    <a href="{{ route('admin.notices.index') }}" class="text-decoration-none small text-danger fw-bold">তালিকা &rarr;</a>
                 </div>
             </div>
         </div>
 
         <!-- News & Media -->
-        <div class="col-xl-3 col-sm-6">
+        <div class="col-6 col-md-6 col-xl-3">
             <div class="stat-card-modern">
                 <div class="stat-top-row">
                     <div>
-                        <div class="stat-title">সংবাদ ও বুলেটিন</div>
+                        <div class="stat-title text-truncate">সংবাদ ও বুলেটিন</div>
                         <div class="stat-number text-info">{{ $stats['news']['total'] ?? 0 }}</div>
                     </div>
                     <div class="stat-icon-wrap info">
@@ -216,18 +275,18 @@
                     </div>
                 </div>
                 <div class="stat-meta d-flex justify-content-between text-muted">
-                    <span>সক্রিয় সংবাদ: <strong>{{ $stats['news']['active'] ?? 0 }}</strong> টি</span>
-                    <a href="{{ route('admin.news.index') }}" class="text-decoration-none small text-info fw-bold">সব সংবাদ &rarr;</a>
+                    <span>সক্রিয়: <strong>{{ $stats['news']['active'] ?? 0 }}</strong> টি</span>
+                    <a href="{{ route('admin.news.index') }}" class="text-decoration-none small text-info fw-bold">তালিকা &rarr;</a>
                 </div>
             </div>
         </div>
 
         <!-- Contacts -->
-        <div class="col-xl-3 col-sm-6">
+        <div class="col-6 col-md-6 col-xl-3">
             <div class="stat-card-modern">
                 <div class="stat-top-row">
                     <div>
-                        <div class="stat-title">যোগাযোগ বার্তা</div>
+                        <div class="stat-title text-truncate">যোগাযোগ বার্তা</div>
                         <div class="stat-number text-primary">{{ $stats['contacts']['total'] ?? 0 }}</div>
                     </div>
                     <div class="stat-icon-wrap primary">
@@ -236,9 +295,9 @@
                 </div>
                 <div class="stat-meta d-flex justify-content-between text-muted">
                     @if(($stats['contacts']['unread'] ?? 0) > 0)
-                        <span class="text-danger fw-bold"><i class="fas fa-exclamation-circle me-1"></i> {{ $stats['contacts']['unread'] }} টি অপঠিত</span>
+                        <span class="text-danger fw-bold"><i class="fas fa-exclamation-circle me-1"></i> {{ $stats['contacts']['unread'] }} অপঠিত</span>
                     @else
-                        <span class="text-success"><i class="fas fa-check-double me-1"></i> সব পড়া হয়েছে</span>
+                        <span class="text-success"><i class="fas fa-check-double me-1"></i> পড়া হয়েছে</span>
                     @endif
                     <a href="{{ route('admin.contacts.index') }}" class="text-decoration-none small text-primary fw-bold">ইনবক্স &rarr;</a>
                 </div>
@@ -264,7 +323,8 @@
                     </div>
                 </div>
                 <div class="card-body p-0">
-                    <div class="table-responsive">
+                    <!-- Desktop Table View -->
+                    <div class="table-responsive d-none d-md-block">
                         <table class="table table-hover align-middle mb-0">
                             <thead>
                                 <tr>
@@ -324,6 +384,51 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <!-- Mobile Minimal List View (< 768px) -->
+                    <div class="mobile-donation-list d-md-none">
+                        @forelse($recentDonations as $donation)
+                            <div class="mobile-donation-item p-3 border-bottom">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <div class="me-2 text-truncate">
+                                        <span class="fw-bold text-dark d-block text-truncate" style="font-size: 0.92rem; max-width: 190px;">
+                                            {{ $donation->is_anonymous ? 'গোপন দান (সাদাকাহ)' : ($donation->name ?? $donation->donor_name ?? 'অজ্ঞাত দাতা') }}
+                                        </span>
+                                        <span class="text-muted font-monospace" style="font-size: 0.74rem;">
+                                            {{ $donation->receipt_no ?? '#' . $donation->id }} • {{ $donation->payment_method ?? 'bKash' }}
+                                        </span>
+                                    </div>
+                                    <div class="text-end text-nowrap">
+                                        <span class="fw-bold text-success d-block" style="font-size: 1.05rem;">
+                                            ৳{{ number_format($donation->amount, 0) }}
+                                        </span>
+                                        @if($donation->status === 'approved')
+                                            <span class="badge badge-active" style="font-size: 0.68rem;">অনুমোদিত</span>
+                                        @elseif($donation->status === 'pending')
+                                            <span class="badge badge-pending" style="font-size: 0.68rem;">পেন্ডিং</span>
+                                        @else
+                                            <span class="badge badge-inactive" style="font-size: 0.68rem;">বাতিল</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-2 pt-2 border-top border-light">
+                                    <span class="badge bg-light text-muted border text-truncate" style="max-width: 170px; font-size: 0.72rem;">
+                                        {{ $donation->cause->name ?? ($donation->category ?? $donation->purpose ?? 'সাধারণ ফান্ড') }}
+                                    </span>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="{{ route('admin.donations.show', $donation->id) }}" class="btn btn-outline-primary py-0 px-2" style="font-size: 0.75rem;">
+                                            <i class="fas fa-eye me-1"></i>দেখুন
+                                        </a>
+                                        <a href="{{ route('admin.donations.receipt', $donation->id) }}" target="_blank" class="btn btn-outline-success py-0 px-2" style="font-size: 0.75rem;">
+                                            <i class="fas fa-print"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="text-center text-muted py-4 small">কোনো অনুদান এন্ট্রি পাওয়া যায়নি</div>
+                        @endforelse
+                    </div>
                 </div>
             </div>
 
@@ -382,7 +487,8 @@
                     <a href="{{ route('admin.activities.index') }}" class="btn btn-sm btn-outline-primary rounded-pill px-3 py-1" style="font-size: 0.8rem;">সব কার্যক্রম</a>
                 </div>
                 <div class="card-body p-0">
-                    <div class="table-responsive">
+                    <!-- Desktop Table -->
+                    <div class="table-responsive d-none d-md-block">
                         <table class="table table-hover align-middle mb-0">
                             <thead>
                                 <tr>
@@ -425,6 +531,37 @@
                                 @endforelse
                             </tbody>
                         </table>
+                    </div>
+
+                    <!-- Mobile Minimal Activity List (< 768px) -->
+                    <div class="mobile-activity-list d-md-none">
+                        @forelse($activities as $act)
+                            <div class="d-flex align-items-center justify-content-between p-2 p-sm-3 border-bottom">
+                                <div class="d-flex align-items-center gap-2 overflow-hidden me-2">
+                                    @if($act->image)
+                                        <img src="{{ asset('storage/' . $act->image) }}" class="rounded flex-shrink-0" style="width: 42px; height: 42px; object-fit: cover;" alt="{{ $act->title }}">
+                                    @else
+                                        <div class="bg-light text-center rounded text-muted flex-shrink-0 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;"><i class="fas fa-image"></i></div>
+                                    @endif
+                                    <div class="overflow-hidden">
+                                        <div class="fw-semibold text-dark text-truncate" style="font-size: 0.88rem;">{{ $act->title }}</div>
+                                        <small class="text-muted d-block" style="font-size: 0.74rem;">{{ $act->created_at ? $act->created_at->format('d M, Y') : '-' }}</small>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-2 flex-shrink-0">
+                                    @if($act->status)
+                                        <span class="badge badge-active" style="font-size: 0.65rem;">সক্রিয়</span>
+                                    @else
+                                        <span class="badge badge-inactive" style="font-size: 0.65rem;">নিষ্ক্রিয়</span>
+                                    @endif
+                                    <a href="{{ route('admin.activities.edit', $act->id) }}" class="btn btn-sm btn-outline-secondary py-0 px-2" style="font-size: 0.75rem;" title="এডিট">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="text-center text-muted py-3 small">কোনো কার্যক্রম পাওয়া যায়নি</div>
+                        @endforelse
                     </div>
                 </div>
             </div>

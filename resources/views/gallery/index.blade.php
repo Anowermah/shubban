@@ -34,6 +34,7 @@
         {{ $photos->links() }}
     </div>
 </div>
+@endsection
 
 @push('styles')
     <!-- Lightbox CSS -->

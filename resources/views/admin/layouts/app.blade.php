@@ -83,6 +83,11 @@
             </div>
         </div>
 
+        <!-- Mobile Scroll To Top Floating Button -->
+        <button type="button" class="btn btn-sm btn-success rounded-circle shadow admin-back-to-top d-md-none" id="adminBackToTopBtn" aria-label="উপরে যান" style="display: none; position: fixed; bottom: 72px; right: 16px; width: 38px; height: 38px; z-index: 1030;">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
         <!-- Mobile Bottom Navigation Bar -->
         @include('admin.layouts.partials.bottomnav')
     </div>

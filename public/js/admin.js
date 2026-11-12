@@ -177,4 +177,23 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }, { passive: true });
     }
+
+    // 14. Mobile Scroll to Top Button
+    const backToTopBtn = document.getElementById('adminBackToTopBtn');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 200) {
+                backToTopBtn.style.display = 'inline-flex';
+                backToTopBtn.style.alignItems = 'center';
+                backToTopBtn.style.justifyContent = 'center';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        }, { passive: true });
+
+        backToTopBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 });
