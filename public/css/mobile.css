@@ -15,9 +15,18 @@
    Mobile App Top Header Bar (Screen < 992px)
    -------------------------------------------------------------------------- */
 @media (max-width: 991.98px) {
+    html {
+        overflow-x: clip !important;
+    }
+
     body {
+        overflow-x: clip !important;
         padding-bottom: calc(var(--mob-bottom-bar-height) + 12px) !important;
         -webkit-tap-highlight-color: transparent;
+    }
+
+    .min-h-screen {
+        overflow: visible !important;
     }
 
     /* Hide Desktop-only Header Parts */
@@ -29,19 +38,21 @@
 
     /* Modern Compact Sticky Mobile Header */
     .mobile-header-bar {
-        position: sticky;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 60px;
-        background: linear-gradient(90deg, var(--mob-primary-dark) 0%, var(--mob-primary) 100%);
-        border-bottom: 2px solid var(--mob-gold);
-        box-shadow: 0 4px 15px rgba(7, 40, 29, 0.35);
-        z-index: 1030;
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 60px !important;
+        background: linear-gradient(90deg, var(--mob-primary-dark) 0%, var(--mob-primary) 100%) !important;
+        border-bottom: 2px solid var(--mob-gold) !important;
+        box-shadow: 0 4px 15px rgba(7, 40, 29, 0.35) !important;
+        z-index: 1030 !important;
         display: flex !important;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 14px;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0 14px !important;
     }
 
     .mobile-brand {

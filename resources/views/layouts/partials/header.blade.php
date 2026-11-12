@@ -259,7 +259,7 @@
 <!-- ==========================================================================
      MOBILE MODERN HEADER BAR (Screen < 992px)
      ========================================================================== -->
-<div class="mobile-header-bar d-lg-none">
+<header class="mobile-header-bar sticky-top d-lg-none">
     <a href="{{ url('/') }}" class="mobile-brand" title="জমঈয়ত শুব্বানে আহলে হাদীস বাংলাদেশ">
         <img src="{{ asset('images/logo.png') }}" alt="Shubban Logo" class="mobile-brand-img">
     </a>
@@ -299,7 +299,7 @@
             <i class="fas fa-bars"></i>
         </button>
     </div>
-</div>
+</header>
 
 <!-- ==========================================================================
      MOBILE SEARCH MODAL
