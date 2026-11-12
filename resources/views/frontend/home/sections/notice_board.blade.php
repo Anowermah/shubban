@@ -39,29 +39,39 @@
                     <div class="card-body p-0">
                         <div class="list-group list-group-flush">
                             @forelse($noticeList as $notice)
-                                <div class="list-group-item p-2 p-md-3 border-bottom d-flex align-items-center justify-content-between flex-wrap gap-2">
-                                    <div class="flex-grow-1 overflow-hidden" style="min-width: 160px;">
-                                        <div class="d-flex align-items-center gap-2 mb-1">
-                                            <span class="badge bg-success-subtle text-success small">
-                                                <i class="far fa-calendar-alt me-1"></i> {{ $notice->created_at->format('d M, Y') }}
-                                            </span>
-                                            @if($notice->category)
-                                                <span class="badge bg-light text-secondary border small">{{ ucfirst($notice->category) }}</span>
-                                            @endif
+                                <div class="list-group-item p-2 p-md-3 border-bottom d-flex align-items-center justify-content-between gap-2 transition-all hover-bg-light" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#noticeModal{{ $notice->id }}">
+                                    <div class="d-flex align-items-center gap-2 overflow-hidden flex-grow-1">
+                                        <div class="notice-item-squircle flex-shrink-0 d-flex align-items-center justify-content-center">
+                                            <i class="fas fa-bell"></i>
                                         </div>
-                                        <a href="#" class="text-decoration-none text-dark fw-bold hover-green d-block text-truncate" data-bs-toggle="modal" data-bs-target="#noticeModal{{ $notice->id }}">
-                                            {{ $notice->title }}
-                                        </a>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        @if($notice->file)
-                                            <a href="{{ asset('storage/' . $notice->file) }}" class="btn btn-sm btn-outline-primary py-1 px-3 rounded-pill" download title="PDF ডাউনলোড">
-                                                <i class="fas fa-download me-1"></i> PDF
+                                        <div class="overflow-hidden flex-grow-1">
+                                            <div class="d-flex align-items-center gap-2 mb-1">
+                                                <span class="badge bg-success-subtle text-success font-xs">
+                                                    <i class="far fa-calendar-alt me-1"></i> {{ $notice->created_at->format('d M, Y') }}
+                                                </span>
+                                                @if($notice->category)
+                                                    <span class="badge bg-light text-secondary border font-xs">{{ ucfirst($notice->category) }}</span>
+                                                @endif
+                                            </div>
+                                            <a href="#" class="text-decoration-none text-dark fw-bold hover-green d-block text-truncate" style="font-size: 0.92rem;">
+                                                {{ $notice->title }}
                                             </a>
-                                        @endif
-                                        <button type="button" class="btn btn-sm btn-outline-success py-1 px-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#noticeModal{{ $notice->id }}">
-                                            দেখুন <i class="fas fa-eye ms-1"></i>
-                                        </button>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2 flex-shrink-0">
+                                        <div class="d-none d-md-flex align-items-center gap-2">
+                                            @if($notice->file)
+                                                <a href="{{ asset('storage/' . $notice->file) }}" class="btn btn-sm btn-outline-primary py-1 px-3 rounded-pill font-xs" download title="PDF ডাউনলোড" onclick="event.stopPropagation();">
+                                                    <i class="fas fa-download me-1"></i> PDF
+                                                </a>
+                                            @endif
+                                            <button type="button" class="btn btn-sm btn-outline-success py-1 px-3 rounded-pill font-xs">
+                                                দেখুন <i class="fas fa-eye ms-1"></i>
+                                            </button>
+                                        </div>
+                                        <div class="d-md-none text-muted p-1">
+                                            <i class="fas fa-chevron-right fs-6 text-secondary"></i>
+                                        </div>
                                     </div>
                                 </div>
                             @empty

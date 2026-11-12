@@ -94,8 +94,8 @@
 
         <!-- বিস্তারিত লিঙ্ক -->
         <div class="text-center mt-3 pt-2">
-            <a href="{{ route('about.goals') }}" class="btn btn-sm btn-outline-success rounded-pill px-4">
-                পূর্ণাঙ্গ লক্ষ্য-উদ্দেশ্য ও বিস্তারিত কর্মপন্থা জানুন <i class="fas fa-arrow-right ms-1"></i>
+            <a href="{{ route('about.goals') }}" class="btn btn-sm btn-outline-success rounded-pill px-4 fw-semibold">
+                পূর্ণাঙ্গ লক্ষ্য ও কর্মপন্থা <i class="fas fa-arrow-right ms-1"></i>
             </a>
         </div>
     </div>

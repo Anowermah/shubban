@@ -4,62 +4,110 @@
 
 @section('content')
 <div class="container-fluid px-0">
-    <!-- Mobile Ultra-Minimal Header & Quick Actions (< 768px) -->
+    <!-- Mobile Flagship App-Style Header & 4-Column Action Grid (< 768px: bKash/Nagad Inspired) -->
     <div class="mobile-admin-header d-md-none mb-3">
-        <div class="d-flex align-items-center justify-content-between p-3 rounded-4 bg-gradient-admin text-white shadow-sm mb-2">
-            <div>
-                <div class="d-flex align-items-center gap-1 small text-warning mb-1">
-                    <i class="far fa-calendar-alt"></i>
-                    <span>{{ \Carbon\Carbon::now()->isoFormat('D MMMM, YYYY') }}</span>
+        <div class="admin-app-welcome-card p-3 rounded-4 mb-2 shadow-sm text-white position-relative overflow-hidden" style="background: linear-gradient(135deg, #07281d 0%, #0C4B36 70%, #126348 100%); border: 1px solid rgba(251, 176, 64, 0.25);">
+            <div class="d-flex align-items-center justify-content-between position-relative z-1">
+                <div>
+                    <span class="badge bg-warning text-dark px-2 py-0 rounded-pill font-xs mb-1">
+                        <i class="fas fa-shield-alt me-1"></i> অ্যাডমিন পোর্টাল
+                    </span>
+                    <h6 class="fw-bold mb-0 text-white" style="font-size: 1.05rem;">
+                        {{ Auth::guard('admin')->user()->name ?? 'অ্যাডমিনিস্ট্রেটর' }}
+                    </h6>
+                    <small class="text-white-50 font-xs">
+                        <i class="far fa-calendar-alt text-warning me-1"></i> {{ \Carbon\Carbon::now()->isoFormat('D MMMM, YYYY') }}
+                    </small>
                 </div>
-                <h6 class="fw-bold mb-0 text-white">
-                    {{ Auth::guard('admin')->user()->name ?? 'সম্মানিত অ্যাডমিনিস্ট্রেটর' }}
-                </h6>
+                @php
+                    $totalPending = ($stats['donations']['pending'] ?? 0) + ($stats['organization']['promotions_pending'] ?? 0) + ($stats['organization']['reports_submitted'] ?? 0);
+                @endphp
+                @if($totalPending > 0)
+                    <a href="{{ route('admin.donations.index') }}?status=pending" class="badge bg-danger rounded-pill px-3 py-2 text-decoration-none text-white d-flex align-items-center gap-1 shadow-sm">
+                        <i class="fas fa-bell"></i>
+                        <span>{{ $totalPending }} টি পেন্ডিং</span>
+                    </a>
+                @else
+                    <span class="badge bg-success-subtle text-white rounded-pill px-3 py-1 small" style="background: rgba(255,255,255,0.2) !important;">
+                        <i class="fas fa-check-circle me-1 text-warning"></i> আপডেট
+                    </span>
+                @endif
             </div>
-            @php
-                $totalPending = ($stats['donations']['pending'] ?? 0) + ($stats['organization']['promotions_pending'] ?? 0) + ($stats['organization']['reports_submitted'] ?? 0);
-            @endphp
-            @if($totalPending > 0)
-                <a href="{{ route('admin.donations.index') }}?status=pending" class="badge bg-danger rounded-pill px-3 py-2 text-decoration-none text-white d-flex align-items-center gap-1 shadow-sm">
-                    <i class="fas fa-bell"></i>
-                    <span>{{ $totalPending }} পেন্ডিং</span>
-                </a>
-            @else
-                <span class="badge bg-success-subtle text-success rounded-pill px-3 py-1 small">
-                    <i class="fas fa-check-circle me-1"></i>আপডেট
-                </span>
-            @endif
         </div>
 
-        <!-- Mobile Horizontal Swipe Quick Actions Bar -->
-        <div class="mobile-quick-actions-bar">
-            <a href="{{ route('admin.donations.create') }}" class="mobile-quick-pill">
-                <i class="fas fa-plus text-warning"></i><span>নতুন দান</span>
-            </a>
-            <a href="{{ route('admin.notices.create') }}" class="mobile-quick-pill">
-                <i class="fas fa-bullhorn text-info"></i><span>নোটিশ</span>
-            </a>
-            <a href="{{ route('admin.news.create') }}" class="mobile-quick-pill">
-                <i class="fas fa-newspaper text-success"></i><span>সংবাদ</span>
-            </a>
-            <a href="{{ route('admin.publications.books.create') }}" class="mobile-quick-pill">
-                <i class="fas fa-book text-warning"></i><span>বই</span>
-            </a>
-            <a href="{{ route('admin.ai-copilot.index') }}" class="mobile-quick-pill">
-                <i class="fas fa-wand-magic-sparkles text-danger"></i><span>এআই কো-পাইলট</span>
-            </a>
-            <a href="{{ route('admin.organization.promotions') }}" class="mobile-quick-pill">
-                <i class="fas fa-layer-group text-primary"></i><span>পদোন্নতি</span>
-            </a>
-            <a href="{{ route('admin.organization.reports') }}" class="mobile-quick-pill">
-                <i class="fas fa-file-signature text-success"></i><span>প্রতিবেদন</span>
-            </a>
-            <a href="{{ route('admin.homepage.index') }}" class="mobile-quick-pill">
-                <i class="fas fa-sliders-h text-info"></i><span>হোমপেজ</span>
-            </a>
-            <a href="{{ route('admin.media.index') }}" class="mobile-quick-pill">
-                <i class="fas fa-photo-video text-warning"></i><span>মিডিয়া</span>
-            </a>
+        <!-- 4-Column bKash/Nagad Style Quick Action Grid -->
+        <div class="admin-mobile-quick-card bg-white rounded-4 p-3 shadow-sm border mb-2">
+            <div class="d-flex align-items-center justify-content-between mb-2 pb-1 border-bottom border-light">
+                <span class="fw-bold font-sm text-dark d-flex align-items-center">
+                    <i class="fas fa-th-large text-warning me-2"></i> দ্রুত অ্যাকশন
+                </span>
+                <span class="text-muted font-xs">১-ক্লিক শর্টকাট</span>
+            </div>
+            <div class="admin-mobile-app-grid">
+                <!-- 1. New Donation -->
+                <a href="{{ route('admin.donations.create') }}" class="admin-app-grid-item">
+                    <div class="admin-app-squircle rose">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <span class="admin-app-grid-label">নতুন দান</span>
+                </a>
+
+                <!-- 2. Notices -->
+                <a href="{{ route('admin.notices.create') }}" class="admin-app-grid-item">
+                    <div class="admin-app-squircle sky">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <span class="admin-app-grid-label">নোটিশ</span>
+                </a>
+
+                <!-- 3. News -->
+                <a href="{{ route('admin.news.create') }}" class="admin-app-grid-item">
+                    <div class="admin-app-squircle emerald">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <span class="admin-app-grid-label">সংবাদ</span>
+                </a>
+
+                <!-- 4. Books -->
+                <a href="{{ route('admin.publications.books.create') }}" class="admin-app-grid-item">
+                    <div class="admin-app-squircle amber">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <span class="admin-app-grid-label">নতুন বই</span>
+                </a>
+
+                <!-- 5. AI Copilot -->
+                <a href="{{ route('admin.ai-copilot.index') }}" class="admin-app-grid-item">
+                    <div class="admin-app-squircle violet">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                    </div>
+                    <span class="admin-app-grid-label">এআই কো-পাইলট</span>
+                </a>
+
+                <!-- 6. Promotions -->
+                <a href="{{ route('admin.organization.promotions') }}" class="admin-app-grid-item">
+                    <div class="admin-app-squircle indigo">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <span class="admin-app-grid-label">পদোন্নতি</span>
+                </a>
+
+                <!-- 7. Reports -->
+                <a href="{{ route('admin.organization.reports') }}" class="admin-app-grid-item">
+                    <div class="admin-app-squircle teal">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <span class="admin-app-grid-label">প্রতিবেদন</span>
+                </a>
+
+                <!-- 8. Homepage Control -->
+                <a href="{{ route('admin.homepage.index') }}" class="admin-app-grid-item">
+                    <div class="admin-app-squircle slate">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <span class="admin-app-grid-label">হোমপেজ</span>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -385,44 +433,36 @@
                         </table>
                     </div>
 
-                    <!-- Mobile Minimal List View (< 768px) -->
+                    <!-- Mobile Fintech App-Style List View (< 768px: bKash/Nagad Inspired) -->
                     <div class="mobile-donation-list d-md-none">
                         @forelse($recentDonations as $donation)
-                            <div class="mobile-donation-item p-3 border-bottom">
-                                <div class="d-flex justify-content-between align-items-start mb-1">
-                                    <div class="me-2 text-truncate">
-                                        <span class="fw-bold text-dark d-block text-truncate" style="font-size: 0.92rem; max-width: 190px;">
-                                            {{ $donation->is_anonymous ? 'গোপন দান (সাদাকাহ)' : ($donation->name ?? $donation->donor_name ?? 'অজ্ঞাত দাতা') }}
-                                        </span>
-                                        <span class="text-muted font-monospace" style="font-size: 0.74rem;">
-                                            {{ $donation->receipt_no ?? '#' . $donation->id }} • {{ $donation->payment_method ?? 'bKash' }}
-                                        </span>
+                            <div class="mobile-donation-item p-3 border-bottom d-flex align-items-center justify-content-between gap-2" onclick="window.location='{{ route('admin.donations.show', $donation->id) }}'" style="cursor: pointer;">
+                                <div class="d-flex align-items-center gap-2 overflow-hidden flex-grow-1">
+                                    <div class="fintech-avatar-squircle flex-shrink-0">
+                                        <i class="fas fa-hand-holding-usd text-success"></i>
                                     </div>
-                                    <div class="text-end text-nowrap">
-                                        <span class="fw-bold text-success d-block" style="font-size: 1.05rem;">
-                                            ৳{{ number_format($donation->amount, 0) }}
-                                        </span>
-                                        @if($donation->status === 'approved')
-                                            <span class="badge badge-active" style="font-size: 0.68rem;">অনুমোদিত</span>
-                                        @elseif($donation->status === 'pending')
-                                            <span class="badge badge-pending" style="font-size: 0.68rem;">পেন্ডিং</span>
-                                        @else
-                                            <span class="badge badge-inactive" style="font-size: 0.68rem;">বাতিল</span>
-                                        @endif
+                                    <div class="overflow-hidden">
+                                        <div class="fw-bold text-dark text-truncate" style="font-size: 0.9rem;">
+                                            {{ $donation->is_anonymous ? 'সাদাকাহ (গোপন দান)' : ($donation->name ?? $donation->donor_name ?? 'অজ্ঞাত দাতা') }}
+                                        </div>
+                                        <div class="text-muted font-xs text-truncate">
+                                            <span>{{ $donation->cause->name ?? ($donation->category ?? 'সাধারণ ফান্ড') }}</span>
+                                            <span class="mx-1">•</span>
+                                            <span>{{ $donation->payment_method ?? 'bKash' }}</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center mt-2 pt-2 border-top border-light">
-                                    <span class="badge bg-light text-muted border text-truncate" style="max-width: 170px; font-size: 0.72rem;">
-                                        {{ $donation->cause->name ?? ($donation->category ?? $donation->purpose ?? 'সাধারণ ফান্ড') }}
-                                    </span>
-                                    <div class="btn-group btn-group-sm">
-                                        <a href="{{ route('admin.donations.show', $donation->id) }}" class="btn btn-outline-primary py-0 px-2" style="font-size: 0.75rem;">
-                                            <i class="fas fa-eye me-1"></i>দেখুন
-                                        </a>
-                                        <a href="{{ route('admin.donations.receipt', $donation->id) }}" target="_blank" class="btn btn-outline-success py-0 px-2" style="font-size: 0.75rem;">
-                                            <i class="fas fa-print"></i>
-                                        </a>
+                                <div class="text-end flex-shrink-0">
+                                    <div class="fw-bold text-success fs-6">
+                                        +৳{{ number_format($donation->amount, 0) }}
                                     </div>
+                                    @if($donation->status === 'approved')
+                                        <span class="badge badge-active font-xs py-0 px-2">অনুমোদিত</span>
+                                    @elseif($donation->status === 'pending')
+                                        <span class="badge badge-pending font-xs py-0 px-2">পেন্ডিং</span>
+                                    @else
+                                        <span class="badge badge-inactive font-xs py-0 px-2">বাতিল</span>
+                                    @endif
                                 </div>
                             </div>
                         @empty

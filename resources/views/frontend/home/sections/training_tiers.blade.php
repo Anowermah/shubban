@@ -65,9 +65,9 @@
             </div>
         </div>
 
-        <div class="text-center mt-4">
+        <div class="text-center mt-3 pt-1">
             <a href="{{ route('training.courses') }}" class="btn btn-sm btn-outline-primary rounded-pill px-4 py-2 fw-semibold">
-                <i class="fas fa-graduation-cap me-1"></i> সকল প্রশিক্ষণ কোর্সের তথ্য ও সিলেবাস
+                <i class="fas fa-graduation-cap me-1"></i> সকল প্রশিক্ষণ পাঠ্যক্রম
             </a>
         </div>
     </div>

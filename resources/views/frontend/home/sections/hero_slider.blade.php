@@ -99,58 +99,75 @@
         </div>
     @endif
 
-    <!-- App-Style Minimal Quick Actions Bar (Mobile Only: Screen < 992px) -->
-    <div class="mobile-quick-actions-bar d-lg-none">
-        <div class="container px-2">
-            <div class="quick-actions-track">
-                <a href="{{ route('notice.index') }}" class="quick-action-pill">
-                    <div class="quick-action-icon bg-warning-subtle text-warning-emphasis">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
-                    <span class="quick-action-title">নোটিশ</span>
-                </a>
-                <a href="{{ route('publications.books') }}" class="quick-action-pill">
-                    <div class="quick-action-icon bg-success-subtle text-success">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <span class="quick-action-title">বই সম্ভার</span>
-                </a>
-                <a href="{{ route('responsible.district') }}" class="quick-action-pill">
-                    <div class="quick-action-icon bg-info-subtle text-info-emphasis">
-                        <i class="fas fa-users-cog"></i>
-                    </div>
-                    <span class="quick-action-title">দায়িত্বশীল</span>
-                </a>
-                <a href="{{ route('training.courses') }}" class="quick-action-pill">
-                    <div class="quick-action-icon bg-primary-subtle text-primary">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <span class="quick-action-title">প্রশিক্ষণ</span>
-                </a>
-                <a href="{{ route('donate.index') }}" class="quick-action-pill">
-                    <div class="quick-action-icon bg-danger-subtle text-danger">
-                        <i class="fas fa-hand-holding-heart"></i>
-                    </div>
-                    <span class="quick-action-title">দান করুন</span>
-                </a>
-                <a href="{{ route('gallery.photos') }}" class="quick-action-pill">
-                    <div class="quick-action-icon bg-secondary-subtle text-secondary">
-                        <i class="fas fa-images"></i>
-                    </div>
-                    <span class="quick-action-title">ছবি</span>
-                </a>
-                <a href="{{ route('gallery.videos') }}" class="quick-action-pill">
-                    <div class="quick-action-icon bg-danger-subtle text-danger">
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                    <span class="quick-action-title">ভিডিও</span>
-                </a>
-                <a href="{{ route('contact.index') }}" class="quick-action-pill">
-                    <div class="quick-action-icon bg-success-subtle text-success">
-                        <i class="fas fa-phone-alt"></i>
-                    </div>
-                    <span class="quick-action-title">যোগাযোগ</span>
-                </a>
+    <!-- App-Grade 4-Column Quick Services Grid (bKash / MyGP Inspired: Screen < 992px) -->
+    <div class="mobile-app-services-section d-lg-none">
+        <div class="container px-2 px-sm-3">
+            <div class="app-services-card">
+                <div class="app-services-grid">
+                    <!-- 1. Donation -->
+                    <a href="{{ route('donate.index') }}" class="app-service-item">
+                        <div class="app-service-squircle rose">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <span class="app-service-label">দান করুন</span>
+                    </a>
+
+                    <!-- 2. Books -->
+                    <a href="{{ route('publications.books') }}" class="app-service-item">
+                        <div class="app-service-squircle amber">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <span class="app-service-label">বই সম্ভার</span>
+                    </a>
+
+                    <!-- 3. Training -->
+                    <a href="{{ route('training.courses') }}" class="app-service-item">
+                        <div class="app-service-squircle indigo">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <span class="app-service-label">প্রশিক্ষণ</span>
+                    </a>
+
+                    <!-- 4. Notice -->
+                    <a href="{{ route('notice.index') }}" class="app-service-item">
+                        <div class="app-service-squircle sky">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <span class="app-service-label">নোটিশ</span>
+                    </a>
+
+                    <!-- 5. As-Shifa -->
+                    <a href="{{ route('facilities.as-shifa') }}" class="app-service-item">
+                        <div class="app-service-squircle coral">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <span class="app-service-label">আস-শিফা</span>
+                    </a>
+
+                    <!-- 6. Research -->
+                    <a href="{{ route('facilities.research-center') }}" class="app-service-item">
+                        <div class="app-service-squircle teal">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <span class="app-service-label">গবেষণা</span>
+                    </a>
+
+                    <!-- 7. Leadership -->
+                    <a href="{{ route('responsible.district') }}" class="app-service-item">
+                        <div class="app-service-squircle violet">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <span class="app-service-label">দায়িত্বশীল</span>
+                    </a>
+
+                    <!-- 8. AI Chat Assistant -->
+                    <a href="#" class="app-service-item" onclick="if(window.openShubbanAIChat){window.openShubbanAIChat();return false;}">
+                        <div class="app-service-squircle emerald">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <span class="app-service-label">এআই সহকারী</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
