@@ -410,19 +410,55 @@
         border-color: #334155;
     }
 
-    @media (max-width: 576px) {
+    /* Mobile Screen Responsive Positioning & Bottom Bar Avoidance (< 992px) */
+    @media (max-width: 991.98px) {
+        .shubban-ai-launcher {
+            /* Position cleanly above the mobile bottom bar with 12px clearance */
+            bottom: calc(var(--mob-bottom-bar-height, 62px) + env(safe-area-inset-bottom, 0px) + 12px) !important;
+            left: 14px !important;
+            right: auto !important;
+            gap: 0 !important;
+            z-index: 1035 !important;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+
+        .shubban-ai-btn {
+            width: 44px !important;
+            height: 44px !important;
+            min-width: 44px !important;
+            font-size: 1.2rem !important;
+            box-shadow: 0 4px 14px rgba(12, 75, 54, 0.45) !important;
+            border-width: 2px !important;
+        }
+
+        /* Hide the text pill on mobile devices so it doesn't block content or overlap */
+        .shubban-ai-label {
+            display: none !important;
+        }
+
+        /* Mobile Sheet Style Chat Window */
         .shubban-ai-window {
-            bottom: 0 !important;
-            right: 0 !important;
-            left: 0 !important;
+            position: fixed !important;
+            inset: auto 0 0 0 !important;
             width: 100vw !important;
             max-width: 100vw !important;
-            height: 85vh !important;
-            max-height: 85vh !important;
+            height: 88vh !important;
+            max-height: 88vh !important;
             border-radius: 20px 20px 0 0 !important;
+            z-index: 1070 !important; /* Above bottom navigation bar (z-index: 1040) */
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.35) !important;
         }
-        .shubban-ai-label {
-            display: none;
+
+        .shubban-ai-footer {
+            padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
+        }
+
+        /* When AI Chat modal is open on mobile, smoothly fade out floating buttons */
+        body.ai-chat-open .shubban-ai-launcher,
+        body.ai-chat-open .btn-back-to-top {
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transform: scale(0.6) translateY(10px) !important;
         }
     }
 </style>
@@ -542,17 +578,35 @@
         const isOpen = open !== undefined ? open : !chatWindow.classList.contains('active');
         if (isOpen) {
             chatWindow.classList.add('active');
+            document.body.classList.add('ai-chat-open');
             launcherIcon.className = 'fas fa-chevron-down';
             setTimeout(() => input.focus(), 200);
             scrollToBottom();
         } else {
             chatWindow.classList.remove('active');
+            document.body.classList.remove('ai-chat-open');
             launcherIcon.className = 'fas fa-robot';
         }
     }
 
     launcherBtn.addEventListener('click', () => toggleChat());
     closeBtn.addEventListener('click', () => toggleChat(false));
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && chatWindow.classList.contains('active')) {
+            toggleChat(false);
+        }
+    });
+
+    // Close when tapping outside chat window
+    document.addEventListener('click', function(e) {
+        if (chatWindow.classList.contains('active')) {
+            if (!chatWindow.contains(e.target) && !launcherBtn.contains(e.target)) {
+                toggleChat(false);
+            }
+        }
+    });
 
     function scrollToBottom() {
         container.scrollTop = container.scrollHeight;

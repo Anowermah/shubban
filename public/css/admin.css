@@ -601,6 +601,22 @@ body {
     .mb-4 {
         margin-bottom: 1rem !important;
     }
+
+    /* Mobile Back to Top floating button */
+    .admin-back-to-top {
+        position: fixed !important;
+        bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 12px) !important;
+        right: 14px !important;
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 50% !important;
+        background: linear-gradient(135deg, var(--admin-primary) 0%, #073123 100%) !important;
+        border: 2px solid var(--admin-accent) !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.25) !important;
+        z-index: 1035 !important;
+        transition: all 0.25s ease !important;
+    }
 }
 
 /* Mobile Admin Quick Actions Bar & Gradient */

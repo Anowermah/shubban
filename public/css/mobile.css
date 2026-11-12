@@ -511,19 +511,19 @@
 }
 
 /* --------------------------------------------------------------------------
-   Back to Top Floating Button
+   Back to Top Floating Button (Desktop & Mobile Unified)
    -------------------------------------------------------------------------- */
 .btn-back-to-top {
     position: fixed;
-    bottom: calc(var(--mob-bottom-bar-height) + 16px);
-    right: 14px;
-    width: 40px;
-    height: 40px;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: var(--mob-primary);
+    background: linear-gradient(135deg, #072e20 0%, #0C4B36 70%, #16654c 100%);
     color: #ffffff;
     border: 2px solid var(--mob-gold);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -531,20 +531,34 @@
     z-index: 1035;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transform: scale(0.65) translateY(12px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     text-decoration: none;
 }
 
 .btn-back-to-top.show {
     opacity: 1;
     visibility: visible;
+    transform: scale(1) translateY(0);
 }
 
 .btn-back-to-top:hover,
 .btn-back-to-top:active {
     background: var(--mob-primary-dark);
     color: var(--mob-gold);
-    transform: translateY(-3px);
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* On Mobile screens (< 992px) where mobile bottom bar is active */
+@media (max-width: 991.98px) {
+    .btn-back-to-top {
+        bottom: calc(var(--mob-bottom-bar-height, 62px) + env(safe-area-inset-bottom, 0px) + 12px) !important;
+        right: 14px !important;
+        width: 42px !important;
+        height: 42px !important;
+        font-size: 0.88rem !important;
+    }
 }
 
 /* ==========================================================================
