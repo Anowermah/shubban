@@ -23,14 +23,10 @@
         
         <!-- Right Navigation / Actions -->
         <div class="d-flex align-items-center gap-2">
-            <!-- Pending Actions Notification Pill (if any pending) -->
-            @if(isset($adminBadges['total_pending']) && $adminBadges['total_pending'] > 0)
-                <a href="{{ route('admin.donations.index') }}" class="btn btn-sm btn-outline-warning rounded-pill px-2 px-sm-3 d-flex align-items-center gap-1 text-white border-warning-subtle" title="{{ $adminBadges['total_pending'] }} টি অপেক্ষমাণ কার্যক্রম রয়েছে">
-                    <i class="fas fa-bell text-warning"></i>
-                    <span class="badge bg-warning text-dark fw-bold rounded-pill">{{ $adminBadges['total_pending'] }}</span>
-                    <span class="d-none d-lg-inline small">অপেক্ষমাণ</span>
-                </a>
-            @endif
+            <!-- Notifications / Contacts Quick Icon Button (Icon Only - Clean & Uniform) -->
+            <a href="{{ route('admin.contacts.index') }}" class="btn btn-notification-bell" title="যোগাযোগ বার্তা ও নোটিফিকেশন">
+                <i class="fas fa-bell text-warning"></i>
+            </a>
 
             <!-- View Site Button (Universal: Icon on mobile, Icon+text on desktop) -->
             <div class="d-flex align-items-center">

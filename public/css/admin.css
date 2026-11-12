@@ -122,7 +122,8 @@ body {
     line-height: 1;
 }
 
-.admin-navbar .btn-view-site {
+.admin-navbar .btn-view-site,
+.admin-navbar .btn-notification-bell {
     background: rgba(255, 255, 255, 0.12);
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -133,10 +134,26 @@ body {
     transition: all 0.2s ease;
 }
 
-.admin-navbar .btn-view-site:hover {
+.admin-navbar .btn-notification-bell {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+}
+
+.admin-navbar .btn-view-site:hover,
+.admin-navbar .btn-notification-bell:hover {
     background: var(--admin-accent);
     color: #07281d;
     border-color: var(--admin-accent);
+}
+
+.admin-navbar .btn-notification-bell:hover i {
+    color: #07281d !important;
 }
 
 .admin-navbar .admin-badge {
@@ -485,9 +502,11 @@ body {
         justify-content: center;
     }
 
-    .btn-view-site {
+    .btn-view-site,
+    .btn-notification-bell {
         width: 36px !important;
         height: 36px !important;
+        min-width: 36px !important;
         padding: 0 !important;
         display: inline-flex !important;
         align-items: center;
